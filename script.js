@@ -18,8 +18,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// Click + получаем первую строку
-document.getElementById('addWord').addEventListener('click', () => {
+
+document.getElementById('addWord').addEventListener('click', () => { 
+    Fy()
+ });
+    function Fy() {
     const TTable = document.getElementById('Table');
     const TTbody = TTable.querySelector('tbody');
     const pop = TTbody.querySelectorAll('tr');
@@ -45,7 +48,7 @@ document.getElementById('addWord').addEventListener('click', () => {
     } else {
         alert('Пожалуйста, заполните все строки ❤️');
     }
-});
+    };
 
 // Обновление таблицы 
 function updateTable() {
