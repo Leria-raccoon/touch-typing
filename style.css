@@ -1,0 +1,54 @@
+#modal {
+    display: none; /* Скрыто по умолчанию */
+    position: fixed; /* Фиксированное позиционирование */
+    z-index: 999;
+    left: 0; /* Начало с левого края */
+    top: 0; /* Начало с верхнего края */
+    width: 100%; /* Ширина на весь экран */
+    height: 100%; /* Высота на весь экран */
+
+}
+
+#cotainterModal { /* Исправлено имя на containerModal */
+    padding: 20px; /* Отступы снаружи */
+    background-color: rgba(208, 132, 255, 0.5); /* Полупрозрачный цвет */
+    border-radius: 16px;
+    position: absolute;
+    top: 50%; /* Центрирование по вертикали */
+    left: 50%; /* Центрирование по горизонтали */
+    transform: translate(-50%, -50%); /* Центрирование */
+    height: 85%; /* Высота контейнера */
+    width: 60%; /* Ширина контейнера */
+    overflow-y: auto;
+    z-index: 1;
+}
+
+#close {
+    border: none;
+    background: none;
+    cursor: pointer;
+    position: absolute;
+    top: 10px; /* Положение кнопки закрытия */
+    right: 10px; /* Положение кнопки закрытия */
+    font-size: 24px; /* Размер шрифта */
+}
+
+#Table {
+    position: absolute;
+    width: 60%; 
+    max-width: 600px; /* Максимальная ширина таблицы */
+   /*  margin-left: 0; /* Убираем отступ слева */
+    border-collapse: collapse; /* Убираем пробелы между ячейками */
+}
+
+#Table th, #Table td {
+    padding: 10px; /* Отступы внутри ячеек */
+    border: 1px solid #ccc; /* Граница ячеек */
+    text-align: center; /* Выравнивание текста по центру */
+}
+
+#ru, #en{
+    background-color: rgb(84, 80, 80);
+    border-radius: 5px;   
+}
+

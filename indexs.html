@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Слепая печать</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <button id="choose">Выбрать язык</button>
+    <button id="RU">russian</button>
+    <button id="EN">english</button>
+    <button id="addWords">Создать собственный набор слов</button>
+    <div id="modal">
+        <div id="cotainterModal">
+            <button id="close">&times</button>
+            <table id="Table">
+                <button id="DDD">Импорт</button>
+                <button id="download">Экспорт</button>
+                <button id="addWord">Добавить</button>
+                <thead>
+                    <tr>
+                        <th>Слово</th>
+                        <th>Перевод</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input type="text" id="en" placeholder="введите слово"></td>
+                        <td><input type="text" id="ru" placeholder="введите передов"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
