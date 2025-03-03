@@ -47,8 +47,3 @@
     text-align: center; /* Выравнивание текста по центру */
 }
 
-#ru, #en{
-    background-color: rgb(84, 80, 80);
-    border-radius: 5px;   
-}
-

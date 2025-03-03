@@ -22,6 +22,28 @@ document.addEventListener('DOMContentLoaded', () => {
 document.getElementById('addWord').addEventListener('click', () => { 
     Fy()
  });
+
+/* 
+// предотвращает запись цифр, работает на все окно
+ document.addEventListener('keydown', (ev)=> {
+if (ev.target.matches('input')){
+if (/\d/.test(ev.key)){
+    ev.preventDefault()
+    }
+   }
+ }); */
+
+ /* document.addEventListener('keydown', (ev)=> {
+ console.log('сработало!', ev.key);
+    /* if(ev.target.matches('#en') || ev.target.matches('#ru')){
+        if (ev.code === 'Enter'){
+            ev.preventDefault();
+            Fy();
+        }
+    } 
+ });
+ */
+
     function Fy() {
     const TTable = document.getElementById('Table');
     const TTbody = TTable.querySelector('tbody');
@@ -50,6 +72,7 @@ document.getElementById('addWord').addEventListener('click', () => {
     }
     };
 
+    
 // Обновление таблицы 
 function updateTable() {
     const TTable = document.getElementById('Table');
