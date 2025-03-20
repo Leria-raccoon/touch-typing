@@ -1,26 +1,131 @@
-#modal {
-    display: none; /* Скрыто по умолчанию */
-    position: fixed; /* Фиксированное позиционирование */
-    z-index: 999;
-    left: 0; /* Начало с левого края */
-    top: 0; /* Начало с верхнего края */
-    width: 100%; /* Ширина на весь экран */
-    height: 100%; /* Высота на весь экран */
-
+#pole {
+    position: relative;
+    z-index:0;
+    top: 170px;
+    left: 5%;
+    width: 400px;
+    height: 50px; 
+    background-color: rgb(68, 89, 89);
+}
+#Pole {
+    position: relative;
+    z-index:1;
+    top: 220px;
+    left: 5%;
+    opacity:0.1;
+    color: #000000;
+    width: 400px;
+    height: 50px;
 }
 
-#cotainterModal { /* Исправлено имя на containerModal */
-    padding: 20px; /* Отступы снаружи */
-    background-color: rgba(208, 132, 255, 0.5); /* Полупрозрачный цвет */
+body{
+    background-color: rgb(34, 38, 44);
+    font-family:Arial, Helvetica, sans-serif ;
+    color: #dedede;
+}
+/* 61, 73, 63    53, 48, 48  34, 38, 44*/
+H1{
+    margin: 25px auto auto 10%  
+    /* background-color: rgba(140, 132, 132, 0.5); */
+}
+
+#modal1{
+    display: none;
+    z-index: 1;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+#cotaiterModal1{
+    position: relative;
+    z-index: 2;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Центрирование */ 
+    height: 300px; /* высота контейнера  */ 
+    width: 400px;  /* Ширина контейнера  */
+    background-color: rgb(170, 164, 164);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     border-radius: 16px;
-    position: absolute;
-    top: 50%; /* Центрирование по вертикали */
-    left: 50%; /* Центрирование по горизонтали */
-    transform: translate(-50%, -50%); /* Центрирование */
+    gap: 10px;
+}
+
+.Q{
+ padding: 20px;
+ color: #dedede;
+ background-color: rgb(140, 132, 132);
+ border: none;
+ font-size:17px ;
+ font-family: Arial, Helvetica, sans-serif;
+ border-radius: 16px;
+ width: 350px;
+ height: 60px; 
+ cursor: pointer;
+ transition: background-color 0.3s;
+}
+
+.Q:hover{
+    background-color: rgb(93, 88, 88);
+   /*  transform: translateY(-5px);  Выдвигаем кнопку вверх 
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Увеличиваем тень при наведении */ 
+}
+
+#modal2 {
+    display: none;
+    position: fixed; 
+    z-index:3;
+    left: 0; 
+    top: 0; 
+    width: 100%; 
+    height: 100%; 
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+#cotainterModal2 { /* Исправлено имя на containerModal */
+    padding: 20px; /* Отступы снаружи */
+    background-color: rgb(140, 132, 132); 
+    position: relative;
+    z-index: 4;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Центрирование */ 
     height: 85%; /* Высота контейнера */
     width: 60%; /* Ширина контейнера */
     overflow-y: auto;
-    z-index: 1;
+    border-radius: 16px;
+}
+
+.button-container {
+    display:flex;
+    justify-content: center;
+   }
+
+.button-container button{
+  color: #dedede;
+  background-color: rgb(53, 48, 48);
+  border-radius: 16px;
+  border: none;
+  padding: 15px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.W {
+ color: #ffffff;
+ background-color: rgb(140, 132, 132);
+ padding: 5px 10px;
+ border: none;
+ border-radius: 10px;
+}
+
+.W:hover{
+    background-color: #645c5c;
 }
 
 #close {
@@ -29,16 +134,20 @@
     cursor: pointer;
     position: absolute;
     top: 10px; /* Положение кнопки закрытия */
-    right: 10px; /* Положение кнопки закрытия */
+    right: 10px; 
     font-size: 24px; /* Размер шрифта */
+    color: #dedede;
 }
 
 #Table {
-    position: absolute;
-    width: 60%; 
     max-width: 600px; /* Максимальная ширина таблицы */
-   /*  margin-left: 0; /* Убираем отступ слева */
+    margin-left: 0; /* Убираем отступ слева */
     border-collapse: collapse; /* Убираем пробелы между ячейками */
+}
+
+#TABLE{
+    display: flex;
+    justify-content: center;
 }
 
 #Table th, #Table td {
@@ -47,3 +156,8 @@
     text-align: center; /* Выравнивание текста по центру */
 }
 
+ #keyboard {
+    display: flex;
+    flex-direction: column;
+ } 
+ 
