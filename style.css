@@ -1,37 +1,78 @@
+.W {
+    color: #8a8a93;
+    background-color:  rgb(75, 72, 69);
+    padding: 5px 10px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+   }
+   
+   .W:hover{
+       color: #fdfdff;
+   }
+
 #pole {
-    position: relative;
+    position: absolute;
     z-index:0;
-    top: 170px;
-    left: 5%;
-    width: 400px;
-    height: 50px; 
-    background-color: rgb(68, 89, 89);
-}
-#Pole {
-    position: relative;
-    z-index:1;
-    top: 220px;
-    left: 5%;
-    opacity:0.1;
-    color: #000000;
-    width: 400px;
-    height: 50px;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Центрирование */ 
+    width: 60%;
+    height: 30px; 
+    background-color: rgb(75, 72, 69);
+    border-radius: 16px;
+    padding: 20px;
 }
 
+
+
 body{
-    background-color: rgb(34, 38, 44);
+    background-color: rgb(45, 44, 42);
     font-family:Arial, Helvetica, sans-serif ;
-    color: #dedede;
+    color: #fdfdff;
+    margin: 0;
 }
-/* 61, 73, 63    53, 48, 48  34, 38, 44*/
-H1{
-    margin: 25px auto auto 10%  
+/* 61, 73, 63    53, 48, 48  34, 38, 44    47, 42, 42  34, 31, 31*/
+/* h1{
+     margin: 25px auto auto 10%   
     /* background-color: rgba(140, 132, 132, 0.5); */
+
+#H1{
+    background-color: rgba(140, 132, 132, 0.5); 
+    
+
+} 
+
+#menu{
+    position: fixed;
+    width: 250px;
+    height: 100%;/*  */
+    top: 0;
+    right: -250px;
+    transition: right 0.4s ease;
+    background-color: rgba(188, 183, 183, 0.8);
+    z-index:1;
+}
+
+#menu.open {
+    right: 0; /* прижат к правой стороне */
+}
+
+#MenuButtom{
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 2;
+    border: none; /* Убираем границы */
+    background-color: transparent; /* Сделать фон прозрачным, если нужно */
+    padding: 10px 20px;
+    cursor: pointer; 
+    color: #fdfdff;
 }
 
 #modal1{
     display: none;
-    z-index: 1;
+    z-index: 3;
     position: fixed;
     left: 0;
     top: 0;
@@ -41,14 +82,16 @@ H1{
 }
 
 #cotaiterModal1{
+    transition: opacity 0.5s ease; 
     position: relative;
-    z-index: 2;
+    z-index: 4;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%); /* Центрирование */ 
     height: 300px; /* высота контейнера  */ 
     width: 400px;  /* Ширина контейнера  */
-    background-color: rgb(170, 164, 164);
+    top: 50%;
+    background-color: rgba(157, 152, 152, 0.9);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -59,8 +102,8 @@ H1{
 
 .Q{
  padding: 20px;
- color: #dedede;
- background-color: rgb(140, 132, 132);
+ color: #ffffff;
+ background-color: rgb(116, 110, 110);
  border: none;
  font-size:17px ;
  font-family: Arial, Helvetica, sans-serif;
@@ -68,11 +111,12 @@ H1{
  width: 350px;
  height: 60px; 
  cursor: pointer;
- transition: background-color 0.3s;
+ /* transition: background-color 0.3s; */
 }
 
 .Q:hover{
-    background-color: rgb(93, 88, 88);
+    /*  background-color: rgb(54, 55, 58); */
+       color: #fdfdff;
    /*  transform: translateY(-5px);  Выдвигаем кнопку вверх 
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Увеличиваем тень при наведении */ 
 }
@@ -80,7 +124,7 @@ H1{
 #modal2 {
     display: none;
     position: fixed; 
-    z-index:3;
+    z-index:5;
     left: 0; 
     top: 0; 
     width: 100%; 
@@ -90,9 +134,9 @@ H1{
 
 #cotainterModal2 { /* Исправлено имя на containerModal */
     padding: 20px; /* Отступы снаружи */
-    background-color: rgb(140, 132, 132); 
+    background-color:  rgb(75, 72, 69); 
     position: relative;
-    z-index: 4;
+    z-index: 6;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%); /* Центрирование */ 
@@ -105,27 +149,16 @@ H1{
 .button-container {
     display:flex;
     justify-content: center;
-   }
+}
 
 .button-container button{
   color: #dedede;
-  background-color: rgb(53, 48, 48);
+  background-color: rgb(140, 136, 130);
   border-radius: 16px;
   border: none;
   padding: 15px;
   font-family: Arial, Helvetica, sans-serif;
-}
-
-.W {
- color: #ffffff;
- background-color: rgb(140, 132, 132);
- padding: 5px 10px;
- border: none;
- border-radius: 10px;
-}
-
-.W:hover{
-    background-color: #645c5c;
+  cursor: pointer;
 }
 
 #close {

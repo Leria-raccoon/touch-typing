@@ -1,3 +1,9 @@
+// открытие и закрытие 
+document.getElementById('MenuButtom').addEventListener('click', () => {
+    menu.classList.toggle('open'); // Переключаем класс 'open'
+    //если есть класс, то он удаляется, если нет, то добавляется
+});
+
 let MModal = document.getElementById('modal1');
 document.getElementById('language').addEventListener('click', () => {
  MModal.style.display = "block";
@@ -25,6 +31,7 @@ window.addEventListener('click', (ev) =>{
  }
 });
 
+// таблица
 const element = [];
 
 // Загружаем данные из localStorage при загрузке страницы
@@ -49,6 +56,7 @@ if (/\d/.test(ev.key)){
     alert('вы ввели цифру!');
     }
    }
+
  }); 
 
   document.addEventListener('keydown', (ev)=> {
@@ -137,9 +145,7 @@ document.getElementById('download').addEventListener('click', () => {
 });
 
  
-
-
-let i = 0
+ let i = 0
 const words = 'apple banana orange grape cherry strawberry '; 
 const wordsA = words.split('');  // Разбиваеn строку на символы
 
@@ -147,7 +153,7 @@ const wordContainer = document.getElementById('pole');
   wordContainer.textContent = words; // Устанавливаем текст элемента
  
  let cat = false;
- document.getElementById('Pole').addEventListener('keydown',(ev) =>{
+ document.getElementById('pole').addEventListener('keydown',(ev) =>{
    if (ev.key === 'Backspace')  { 
    if (cat && i>0){
      console.log("ты удалила")
@@ -165,8 +171,19 @@ const wordContainer = document.getElementById('pole');
 }
 i++
 });
-
  
+/* const words = 'apple banana orange grape cherry strawberry '; 
+const wordsA = words.split('');  // Разбиваеn строку на символы
+const wordContainer = document.getElementById('pole');
+  wordContainer.textContent = words; // Устанавливаем текст элемента
+
+document.getElementById('pole').addEventListener('click', () => {
+    Play()
+})
+ 
+function Play() {
+   alert('получилось')
+} */
 
 
 
@@ -175,82 +192,3 @@ i++
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* const words = 'apple banana cherry date eggfruit fig grape honeydew kiwi lemon mango nectarine orange papaya quince raspberry strawberry tangerine ugli fruit vanilla watermelon xigua yellow passion fruit zucchini'.split(' '); // Исправлено на split(' ')
-
-const wordsCount = words.length;
-
-function randomWord() {
-    const randomIndex = Math.floor(Math.random() * wordsCount); // Исправлено на Math.floor
-    return words[randomIndex];
-};
-
-function newGame() {
-    const elementId = 'words'; // Добавлено определение elementId
-    document.getElementById(elementId).innerHTML = ""; // Исправлено на правильный синтаксис
-    for (let i = 0; i < 200; i++) {
-        document.getElementById(elementId).innerHTML += randomWord() + ' '; // Добавлен пробел между словами
-    }
-};
-
-newGame(); */
-
-
-
-
-/* // event.type должен быть keypress
-function getChar(event) {
-    if (event.which == null) { // IE
-      if (event.keyCode < 32) return null; // спец. символ
-      return String.fromCharCode(event.keyCode)
-    }
-  
-    if (event.which != 0 && event.charCode != 0) { // все кроме IE
-      if (event.which < 32) return null; // спец. символ
-      return String.fromCharCode(event.which); // остальные
-    }
-  
-    return null; // спец. символ
-  }
-  
-  var counterLetters = 0;
-  var levelText= "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur posuere tellus et leo mollis, vel"; //текст, который будет вводить пользователь
-  text.innerHTML=levelText;
-  let mistakesCounter = 0; //Счетчик ошибок
-  mistakes.innerHTML = ("Кол-во ошибок: " + mistakesCounter);
-  function checkKeyEvent() {
-        var keyName = getChar(event);
-        if(levelText[counterLetters] == keyName){
-              console.log("Введен символ"); //просто проверка
-              levelText = levelText.substring(1);
-              text.innerHTML = levelText;
-  
-          } else if (keyName == null) {
-              //do nothing
-               console.log("Нажата спец. клавиша");
-               alertText.innerHTML =("Нажата спец. клавиша");
-               
-          } else {
-              console.log("Введен неверный символ");
-              //тут будет код, оповещающий об ошибке
-              mistakesCounter++;
-              mistakes.innerHTML = ("Кол-во ошибок: " + mistakesCounter);
-          }
-  
-  }
-  document.addEventListener("keypress", checkKeyEvent); */
