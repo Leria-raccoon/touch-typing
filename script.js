@@ -1,6 +1,10 @@
+document.getElementById('background').addEventListener('click', () =>{
+  
+})
+
 // открытие и закрытие 
 document.getElementById('MenuButtom').addEventListener('click', () => {
-    menu.classList.toggle('open'); // Переключаем класс 'open'
+    Menu.classList.toggle('open'); // Переключаем класс 'open'
     //если есть класс, то он удаляется, если нет, то добавляется
 });
 
@@ -55,9 +59,9 @@ if (/\d/.test(ev.key)){
     ev.preventDefault()
     alert('вы ввели цифру!');
     }
-   }
+ 
 
- }); 
+ }})
 
   document.addEventListener('keydown', (ev)=> {
     if(ev.target.matches('#en') || ev.target.matches('#ru')){
@@ -144,8 +148,173 @@ document.getElementById('download').addEventListener('click', () => {
     URL.revokeObjectURL(url); // освобождаем память
 });
 
- 
- let i = 0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Упрощенный вариант без таймера и случайных слов
+const words = ['hello', 'world', 'javascript', 'coding', 'practice', 'example']; // Фиксированный набор слов для тренировки
+const wordsCount = words.length;
+
+// Основные функции для работы с классами элементов
+function addClass(el, name) {
+  el.classList.add(name); //способ добавления класса
+}
+function removeClass(el, name) {
+  el.classList.remove(name); // способ удаления класса
+}
+
+// Форматирование слова для отображения (каждая буква в отдельном span)
+function formatWord(word) {
+  return `<div class="word"><span class="letter">${word.split('').join('</span><span class="letter">')}</span></div>`;
+}
+
+// Инициализация новой игры
+function newGame() {
+  const wordsContainer = document.getElementById('words');
+  wordsContainer.innerHTML = '';// очистка контейнера
+  
+  // Добавляем 20 фиксированных слов 
+  wordsContainer.innerHTML = words.slice(0, 20).map(formatWord).join('');
+  
+  // Устанавливаем текущее слово и букву
+  document.querySelector('.word').classList.add('current ');
+  document.querySelector('.letter').classList.add('current');
+  
+  updateCursorPosition(); // Обновляем позицию курсора
+}
+
+// Обновление позиции курсора
+function updateCursorPosition() {
+  const nextLetter = document.querySelector('.letter.current');
+  const nextWord = document.querySelector('.word.current');
+  const cursor = document.getElementById('cursor');
+  
+  if (nextLetter || nextWord) {
+    const target = nextLetter || nextWord;
+    cursor.style.top = `${target.getBoundingClientRect().top + 2}px`;
+    cursor.style.left = `${target.getBoundingClientRect()[nextLetter ? 'left' : 'right']}px`;
+  }
+}
+
+// Обработчик нажатия клавиш
+document.getElementById('game').addEventListener('keyup', ev => {
+  const key = ev.key;
+  const currentWord = document.querySelector('.word.current');
+  const currentLetter = document.querySelector('.letter.current');
+  const expected = currentLetter?.innerHTML || ' ';
+  const isLetter = key.length === 1 && key !== ' ';
+  const isSpace = key === ' ';
+  const isBackspace = key === 'Backspace';
+  const isFirstLetter = currentLetter === currentWord?.firstChild;
+
+  // Обработка ввода буквы
+  if (isLetter && currentLetter) {
+    addClass(currentLetter, key === expected ? 'correct' : 'incorrect');
+    removeClass(currentLetter, 'current');
+    
+    if (currentLetter.nextSibling) {
+      addClass(currentLetter.nextSibling, 'current');
+    }
+  }
+
+  // Обработка пробела (переход к следующему слову)
+  if (isSpace) {
+    if (expected !== ' ' && currentWord) {
+      // Помечаем все неправильные буквы в текущем слове
+      [...currentWord.children].forEach(letter => {
+        if (!letter.classList.contains('correct')) {
+          addClass(letter, 'incorrect');
+        }
+      });
+    }
+    
+    if (currentWord?.nextSibling) {
+      removeClass(currentWord, 'current');
+      addClass(currentWord.nextSibling, 'current');
+      
+      if (currentLetter) removeClass(currentLetter, 'current');
+      addClass(currentWord.nextSibling.firstChild, 'current');
+    }
+  }
+
+  // Обработка backspace (возврат назад)
+  if (isBackspace) {
+    if (currentLetter && isFirstLetter && currentWord?.previousSibling) {
+      // Возврат к предыдущему слову
+      removeClass(currentWord, 'current');
+      addClass(currentWord.previousSibling, 'current');
+      removeClass(currentLetter, 'current');
+      addClass(currentWord.previousSibling.lastChild, 'current');
+      removeClass(currentWord.previousSibling.lastChild, 'incorrect');
+      removeClass(currentWord.previousSibling.lastChild, 'correct');
+    } else if (currentLetter && !isFirstLetter) {
+      // Возврат к предыдущей букве
+      removeClass(currentLetter, 'current');
+      addClass(currentLetter.previousSibling, 'current');
+      removeClass(currentLetter.previousSibling, 'incorrect');
+      removeClass(currentLetter.previousSibling, 'correct');
+    } else if (!currentLetter && currentWord?.lastChild) {
+      // Возврат к последней букве текущего слова
+      addClass(currentWord.lastChild, 'current');
+      removeClass(currentWord.lastChild, 'incorrect');
+      removeClass(currentWord.lastChild, 'correct');
+    }
+  }
+
+  // Прокрутка текста, если текущее слово уходит за видимую область
+  if (currentWord?.getBoundingClientRect().top > 250) {
+    const wordsContainer = document.getElementById('words');
+    const margin = parseInt(wordsContainer.style.marginTop || '0');
+    wordsContainer.style.marginTop = `${margin - 35}px`;
+  }
+
+  updateCursorPosition(); // Обновляем позицию курсора после изменений
+});
+
+// Инициализация новой игры при загрузке
+document.getElementById('newGameBtn').addEventListener('click', newGame);
+newGame();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ /* let i = 0
 const words = 'apple banana orange grape cherry strawberry '; 
 const wordsA = words.split('');  // Разбиваеn строку на символы
 
@@ -170,20 +339,8 @@ const wordContainer = document.getElementById('pole');
       cat = false;
 }
 i++
-});
+}); */
  
-/* const words = 'apple banana orange grape cherry strawberry '; 
-const wordsA = words.split('');  // Разбиваеn строку на символы
-const wordContainer = document.getElementById('pole');
-  wordContainer.textContent = words; // Устанавливаем текст элемента
-
-document.getElementById('pole').addEventListener('click', () => {
-    Play()
-})
- 
-function Play() {
-   alert('получилось')
-} */
 
 
 
