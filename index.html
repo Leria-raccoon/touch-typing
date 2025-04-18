@@ -21,11 +21,12 @@
  <button id="feedback" class="menu"><img src="https://i.ibb.co/nNktGMjm/image-9.png" width="40" height="40" alt="обратная связь" title="обратная связь"></button>
 </div>
 
+<!-- <button id="play">Нажмите, чтобы начать</button> -->
 <div id="game">
-<div id="pole"></div>
-<div id="cupsor">|</div>
+     <!-- делает div фокусированным  -->
+<div id="pole" tabindex="0"></div>
+<div id="cursor">_</div>
 </div>
-
     <button id="language" class="W">выбор языка</button>
     <div id="modal1">
         <div id="cotaiterModal1">
@@ -36,7 +37,7 @@
 </div>
     <div id="modal2">
         <div id="cotainterModal2">
-            <button id="close">&times</button>
+            <button class="Close" id="close">&times</button>
                 <div class="button-container">
                 <button id="DDD">Импорт</button>
                 <button id="download">Экспорт</button>
@@ -52,8 +53,8 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td><input type="text" id="en" class="B" placeholder="введите слово"></td>
-                        <td><input type="text" id="ru" class="B" placeholder="введите передов"></td>
+                        <td><input type="text" id="en" class="vod" placeholder="введите слово"  ></td>
+                        <td><input type="text" id="ru" class="vod" placeholder="введите передов"></td>
                         <td><button id="c">к</button></td>
                     </tr>
                 </tbody>
