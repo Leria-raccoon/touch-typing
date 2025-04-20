@@ -132,8 +132,34 @@ document.getElementById('download').addEventListener('click', () => {
     URL.revokeObjectURL(url); // освобождаем память
 });
 
-// Упрощенный вариант без таймера и случайных слов
-const words = [
+
+const wordsRU = [
+      "радар", "фламинго", "иллюминатор", "альбатрос", "гейзер", "граффити", 
+    "кристалл", "палатка", "броненосец", "голограмма", "цунами", "оригами",
+    "дикобраз", "телескоп", "сафари", "метеорит", "фейерверк", "кенгуру",
+    "лазер", "затмение", "витраж", "каньон", "осьминог", "гироскутер",
+    "комета", "археология", "парашют", "медуза", "мозаика", "рация",
+    "костер", "колибри", "вакуум", "фуникулер", "пеликан", "лавина",
+    "биология", "каракатица", "робот", "водопад", "саксофон", "дрон",
+    "эйфель", "палеонтология", "байдарка", "иллюзия", "вулкан", "кемпинг",
+    "радуга", "альпинизм", "микроскоп", "хамелеон", "айсберг", "анимация",
+    "экосистема", "нарвал", "компас", "метель", "коала", "эволюция",
+    "канатка", "физика", "роса", "дайвинг", "глобус", "химия",
+    "закат", "трансформер", "кварц", "балет", "пузырь", "саванна",
+    "паспорт", "эхо", "изотоп", "капля", "тайга", "навигатор",
+    "виза", "лабиринт", "коралл", "мольберт", "парадокс", "проектор",
+    "круиз", "артефакт", "реликвия", "иероглиф", "чемодан", "солнечник",
+    "карта", "орнамент", "глушитель", "манускрипт", "алфавит", "экспедиция",
+    "пещера", "силуэт", "фреска", "космонавт", "озеро", "калейдоскоп",
+    "тень", "этюд", "изумруд", "пазл", "галактика", "зодиак"
+  ];
+
+document.getElementById('button2').addEventListener('click',() =>{
+  MModal.style.display = 'none';
+  newGame(wordsRU);
+});
+
+const wordsEN = [          
   "apple", "banana", "orange", "grape", "kiwi", "mango", "peach", "pear", "plum", "cherry",
   "strawberry", "blueberry", "raspberry", "watermelon", "pineapple", "coconut", "lemon", "lime", "apricot", "fig",
   "date", "pomegranate", "blackberry", "tangerine", "cantaloupe", "honeydew", "papaya", "passionfruit", "dragonfruit", "jackfruit",
@@ -145,7 +171,11 @@ const words = [
   "oil", "sauce", "mustard", "ketchup", "mayonnaise", "honey", "jam", "jelly", "syrup", "chocolate",
   "cake", "cookie", "pie", "brownie", "pudding", "ice cream", "candy", "chocolate"
 ];
-const wordsCount = words.length;
+
+document.getElementById('button3').addEventListener('click',() =>{
+  MModal.style.display = 'none';
+  newGame(wordsEN);
+});
 
 // Добавить\ убавить класс
 function addClass(el, name) {
@@ -159,63 +189,27 @@ function removeClass(el, name) {
 function formatWord(word) {
   return `<div class="word"><span class="letter">${word.split('').join('</span><span class="letter">')}</span></div>`;
 }
-//Метод split('') разбивает строку на массив символов ['h', 'e', 'l', 'l', 'o'].
-//Метод join() объединяет элементы массива в строку, используя указанный разделитель.
-//принимает только одно слово 
-/* <div class="word">
-  <span class="letter">h</span>
-  <span class="letter">e</span>
-  выводится как обычное слово*/
 
-// Инициализация новой игры
-function newGame() {
+function WordsContainer (words) {
   const wordsContainer = document.getElementById('pole');
   wordsContainer.innerHTML = '';// очистка контейнера
-  
-  // Добавляем 20 фиксированных слов 
   wordsContainer.innerHTML = words.map(formatWord).join('');
-  // метод slice для получение части массива
-  // Метод map создает новый массив, применяя функцию formatWord к каждому элементу, полученного на предыдущем шаге.
-  // каждое слово будет начинаться с новой строки из-за div
+}
 
+// Инициализация новой игры
+function newGame(words) {
+  WordsContainer (words)
+  
   // Устанавливаем текущее слово и букву
   document.querySelector('.word').classList.add('current');
   document.querySelector('.letter').classList.add('current');
-  // первому элементу с классом (word и letter) добавляем еще один класс current 
-  // добалвяем именно к ЭЛЕМЕНТУ класса
-
+  
   pole.focus();
   updateCursorPosition(); // Обновляем позицию курсора
 
   /* const cursor = document.getElementById('cursor')
   cursor.style.display = 'block' */
 }
-
-
-
-
-
-/* // Обновление позиции курсора
-function updateCursorPosition() {
-  const nextLetter = document.querySelector('.letter.current');
-  const nextWord = document.querySelector('.word.current');
-  const cursor = document.getElementById('cursor');
-  // current это класс, который используется для обозначения текущего элемента
-  // выбирают элемент с двумя классами и засовывают в переменную
-  
-  if (nextLetter || nextWord) { // или
-    const target = nextLetter || nextWord;
-  /*   если следующая буква или следующее слово, ! выбираем один  
-    cursor.style.top = `${target.getBoundingClientRect().top + 2}px`;
-    cursor.style.left = `${target.getBoundingClientRect()[nextLetter ? 'left' : 'right']}px`;
-    //тернарный оператор, если условие истинно, то выполняется после ?, если нет, то после :
-    // определяет позиционирование курсора, горизонтальное или вертикальное 
-  }// горизонтальная позиция,
-}
-// метод getBoundingClientRect() получает размер и текущее расположение элемента 
- */
-
-
 
 function updateCursorPosition() {
   const nextLetter = document.querySelector('.letter.current');
@@ -224,11 +218,10 @@ function updateCursorPosition() {
 
   if (nextLetter || nextWord) {
       const target = nextLetter || nextWord;
-      const rect = target.getBoundingClientRect();
-
+// метод getBoundingClientRect() получает размер и текущее расположение элемента 
       // Учитываем прокрутку страницы
-      cursor.style.top = `${rect.top + window.scrollY + 2}px`;
-      cursor.style.left = `${rect.left + window.scrollX}px`;
+      cursor.style.top = `${target.getBoundingClientRect().top + 10}px`;
+      cursor.style.left = `${target.getBoundingClientRect()[nextLetter ? 'left':'right'] + window.scrollX}px`;// hotizontal
   }
 }
 
@@ -237,13 +230,6 @@ document.addEventListener('keydown', updateCursorPosition);
 
 // Обновление курсора при изменении размера окна
 window.addEventListener('resize', updateCursorPosition);
-
-
-
-
-
-
-
 
 // Обработчик нажатия клавиш
   const pole = document.getElementById('pole')
@@ -349,45 +335,29 @@ firstElementChild: Если вы хотите получить только пе
     } else if (!currentLetter && currentWord?.lastChild) { 
       //если это не current letter and lastChild 
       // Возврат к последней букве текущего слова
-      addClass(currentWord.lastChild, 'current'); //
-      removeClass(currentWord.lastChild, 'incorrect'); //
-      removeClass(currentWord.lastChild, 'correct'); //
+      addClass(currentWord.lastChild, 'current'); 
+      removeClass(currentWord.lastChild, 'incorrect');
+      removeClass(currentWord.lastChild, 'correct'); 
     }
   }
 
-
-
-
-
-
-
-
+/* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
+if (currentWord) {
+  const container = document.getElementById('pole'); 
+  const wordRect = currentWord.getBoundingClientRect();
+  const containerRect = container.getBoundingClientRect();
   
-/*   // Прокрутка текста, если текущее слово уходит за видимую область
-  if (currentWord?.getBoundingClientRect().top > 125) {
-    const wordsContainer = document.getElementById('');
-    const margin = parseInt(wordsContainer.style.marginTop || '0');
-    wordsContainer.style.marginTop = `${margin - 35}px`;
-    // не понимаю что именно нужно прокручивать, нужен элемент
-  } */
-
-
-
-
-
-
-
-
+  if (wordRect.bottom > containerRect.bottom) {
+    const scrollAmount = wordRect.bottom - containerRect.bottom;
+    container.scrollTop += scrollAmount + 10;
+  }
+}
+ 
 
 
     updateCursorPosition(); // Обновляем позицию курсора после изменений
   });
 
-// Инициализация новой игры при загрузке
-document.getElementById('button3').addEventListener('click',() =>{
-  MModal.style.display = 'none';
-  newGame();
-});
 /* 
 const play = document.getElementById('play')
   play.addEventListener('click',() => {

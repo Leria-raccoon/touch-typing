@@ -7,7 +7,7 @@
 
 #language{
     position: absolute;
-    top: 37%;
+    top: 58%;
     left: 120px;
     transform: translate(-50%, -50%);
     background-color:  rgb(56, 55, 53);
@@ -45,17 +45,17 @@
     left: 50%;
     transform: translate(-50%, -50%); /* Центрирование */ 
     width: 85%;
-    height: 75px; 
-/*     background-color:  rgb(75, 72, 69) ;   */
-    border-radius: 16px;
-    padding: 20px;
+    height: 89px; 
+  /*   background-color:  rgb(75, 72, 69) ;   */
+    padding: 6px;
     display: flex;
     flex-wrap: wrap;
     justify-content: start;
-    font-size: 22px;
+    font-size: 23px;
     color: rgb(123, 119, 119);
-    /* filter: blur(10px); */
+    /*  filter: blur(10px);  */
     overflow: hidden; /* скрывает переполнение контейнера */
+    scroll-behavior: smooth; /* Плавная прокрутка всегда */
 }
 
 #pole:focus {
@@ -76,7 +76,7 @@
 
 .word {
     display: inline-flex;
-    margin-right: 10px; /* Горизонтальный отступ */
+    margin-right: 11px; /* Горизонтальный отступ */
     margin-bottom: 6px; /* Вертикальный отступ между строками */
   }
 
