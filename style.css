@@ -3,12 +3,13 @@
     элементов на веб-странице в зависимости от их состояния 
     или положения.*/
     --secondary-color: #e9e9e980; /* Вторичный цвет */
-}
+    --text-color: rgb(123, 119, 119);
+}  
 
 #language{
     position: absolute;
     top: 58%;
-    left: 120px;
+    left: 160px;
     transform: translate(-50%, -50%);
     background-color:  rgb(56, 55, 53);
     padding: 5px 10px;
@@ -16,12 +17,44 @@
     border-radius: 10px;
     cursor: pointer;
     color: #b5b5b5;
+    width: 100px;
 }
 
 #language:hover{
-    border-width: 2px;
-    border-color: #dedede;
-    border-style: solid;
+    color: #dedede;
+    background-color: var(--secondary-color);
+}
+
+#Reboot{
+    position: absolute;
+    top: 58%;
+    left: 90px;
+    transform: translate(-50%, -50%);
+}
+
+#WORDCOUNT{
+    position: absolute;
+    top: 58%;
+    left: 400px;
+    transform: translate(-50%, -50%);
+}
+
+.WordCount{
+    background-color:  rgb(56, 55, 53);
+    padding: 5px 5px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    color: #b5b5b5;
+}
+
+.WordCount:hover{
+    color: #dedede;
+    background-color: var(--secondary-color);
+}
+.WordCount2 {
+    color: #dedede;
+    background-color: var(--secondary-color);
 }
 
 /* #play{
@@ -47,12 +80,12 @@
     width: 85%;
     height: 89px; 
   /*   background-color:  rgb(75, 72, 69) ;   */
-    padding: 6px;
+    padding: 1px;
     display: flex;
     flex-wrap: wrap;
     justify-content: start;
     font-size: 23px;
-    color: rgb(123, 119, 119);
+    color: var(--text-color);
     /*  filter: blur(10px);  */
     overflow: hidden; /* скрывает переполнение контейнера */
     scroll-behavior: smooth; /* Плавная прокрутка всегда */
@@ -64,6 +97,7 @@
 
 #cursor{
     position: absolute;
+    display: none;
 }
 
 .correct{
@@ -86,7 +120,10 @@
  }
 
  #language{
-    left: 25.5%;
+    left: 35%;
+ }
+ #WORDCOUNT{
+    left: 60%;
  }
 } 
 
@@ -134,7 +171,7 @@ h1{
     top: 0;
     right: -250px;
     transition: right 0.4s ease;
-    background-color: rgba(177, 175, 174, 0.9);
+    background-color: rgba(160, 160, 160, 0.9);
     z-index:1;
     display: flex;
     flex-direction: column;
@@ -187,7 +224,7 @@ input:focus{
 }
 
 #cotaiterModal1{
-    position: relative;
+    position: absolute;
     z-index: 4;
     top: 50%;
     left: 50%;
@@ -236,7 +273,7 @@ input:focus{
 #cotainterModal2 { 
     padding: 20px; /* Отступы снаружи */
     background-color:  rgba(177, 174, 174 ); 
-    position: relative;
+    position: absolute;
     z-index: 6;
     top: 50%;
     left: 50%;
@@ -296,8 +333,14 @@ input:focus{
     text-align: center; /* Выравнивание текста по центру */
 }
 
- #keyboard {
-    display: flex;
-    flex-direction: column;
- } 
+#keyboard{
+    display: flex; 
+    
+}
  
+ .key{
+    
+    
+    color: var(--text-color);
+ }
+

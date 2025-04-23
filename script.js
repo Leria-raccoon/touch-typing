@@ -132,50 +132,127 @@ document.getElementById('download').addEventListener('click', () => {
     URL.revokeObjectURL(url); // освобождаем память
 });
 
-
 const wordsRU = [
-      "радар", "фламинго", "иллюминатор", "альбатрос", "гейзер", "граффити", 
-    "кристалл", "палатка", "броненосец", "голограмма", "цунами", "оригами",
-    "дикобраз", "телескоп", "сафари", "метеорит", "фейерверк", "кенгуру",
-    "лазер", "затмение", "витраж", "каньон", "осьминог", "гироскутер",
-    "комета", "археология", "парашют", "медуза", "мозаика", "рация",
-    "костер", "колибри", "вакуум", "фуникулер", "пеликан", "лавина",
-    "биология", "каракатица", "робот", "водопад", "саксофон", "дрон",
-    "эйфель", "палеонтология", "байдарка", "иллюзия", "вулкан", "кемпинг",
-    "радуга", "альпинизм", "микроскоп", "хамелеон", "айсберг", "анимация",
-    "экосистема", "нарвал", "компас", "метель", "коала", "эволюция",
-    "канатка", "физика", "роса", "дайвинг", "глобус", "химия",
-    "закат", "трансформер", "кварц", "балет", "пузырь", "саванна",
-    "паспорт", "эхо", "изотоп", "капля", "тайга", "навигатор",
-    "виза", "лабиринт", "коралл", "мольберт", "парадокс", "проектор",
-    "круиз", "артефакт", "реликвия", "иероглиф", "чемодан", "солнечник",
-    "карта", "орнамент", "глушитель", "манускрипт", "алфавит", "экспедиция",
-    "пещера", "силуэт", "фреска", "космонавт", "озеро", "калейдоскоп",
-    "тень", "этюд", "изумруд", "пазл", "галактика", "зодиак"
-  ];
+  "вулкан", "парашют", "алгоритм", "восторг", "кристалл", "гармония", "цунами", "робот", "мечта", "гейзер", "радуга", "искра", "бриллиант", "лазер", "энергия", "комета", "вихрь", "орбита", "закат", "голограмма", "метеорит", "иллюзия", "палитра", "эволюция", "фейерверк", "калейдоскоп", "квант", "ностальгия", "архипелаг", "трансформер", "самовар", "эхо", "фреска", "дирижабль", "атом", "мозаика", "витраж", "компас", "сфинкс", "осьминог", "лавина", "пазл", "граффити", "колибри", "пещера", "мираж", "магма", "рация", "алхимия", "телескоп","батискаф", "капля", "громоотвод", "айсберг", "коралл", "мерцание", "парусник", "электричество", "кенгуру", "маятник", "пеликан", "радар", "торнадо", "фламинго", "хамелеон", "циклон", "шахматы", "щепка", "энциклопедия", "юла", "якорь", "аметист", "броненосец", "вертолет", "глобус", "дротик", "жасмин", "зефир", "иней", "йогурт", "кварц", "лабиринт", "метель", "нефрит", "озон", "память", "рассвет", "светлячок", "талисман", "ураган", "факел", "хрусталь", "цветение", "чертополох", "шалаш", "щебет", "эгоист", "юнга", "ящерица", "азарт",
+  "блеск", "вибрация", "галактика", "долголетие", "жернова", "зодиак", "импульс", "каравелла", "ласточка", "метроном", "нимб", "океан", "палисадник", "рапсодия", "сатурн", "титаник", "улей", "феникс", "хаос", "цельсий", "чернила", "штурвал", "щелочь", "эпос", "юстиция", "ягуар", "аквамарин", "болид", "верность", "гравюра", "древо", "жажда", "зенит", "искусство", "листва", "магнит", "небоскреб", "оберег", "памятник", "район", "созвездие", "топаз", "устойчивость", "фактура", "хроника", "цветок", "чердак", "шарм", "щепотка", "эскиз", "юмор","ярость", "алмаз", "благодать", "вдохновение", "горизонт", "дыхание", "жемчуг", "заря", "изумруд", "караван", "лукоморье", "метафора", "нимфа", "огонь", "покровитель", "радушие", "самоцвет", "талант", "удача", "фантазия", "холст", "царство", "чародей", "шёпот", "щегол", "эльф", "юность", "ясень", "авантюра", "бесконечность", "волшебство", "грация", "доблесть", "жизнь", "звёзды", "источник", "кружево", "легенда", "магия", "нежность", "оптимизм", "прозрачность", "радость", "свобода", "творчество", "улыбка", "храбрость", "цвета", "чувство", "щедрость","энергия", "яркость", "абсолют", "благородство", "воля", "душа", "жар", "закат", "изобретение", "кокон", "любовь", "мелодия", "надежда", "оригами", "поколение", "рассвет", "сила", "тепло", "уют", "факел", "харизма", "цель", "чаша", "шедевр", "эволюция", "яблоко", "баланс", "вспышка", "гравитация", "добро", "жест", "знание", "истина", "кодекс", "луч", "молния", "наука", "образ", "порыв", "ритм", "свет", "тайна", "успех", "факт", "холод", "цифра", "чудо", "щель", "эра", "юла", "язык"
+];
+          
+  const wordsEN = [
+    "quasar", "flamingo", "portal", "albatross", "geyser", "graffiti", "crystal", "tent", "armadillo", "hologram", "tsunami", "origami", "porcupine", "telescope", "safari", "meteorite", "firework", "kangaroo", "laser", "eclipse", "stainedglass", "canyon", "octopus", "hoverboard", "comet", "archeology", "parachute", "jellyfish", "mosaic", "walkietalkie", "hummingbird", "vacuum", "funicular", "pelican", "avalanche", "biology", "squid", "robot", "waterfall", "saxophone", "drone", "eiffel", "paleontology", "kayak", "illusion", "volcano", "camping", "rainbow", "mountaineering", "microscope", "chameleon", "iceberg", "animation", "ecosystem", "narwhal", "compass", "blizzard", "koala", "evolution", "cablecar", "physics", "dew", "diving", "globe", "chemistry", "sunset", "transformer", "quartz", "ballet", "bubble", "savanna", "passport", "echo", "isotope", "droplet", "taiga", "navigator", "visa", "maze", "coral", "easel", "paradox", "projector", "cruise", "artifact", "relic", "hieroglyph", "suitcase", "sunfish", "map", "ornament", "silencer", "manuscript", "alphabet", "expedition", "cave", "silhouette", "fresco", "astronaut", "lake", "kaleidoscope", "shadow", "sketch", "emerald", "puzzle", "galaxy", "zodiac",
+    "abstraction", "aggression", "alchemy", "analysis", "aristocracy", "aroma", "astronomy", "gratitude", "nobility", "blitz", "vigil", "throw", "inspiration", "empathy", "interaction", "grandeur", "loyalty", "merriment", "admiration", "universe", "hypothesis", "smoothness", "calm", "depth", "humanism", "taoism", "debate", "kindness", "achievement", "friendship", "spirituality", "care", "riddle", "completion", "delusion", "knowledge", "invention", "amazement", "intuition", "classic", "communication", "creativity", "culture", "leadership", "love", "magic", "peace", "wisdom", "hope", "science", "charm", "optimism", "paradigm", "transmission", "learning", "flow", "progress", "reflection", "joy", "reality", "freedom", "power", "compassion", "serenity", "happiness", "art", "tranquility", "success", "philosophy", "color", "emotion", "experiment", "youth", "absolute", "agent", "activity", "antidote", "argument", "atmosphere", "prosperity", "closest", "grace", "blessing", "era", "majestic", "faith", "connection", "inspiring", "rebirth", "enchantment", "recovery", "impression", "versatile", "genius", "profound", "nation", "humanity", "foresight", "actuality", "durability", "accessibility", "warmth", "amusing", "amusement", "mysterious", "merit", "change", "astonishing", "innovation", "integration", "picture", "catastrophe", "cool", "complex", "cosmos", "creativity", "line", "logic", "magnet", "modernization", "module", "award", "direction", "flaw", "unification", "lens", "discovery", "reflection", "parameter", "perspective", "planet", "potential", "excellence", "principle", "issue", "productivity", "diversity", "development", "reaction", "system", "consciousness", "state", "strategy", "destiny", "sphere", "creation", "technology", "transformation", "skill", "phenomenon", "function", "character", "integrity", "miracle", "ecology", "legal", "abstract", "adequate", "accent", "reasoned", "association", "grateful", "charity", "beneficial", "motivating"
+];
+
+const language = document.getElementById('language')
+let D = 'RU'
+let F = 100
+
+document.addEventListener('DOMContentLoaded', ()=>{
+  newGame(wordsRU, 100);
+  addremoveClass (id100, OneHundred)
+})
 
 document.getElementById('button2').addEventListener('click',() =>{
   MModal.style.display = 'none';
-  newGame(wordsRU);
+  newGame(wordsRU, 100);
+  language.textContent = 'russian';
+  D = 'RU';
+  F = 100
 });
-
-const wordsEN = [          
-  "apple", "banana", "orange", "grape", "kiwi", "mango", "peach", "pear", "plum", "cherry",
-  "strawberry", "blueberry", "raspberry", "watermelon", "pineapple", "coconut", "lemon", "lime", "apricot", "fig",
-  "date", "pomegranate", "blackberry", "tangerine", "cantaloupe", "honeydew", "papaya", "passionfruit", "dragonfruit", "jackfruit",
-  "carrot", "potato", "tomato", "cucumber", "pepper", "onion", "garlic", "spinach", "broccoli", "cauliflower",
-  "lettuce", "kale", "zucchini", "eggplant", "beet", "radish", "celery", "asparagus", "artichoke", "brussels sprouts",
-  "chicken", "beef", "pork", "lamb", "fish", "shrimp", "crab", "lobster", "turkey", "duck",
-  "egg", "cheese", "milk", "yogurt", "cream", "butter", "bread", "pasta", "rice", "quinoa",
-  "oat", "barley", "corn", "flour", "sugar", "salt", "pepper", "spice", "herb", "vinegar",
-  "oil", "sauce", "mustard", "ketchup", "mayonnaise", "honey", "jam", "jelly", "syrup", "chocolate",
-  "cake", "cookie", "pie", "brownie", "pudding", "ice cream", "candy", "chocolate"
-];
 
 document.getElementById('button3').addEventListener('click',() =>{
   MModal.style.display = 'none';
-  newGame(wordsEN);
+  newGame(wordsEN, 100);
+  language.textContent = 'english';
+  D = 'EN';
+  F = 100
 });
+
+  const Ten = document.getElementById('Ten')
+  Ten.addEventListener('click',() =>{
+  const words = D === 'RU' ? wordsRU : wordsEN;
+  newGame(words, 10);
+  F = 10
+  addremoveClass (id10, Ten)
+  
+});
+
+  const TwentyFive = document.getElementById('TwentyFive')
+  TwentyFive.addEventListener('click',() =>{
+  const words = D === 'RU' ? wordsRU : wordsEN;
+  newGame(words, 25);
+  F = 25
+  Ten.classList.toggle('WordCount2');
+  addremoveClass(id25, TwentyFive)
+});
+
+  const Fifty = document.getElementById('Fifty')
+  Fifty.addEventListener('click',() =>{
+  const words = D === 'RU' ? wordsRU : wordsEN;
+  newGame(words, 50);
+  F = 50
+  addremoveClass (id50, Fifty)
+});
+
+  const SeventyFive = document.getElementById('SeventyFive')
+  SeventyFive.addEventListener('click',() =>{
+  const words = D === 'RU' ? wordsRU : wordsEN;
+  newGame(words, 75);
+  F = 75
+  addremoveClass (id75, SeventyFive)
+});
+
+  const OneHundred= document.getElementById('OneHundred')
+  OneHundred.addEventListener('click',() =>{
+  const words = D === 'RU' ? wordsRU : wordsEN;
+  newGame(words, 100);
+  F = 100
+  addremoveClass (id100, OneHundred)
+});
+
+ document.getElementById('Reboot').addEventListener('click', () =>{
+    const words = D === 'RU' ? wordsRU : wordsEN ;
+    if (F === 10){
+      const F = 10;
+      newGame(words, F);
+
+    } else if ( F === 25){
+      const F = 25;
+      newGame (words, F);
+
+    } else if (F === 50){
+      const F = 50;
+      newGame (words, F);
+
+    } else if (F === 75){
+      const F = 75;
+      newGame (words, F);
+
+    } else if (F === 100){
+      const F = 100;
+      newGame (words, F);
+    }
+ });
+
+ // массивы с названиями идентификаторов
+ const id10 = ['TwentyFive','Fifty','SeventyFive','OneHundred']
+ const id25 = ['Ten','Fifty','SeventyFive','OneHundred']
+ const id50 = ['Ten','TwentyFive','SeventyFive','OneHundred']
+ const id75 = ['Ten','TwentyFive', 'Fifty','OneHundred']
+ const id100 = ['Ten','TwentyFive', 'SeventyFive','Fifty']
+
+ function addremoveClass (ID, num) {
+  // перебирает каждый элемент, ищет идентификатор, после того как находит, помещает в новый массивм
+  const element = ID.map(i => document.getElementById(i));
+
+  element.forEach(idishci => {
+    if (idishci) {
+      idishci.classList.remove('WordCount2');
+  }
+});
+  if (num){
+  num.classList.add('WordCount2');
+ }
+ }
 
 // Добавить\ убавить класс
 function addClass(el, name) {
@@ -190,38 +267,66 @@ function formatWord(word) {
   return `<div class="word"><span class="letter">${word.split('').join('</span><span class="letter">')}</span></div>`;
 }
 
-function WordsContainer (words) {
-  const wordsContainer = document.getElementById('pole');
-  wordsContainer.innerHTML = '';// очистка контейнера
-  wordsContainer.innerHTML = words.map(formatWord).join('');
-}
+// запуск игры
+function newGame(words, num) {
+  // Функция для правильного перемешивания массива (Фишер-Йетс)
+  function shuffleArray(array) {
+    const newArray = [...array];
+    for (let i = newArray.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+    }
+    return newArray;
+  }
 
-// Инициализация новой игры
-function newGame(words) {
-  WordsContainer (words)
-  
+  // Обновляем контейнер со словами
+  function updateWordsContainer(wordsToShow) {
+    const wordsContainer = document.getElementById('pole');
+    wordsContainer.innerHTML = ''; // очистка контейнера
+    wordsContainer.innerHTML = wordsToShow.map(formatWord).join('');
+  }
+
+  // Перемешиваем слова и выбираем нужное количество
+  const shuffledWords = shuffleArray(words).slice(0, num);
+  updateWordsContainer(shuffledWords);
+
   // Устанавливаем текущее слово и букву
   document.querySelector('.word').classList.add('current');
   document.querySelector('.letter').classList.add('current');
+
+  const cursor = document.getElementById('cursor')
+  cursor.style.display = 'block'
   
   pole.focus();
-  updateCursorPosition(); // Обновляем позицию курсора
+  updateCursorPosition();
+} 
 
-  /* const cursor = document.getElementById('cursor')
-  cursor.style.display = 'block' */
-}
 
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!обновление курсора 
 function updateCursorPosition() {
   const nextLetter = document.querySelector('.letter.current');
   const nextWord = document.querySelector('.word.current');
   const cursor = document.getElementById('cursor');
+  const pole = document.getElementById('pole');
 
   if (nextLetter || nextWord) {
-      const target = nextLetter || nextWord;
-// метод getBoundingClientRect() получает размер и текущее расположение элемента 
-      // Учитываем прокрутку страницы
-      cursor.style.top = `${target.getBoundingClientRect().top + 10}px`;
-      cursor.style.left = `${target.getBoundingClientRect()[nextLetter ? 'left':'right'] + window.scrollX}px`;// hotizontal
+    const target = nextLetter || nextWord;
+    const targetRect = target.getBoundingClientRect();
+    const poleRect = pole.getBoundingClientRect();
+
+    cursor.style.top = `${target.getBoundingClientRect().top + 11}px`; 
+    // расстояние от верхней границы видимоф области окна до верхней границы элемента +11 вниз 
+    cursor.style.left = `${target.getBoundingClientRect()[nextLetter ? 'left':'right'] + window.scrollX}px`;
+    // hotizontal
+    
+    // Автопрокрутка контейнера (если слово уходит за границы)
+    if (targetRect.bottom > poleRect.bottom) { // Учитываем новый отступ
+      const scrollAmount = targetRect.bottom - poleRect.bottom;
+      pole.scrollTop += scrollAmount;
+    } else if (targetRect.top < poleRect.top) {
+      const scrollAmount = targetRect.top - poleRect.top;
+      pole.scrollTop += scrollAmount - 10;
+    }
   }
 }
 
@@ -341,23 +446,10 @@ firstElementChild: Если вы хотите получить только пе
     }
   }
 
-/* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
-if (currentWord) {
-  const container = document.getElementById('pole'); 
-  const wordRect = currentWord.getBoundingClientRect();
-  const containerRect = container.getBoundingClientRect();
-  
-  if (wordRect.bottom > containerRect.bottom) {
-    const scrollAmount = wordRect.bottom - containerRect.bottom;
-    container.scrollTop += scrollAmount + 10;
-  }
-}
- 
-
-
     updateCursorPosition(); // Обновляем позицию курсора после изменений
   });
 
+  
 /* 
 const play = document.getElementById('play')
   play.addEventListener('click',() => {
