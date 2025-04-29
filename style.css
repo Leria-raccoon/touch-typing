@@ -9,7 +9,7 @@
 #language{
     position: absolute;
     top: 58%;
-    left: 160px;
+    left: 220px;
     transform: translate(-50%, -50%);
     background-color:  rgb(56, 55, 53);
     padding: 5px 10px;
@@ -79,7 +79,7 @@
     transform: translate(-50%, -50%); /* Центрирование */ 
     width: 85%;
     height: 89px; 
-  /*   background-color:  rgb(75, 72, 69) ;   */
+ /*    background-color:  rgb(75, 72, 69) ;   */ 
     padding: 1px;
     display: flex;
     flex-wrap: wrap;
@@ -98,6 +98,7 @@
 #cursor{
     position: absolute;
     display: none;
+    transition: all 0.2s ease-out;
 }
 
 .correct{
@@ -120,7 +121,7 @@
  }
 
  #language{
-    left: 35%;
+    left: 40%;
  }
  #WORDCOUNT{
     left: 60%;
@@ -171,7 +172,7 @@ h1{
     top: 0;
     right: -250px;
     transition: right 0.4s ease;
-    background-color: rgba(160, 160, 160, 0.9);
+    background-color: rgba(57, 56, 56, 0.9);
     z-index:1;
     display: flex;
     flex-direction: column;
@@ -333,14 +334,44 @@ input:focus{
     text-align: center; /* Выравнивание текста по центру */
 }
 
-#keyboard{
-    display: flex; 
-    
+#keyboard {
+    display: flex; /* 3 блока выстраиваются в линию  */
+    flex-direction: column; /* потом в вертикаль */
+    gap: 8px; /* вертикальный отступ */
+    color: var(--secondary-color);
+    position: absolute;
+    top: 82%;
+    left: 50%;
+    transform: translate(-50%, -50%); 
 }
- 
- .key{
-    
-    
-    color: var(--text-color);
- }
+  
+.line {
+    display: flex; /*но уже содердимое контейнера в горизонталь */
+    justify-content: center; /* располагается по середине */
+    gap: 10px; /* Расстояние между клавишами */
+    margin: 0;
+    padding: 0;
+} 
 
+.key {
+    width: 35px;
+    height: 35px;
+    border: var(--secondary-color);
+    border-style: solid; /* сплошная граница */
+    border-width: 2px;
+    border-radius: 10px;
+    display: flex;
+/* просто идеально центрурует букву внутри кнопки */
+    align-items: center;
+    justify-content: center; 
+    gap: 8px;
+} 
+@media(max-width:570px){
+    #keyboard{
+    display: none;
+    }
+
+    #WORDCOUNT{
+        left: 370px;
+    }
+     }

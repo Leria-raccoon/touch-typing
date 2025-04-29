@@ -143,37 +143,43 @@ const wordsRU = [
 ];
 
 const language = document.getElementById('language')
-let D = 'RU'
-let F = 100
+let D = 'RU' // показывает какой именно сейчас массив слов рус или англ
+let F = 10 // показывает сколько слов попало в контейнер
 
 document.addEventListener('DOMContentLoaded', ()=>{
-  newGame(wordsRU, 100);
-  addremoveClass (id100, OneHundred)
-})
+  newGame(wordsEN, 10); 
+  addremoveClass (id10, Ten)
+  Observe()
+  ENGLISH ()
+});
 
 document.getElementById('button2').addEventListener('click',() =>{
   MModal.style.display = 'none';
   newGame(wordsRU, 100);
   language.textContent = 'russian';
   D = 'RU';
-  F = 100
+  F = 100;
+  Observe()
+  RUSSIAN ()
 });
 
 document.getElementById('button3').addEventListener('click',() =>{
   MModal.style.display = 'none';
   newGame(wordsEN, 100);
   language.textContent = 'english';
-  D = 'EN';
-  F = 100
+  D = 'EN'; // показывает какой именно сейчас массив слов рус или англ
+  F = 100; // показывает сколько слов попало в контейнер
+  Observe()
+  ENGLISH()
 });
 
   const Ten = document.getElementById('Ten')
   Ten.addEventListener('click',() =>{
   const words = D === 'RU' ? wordsRU : wordsEN;
   newGame(words, 10);
-  F = 10
-  addremoveClass (id10, Ten)
-  
+  F = 10; 
+  addremoveClass (id10, Ten);
+  Observe()//
 });
 
   const TwentyFive = document.getElementById('TwentyFive')
@@ -183,6 +189,7 @@ document.getElementById('button3').addEventListener('click',() =>{
   F = 25
   Ten.classList.toggle('WordCount2');
   addremoveClass(id25, TwentyFive)
+  Observe()
 });
 
   const Fifty = document.getElementById('Fifty')
@@ -191,6 +198,7 @@ document.getElementById('button3').addEventListener('click',() =>{
   newGame(words, 50);
   F = 50
   addremoveClass (id50, Fifty)
+  Observe()
 });
 
   const SeventyFive = document.getElementById('SeventyFive')
@@ -199,6 +207,7 @@ document.getElementById('button3').addEventListener('click',() =>{
   newGame(words, 75);
   F = 75
   addremoveClass (id75, SeventyFive)
+  Observe()
 });
 
   const OneHundred= document.getElementById('OneHundred')
@@ -207,6 +216,7 @@ document.getElementById('button3').addEventListener('click',() =>{
   newGame(words, 100);
   F = 100
   addremoveClass (id100, OneHundred)
+  Observe()
 });
 
  document.getElementById('Reboot').addEventListener('click', () =>{
@@ -231,6 +241,7 @@ document.getElementById('button3').addEventListener('click',() =>{
       const F = 100;
       newGame (words, F);
     }
+    Observe()
  });
 
  // массивы с названиями идентификаторов
@@ -264,12 +275,17 @@ function removeClass(el, name) {
 
 // Форматирование слова для отображения (каждая буква в отдельном span)
 function formatWord(word) {
-  return `<div class="word"><span class="letter">${word.split('').join('</span><span class="letter">')}</span></div>`;
+  return `<div class="word"><span class="letter">${word.trim().split('').join('</span><span class="letter">')}</span></div>`;
+  /* <div class="word">
+    <span class="letter">П</span>
+    <span class="letter">р</span>
+   </div>
+  */
 }
 
-// запуск игры
+// НАЧАЛО 
 function newGame(words, num) {
-  // Функция для правильного перемешивания массива (Фишер-Йетс)
+  // Функция для перемешивания массива (Фишер-Йетс)
   function shuffleArray(array) {
     const newArray = [...array];
     for (let i = newArray.length - 1; i > 0; i--) {
@@ -286,21 +302,19 @@ function newGame(words, num) {
     wordsContainer.innerHTML = wordsToShow.map(formatWord).join('');
   }
 
-  // Перемешиваем слова и выбираем нужное количество
-  const shuffledWords = shuffleArray(words).slice(0, num);
-  updateWordsContainer(shuffledWords);
+  const shuffledWords = shuffleArray(words).slice(0, num);// Перемешиваем слова 
+  updateWordsContainer(shuffledWords); 
 
   // Устанавливаем текущее слово и букву
   document.querySelector('.word').classList.add('current');
   document.querySelector('.letter').classList.add('current');
-
+ 
   const cursor = document.getElementById('cursor')
   cursor.style.display = 'block'
   
   pole.focus();
   updateCursorPosition();
 } 
-
 
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!обновление курсора 
 function updateCursorPosition() {
@@ -314,20 +328,32 @@ function updateCursorPosition() {
     const targetRect = target.getBoundingClientRect();
     const poleRect = pole.getBoundingClientRect();
 
-    cursor.style.top = `${target.getBoundingClientRect().top + 11}px`; 
+    cursor.style.top = `${targetRect.top + 11 + window.scrollY}px`; 
     // расстояние от верхней границы видимоф области окна до верхней границы элемента +11 вниз 
-    cursor.style.left = `${target.getBoundingClientRect()[nextLetter ? 'left':'right'] + window.scrollX}px`;
+    cursor.style.left = `${targetRect [nextLetter ? 'left':'right'] + window.scrollX}px`;
     // hotizontal
-    
+  
     // Автопрокрутка контейнера (если слово уходит за границы)
-    if (targetRect.bottom > poleRect.bottom) { // Учитываем новый отступ
+    // там где находится буква или слово >где находится поле
+// если юуква находится ниже чем нижний край поля, то
+    if (targetRect.bottom > poleRect.bottom) { 
+/* y координата нижнего края элемента - нижнего края видимой области контейнера 
+нижний край буквы  120 - нижний край поля 100 - 20 разница  
+на сколько он вылез за границу поля */
       const scrollAmount = targetRect.bottom - poleRect.bottom;
+/*scrollTop - это свойство DOM-элемента, которое показывает/устанавливает
+ количество пикселей, на которое прокручено содержимое элемента
+ вниз от его верхнего края.  
+ scrollAmount - увеличиваем значение еще на 20px*/       
       pole.scrollTop += scrollAmount;
     } else if (targetRect.top < poleRect.top) {
       const scrollAmount = targetRect.top - poleRect.top;
-      pole.scrollTop += scrollAmount - 10;
+      pole.scrollTop += scrollAmount ;
     }
-  }
+  }  
+/* Браузер (Chrome, Firefox и др.) получает команду scrollTop
+ → мгновенно перерисовывает страницу, сдвигая содержимое.
+Это встроенная функция, как например background-color  */
 }
 
 // Обновление курсора при нажатии клавиш
@@ -335,17 +361,19 @@ document.addEventListener('keydown', updateCursorPosition);
 
 // Обновление курсора при изменении размера окна
 window.addEventListener('resize', updateCursorPosition);
+  
 
 // Обработчик нажатия клавиш
   const pole = document.getElementById('pole')
   pole.addEventListener('keydown', ev => {
-  const key = ev.key;
+  const key = ev.key; 
   const currentWord = document.querySelector('.word.current');
   const currentLetter = document.querySelector('.letter.current');
   const expected = currentLetter?.innerHTML || ' ';
- /* innerHTML- это одна буква, которая находится в span
+ /* пытается понять что именно находится в span
+ innerHTML (получает содержимое элемента)- это одна буква, которая находится в span
  оператор опциональной цепочки  ?.. Этот оператор позволяет
- безопасно обращаться к свойствам объектов, 
+ обращаться к свойствам объектов, 
  которые могут быть null или undefined, не вызывая ошибки 
  (он просто вернет undefined)
  1 проверяет на существование currentLetter (если не равен null\undefined)
@@ -366,7 +394,7 @@ firstElementChild: Если вы хотите получить только пе
 
   // Обработка ввода буквы
   // если это одна буква и внимание направлено на нее
-  if (isLetter && currentLetter) {
+  if (isLetter && currentLetter) { 
     addClass(currentLetter, key === expected ? 'correct' : 'incorrect');
     /* если эта буква находится в span(то есть правильная буква),
     а ввели неправильную букву, то присвоится другой класс*/
@@ -382,17 +410,18 @@ firstElementChild: Если вы хотите получить только пе
       addClass(currentLetter.nextSibling, 'current');
     }
   }
-  // Свойство .nextSibling- получение next node, 
+  // Свойство .nextSibling- получение next node (следующего узла), 
   // относительно текущего узла (для объякта типа Node, возвращает следующий узел на том же уровне вложенности)
 
   // Обработка пробела (переход к следующему слову)
-  // нажали пробел и переходим к новому слову 
+  // НАЖАЛИ ПРОБЕЛ И ПЕРЕШЛИ К НОВОМУ СЛОВУ
   if (isSpace) {
     if (expected !== ' ' && currentWord) {
+// ожидаемое значение не является пробелом и это буква       
       // Помечаем все неправильные буквы в текущем слове
-      [...currentWord.children].forEach(letter => { // [] преобразуют в массив 
+      [...currentWord.children].forEach(letter => { // [] преобразуют коллекциию узлов в массив 
         if (!letter.classList.contains('correct')) { 
-          // если буква не помечена как правильная, то мы помечаем ее как правильная 
+          //  если буква не имеет correct
           addClass(letter, 'incorrect');
         }
       });
@@ -404,15 +433,20 @@ firstElementChild: Если вы хотите получить только пе
     childNodes
     */
 
-// курсор на СЛОВЕ и получает слудующий узел (проверяет на наличие слудующего узла)
+// существует ли следующее слово ? получает следующий узел (проверяет на наличие слудующего узла)
     if (currentWord?.nextSibling) {
-      removeClass(currentWord, 'current'); // удаляем класс
-      addClass(currentWord.nextSibling, 'current');// добавляем класс
+      removeClass(currentWord, 'current'); // удаляем класс у текущей
+      addClass(currentWord.nextSibling, 'current');// добавляем класс следующей БУКВЕ
       // if the cursor is on the current LETTER
       if (currentLetter) removeClass(currentLetter, 'current');
-      addClass(currentWord.nextSibling.firstChild, 'current');
-    }
+      addClass(currentWord.nextSibling.firstChild, 'current');   
+/* add class к первой букве в слове  */
+    } 
   }
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
+  if (currentWord.nextSibling == null ) {
+    console.log('НЕТ БОЛЬШЕ СЛОВ')
+  } /* нужна последняя буква последнего слова */
 
   // processing (Обработка) backspace (возврат назад)
   if (isBackspace) {
@@ -449,20 +483,164 @@ firstElementChild: Если вы хотите получить только пе
     updateCursorPosition(); // Обновляем позицию курсора после изменений
   });
 
-  
 /* 
 const play = document.getElementById('play')
   play.addEventListener('click',() => {
   pole.style.filter = 'blur(0px)';
   play.style.display = 'none'
 });
-
- 
  */
 
+// клавиатура 
+  // Функция для вывода текста текущей буквы
+  const logCurrentLetter = () => {
+    const currentLetter = document.querySelector('.letter.current');
+    if (currentLetter){
+    const CurrentLetter = currentLetter.textContent.toLowerCase();
+  
+const keys = document.querySelectorAll('.key');
+    const  ids = Array.from(keys).map(key => key.id);
+    const idss = ids.map(id => id.toLowerCase())
+  /* преобразует каждый id в нижний регистр
+   Array.from(keys) - преобразует в массив 
+   map(key => key.id) - map проходится по каждому элементу в массиве, 
+   key - текущий элемент 
+   key.id - ВОЗВРАЩАЕТ ID ТЕКУЩЕГО ЭЛЕМЕНТА  */
+      // trim - удаляет пробелы сначала и с конца строки
+      let flaw = 3;
+      idss.forEach(id =>{
+        if (id == CurrentLetter) {
+       flaw = 5;
+   } })
+      if (flaw == 5) {
+        console.log('получилось')
+      } else{
+        console.log('боже мой')
+      }
+  }} 
+/* каждый раз когда я ощищаю контейнер и добавляю в него слова, 
+.letter.current получает новые элементы */
+  
 
+  // Наблюдатель за изменениями в DOM
+  function Observe() {
+  const observer = new MutationObserver((mutations) => {
+/* передаете функуию обратного вызова, будет вызвана каждый раз,
+ как происходит изменения в dom, эта функция получает массив mutations
+  (в массиве есть объекты) */    
+    mutations.forEach((mutation) => {
+      if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+        logCurrentLetter();               // какой именно атрибут был изменен 
+      }
+    });
+  });
 
+  // Начинаем наблюдать за всеми буквами (запуск наблюдателя)
+  const letters = document.querySelectorAll('.letter');
+  letters.forEach((letter) => {
+    observer.observe(letter, { attributes: true });
+// каждая буква имеет класс letter - отслеживает добавление current
+  }); // элемент за которым будем следить и тип изменения (если изменяется класс или стиль)
+ /* После обновления DOM вы снова вызываете Observe (), 
+ что создает новый экземпляр MutationObserver и начинает следить за новыми элементами. */
 
+  // Выводим первую букву сразу
+  logCurrentLetter();
+}
+setTimeout(Observe, 1000)
 
+function ENGLISH () {
+const keyboardContainer = document.getElementById('keyboard');
+keyboardContainer.innerHTML = `
+    <ul class="line">
+      <li class="key" id="Q">Q</li>
+      <li class="key" id="W">W</li>
+      <li class="key" id="E">E</li>
+      <li class="key" id="R">R</li>
+      <li class="key" id="T">T</li>
+      <li class="key" id="Y">Y</li>
+      <li class="key" id="U">U</li>
+      <li class="key" id="I">I</li>
+      <li class="key" id="O">O</li>
+      <li class="key" id="P">P</li>
+    </ul>
+    
+    <ul class="line">
+      <li class="key" id="A">A</li>
+      <li class="key" id="S">S</li>
+      <li class="key" id="D">D</li>
+      <li class="key" id="F">F</li>
+      <li class="key" id="G">G</li>
+      <li class="key" id="H">H</li>
+      <li class="key" id="J">J</li>
+      <li class="key" id="K">K</li>
+      <li class="key" id="L">L</li>
+    </ul>
+    
+    <ul class="line">
+      <li class="key" id="Z">Z</li>  
+      <li class="key" id="X">X</li>  
+      <li class="key" id="C">C</li>  
+      <li class="key" id="V">V</li>  
+      <li class="key" id="B">B</li>  
+      <li class="key" id="N">N</li>  
+      <li class="key" id="M">M</li>  
+    </ul> 
+
+    <ul class="line">
+        <li class="key" id="Space" style="width: 200px;"></li>
+    </ul>
+    </ul>
+`;
+}
+
+function RUSSIAN () {
+  const keyboardContainer = document.getElementById('keyboard');
+  keyboardContainer.innerHTML = `
+   <ul class="line">
+     <li class="key" id="Й">Й</li>
+     <li class="key" id="Ц">Ц</li>
+     <li class="key" id="У">У</li>
+     <li class="key" id="К">К</li>
+     <li class="key" id="Е">Е</li>
+     <li class="key" id="Н">Н</li>
+     <li class="key" id="Г">Г</li>
+     <li class="key" id="Ш">Ш</li>
+     <li class="key" id="Щ">Щ</li>
+     <li class="key" id="З">З</li>
+     <li class="key" id="Х">Х</li>
+     <li class="key" id="Ъ">Ъ</li>
+   </ul>
+
+   <ul class="line">
+     <li class="key" id="Ф">Ф</li>
+     <li class="key" id="Ы">Ы</li>
+     <li class="key" id="В">В</li>
+     <li class="key" id="А">А</li>
+     <li class="key" id="П">П</li>
+     <li class="key" id="Р">Р</li>
+     <li class="key" id="О">О</li>
+     <li class="key" id="Л">Л</li>
+     <li class="key" id="Д">Д</li>
+     <li class="key" id="Ж">Ж</li>
+     <li class="key" id="Э">Э</li>
+   </ul>
+
+   <ul class="line">
+     <li class="key" id="Я">Я</li>
+     <li class="key" id="Ч">Ч</li>
+     <li class="key" id="С">С</li>
+     <li class="key" id="М">М</li>
+     <li class="key" id="И">И</li>
+     <li class="key" id="Т">Т</li>
+     <li class="key" id="Ь">Ь</li>
+     <li class="key" id="Б">Б</li>
+     <li class="key" id="Ю">Ю</li>
+   </ul>     
+
+   <ul class="line">
+     <li class="key" id="Space" style="width: 270px;"></li>
+  </ul>`
+}
 
 
