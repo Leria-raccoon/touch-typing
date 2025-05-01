@@ -151,13 +151,15 @@ document.addEventListener('DOMContentLoaded', ()=>{
   addremoveClass (id10, Ten)
   Observe()
   ENGLISH ()
+  D = 'EN'
 });
 
 document.getElementById('button2').addEventListener('click',() =>{
   MModal.style.display = 'none';
   newGame(wordsRU, 100);
+  addremoveClass (id100, OneHundred)
   language.textContent = 'russian';
-  D = 'RU';
+  D = 'RU'; 
   F = 100;
   Observe()
   RUSSIAN ()
@@ -166,6 +168,7 @@ document.getElementById('button2').addEventListener('click',() =>{
 document.getElementById('button3').addEventListener('click',() =>{
   MModal.style.display = 'none';
   newGame(wordsEN, 100);
+  addremoveClass (id100, OneHundred)
   language.textContent = 'english';
   D = 'EN'; // показывает какой именно сейчас массив слов рус или англ
   F = 100; // показывает сколько слов попало в контейнер
@@ -273,13 +276,20 @@ function removeClass(el, name) {
   el.classList.remove(name); 
 }
 
-// Форматирование слова для отображения (каждая буква в отдельном span)
-function formatWord(word) {
+// Форматирование СЛОВА для отображения (каждая буква в отдельном span)
+function formatWord(word) { 
   return `<div class="word"><span class="letter">${word.trim().split('').join('</span><span class="letter">')}</span></div>`;
-  /* <div class="word">
-    <span class="letter">П</span>
-    <span class="letter">р</span>
-   </div>
+  /*  word - строкa - одно слово 
+Интерполяция — это процесс вставки значений переменных или результатов выражений в строку.${...}
+удаляет отступы в начале и в конце 
+.split('') - разбивает строку на массив БУКВ! - !без пробела 
+.join объединяет все элементы обртно в строку и вставляет между ними 
+
+  <div class="word">
+  <span class="letter"> Р </span>
+  <span class="letter"> р </span>
+  <span class="letter"> Л </span>
+  </div>
   */
 }
 
@@ -295,15 +305,19 @@ function newGame(words, num) {
     return newArray;
   }
 
+// Перемешиваем слова и добавляем определенное количество МАССИВ 
+const shuffledWords = shuffleArray(words).slice(0, num);
+// перемешанные слова добавляем в поле 
+  updateWordsContainer(shuffledWords); 
+
   // Обновляем контейнер со словами
   function updateWordsContainer(wordsToShow) {
     const wordsContainer = document.getElementById('pole');
-    wordsContainer.innerHTML = ''; // очистка контейнера
     wordsContainer.innerHTML = wordsToShow.map(formatWord).join('');
+// если есть пробел, то перестает работать
+  // разделяет с помощью пробела
+// вызывается функция для каждого слова в МАССИВЕ - возвращает СЛОВО
   }
-
-  const shuffledWords = shuffleArray(words).slice(0, num);// Перемешиваем слова 
-  updateWordsContainer(shuffledWords); 
 
   // Устанавливаем текущее слово и букву
   document.querySelector('.word').classList.add('current');
@@ -315,6 +329,8 @@ function newGame(words, num) {
   pole.focus();
   updateCursorPosition();
 } 
+
+const modal3 = document.getElementById('modal3');
 
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!обновление курсора 
 function updateCursorPosition() {
@@ -332,7 +348,22 @@ function updateCursorPosition() {
     // расстояние от верхней границы видимоф области окна до верхней границы элемента +11 вниз 
     cursor.style.left = `${targetRect [nextLetter ? 'left':'right'] + window.scrollX}px`;
     // hotizontal
-  
+    
+    const space = document.getElementById('Space')
+    if (nextWord && target === nextWord && nextWord.lastElementChild) {
+      addClass (space, 'migaet');
+    } 
+/* !!!!!!!!!!!!!!!не только когда курсор дошел до последней буквы, 
+но и когда всем буквам присвоилось incor
+или же просто убрать возможность у последнего слова нажимать пробел 
+если это последнее слово  */
+    if (target === nextWord && !nextWord.nextElementSibling) {
+      modal3.style.display = "block";
+    }
+
+    /* проверяет на существование 
+     target === nextWord - именно текущее СЛОВО - работаем со словом*/
+    
     // Автопрокрутка контейнера (если слово уходит за границы)
     // там где находится буква или слово >где находится поле
 // если юуква находится ниже чем нижний край поля, то
@@ -362,7 +393,6 @@ document.addEventListener('keydown', updateCursorPosition);
 // Обновление курсора при изменении размера окна
 window.addEventListener('resize', updateCursorPosition);
   
-
 // Обработчик нажатия клавиш
   const pole = document.getElementById('pole')
   pole.addEventListener('keydown', ev => {
@@ -395,6 +425,7 @@ firstElementChild: Если вы хотите получить только пе
   // Обработка ввода буквы
   // если это одна буква и внимание направлено на нее
   if (isLetter && currentLetter) { 
+    /* нажатая буква === буква которая содержится в span */
     addClass(currentLetter, key === expected ? 'correct' : 'incorrect');
     /* если эта буква находится в span(то есть правильная буква),
     а ввели неправильную букву, то присвоится другой класс*/
@@ -404,6 +435,9 @@ firstElementChild: Если вы хотите получить только пе
   el.classList.add(name); 
   name- это имя класса, который мы хотим добавить к элементу 
 }*/
+   if (key === expected.incorrect) {
+   
+   }
 
 // добавляем класс к следующий букве
     if (currentLetter.nextSibling) {
@@ -425,29 +459,33 @@ firstElementChild: Если вы хотите получить только пе
           addClass(letter, 'incorrect');
         }
       });
-    } /* property children —для HTML-элементов ,
+     const words = document.querySelectorAll('.word')
+     const isLastWord = currentWord === words[words.length - 1]
+     if (isLastWord ){
+      modal3.style.display = "block"
+     }
+    } 
+    
+    /* property children —для HTML-элементов ,
     возвращает коллекцию всех дочерних элементов (узлов) данного 
     элемента. Получить доступ к элементам, 
     которые находятся внутри указанного элемента, 
     не включая текстовые узлы или комментарии. 
     childNodes
     */
-
+    
 // существует ли следующее слово ? получает следующий узел (проверяет на наличие слудующего узла)
-    if (currentWord?.nextSibling) {
-      removeClass(currentWord, 'current'); // удаляем класс у текущей
-      addClass(currentWord.nextSibling, 'current');// добавляем класс следующей БУКВЕ
-      // if the cursor is on the current LETTER
-      if (currentLetter) removeClass(currentLetter, 'current');
+    if (currentWord?.nextElementSibling) {
+      removeClass(currentWord, 'current'); // удаляем класс у текущего СЛОВА 
+      addClass(currentWord.nextSibling, 'current');// добавляем класс следующей СЛОВУ
+      // если существует текущая буква, то у нее удаляется класс и при...
+      if (currentLetter) removeClass(currentLetter, 'current');/*  удаляем у буквы класс */
       addClass(currentWord.nextSibling.firstChild, 'current');   
 /* add class к первой букве в слове  */
     } 
   }
-// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
-  if (currentWord.nextSibling == null ) {
-    console.log('НЕТ БОЛЬШЕ СЛОВ')
-  } /* нужна последняя буква последнего слова */
 
+   
   // processing (Обработка) backspace (возврат назад)
   if (isBackspace) {
     if (currentLetter && isFirstLetter && currentWord?.previousSibling) {
@@ -492,35 +530,31 @@ const play = document.getElementById('play')
  */
 
 // клавиатура 
-  // Функция для вывода текста текущей буквы
-  const logCurrentLetter = () => {
-    const currentLetter = document.querySelector('.letter.current');
-    if (currentLetter){
-    const CurrentLetter = currentLetter.textContent.toLowerCase();
-  
-const keys = document.querySelectorAll('.key');
-    const  ids = Array.from(keys).map(key => key.id);
-    const idss = ids.map(id => id.toLowerCase())
-  /* преобразует каждый id в нижний регистр
-   Array.from(keys) - преобразует в массив 
-   map(key => key.id) - map проходится по каждому элементу в массиве, 
-   key - текущий элемент 
-   key.id - ВОЗВРАЩАЕТ ID ТЕКУЩЕГО ЭЛЕМЕНТА  */
-      // trim - удаляет пробелы сначала и с конца строки
-      let flaw = 3;
-      idss.forEach(id =>{
-        if (id == CurrentLetter) {
-       flaw = 5;
-   } })
-      if (flaw == 5) {
-        console.log('получилось')
-      } else{
-        console.log('боже мой')
-      }
-  }} 
-/* каждый раз когда я ощищаю контейнер и добавляю в него слова, 
-.letter.current получает новые элементы */
-  
+const logCurrentLetter = () => {
+  // Удаляем класс со всех клавиш
+  document.querySelectorAll('.key.migaet').forEach(key => {
+    removeClass(key, 'migaet');
+  });
+
+  const currentLetter = document.querySelector('.letter.current');
+  if (!currentLetter) return;// если нет, то выходим 
+
+  const currentChar = currentLetter.textContent.trim().toLowerCase();// нижний регистр
+  const keys = document.querySelectorAll('.key');
+
+  // Ищем конкретную клавишу
+  const foundKey = Array.from(keys).find(key => 
+    key.id.toLowerCase() === currentChar);
+
+/* key.id обращение к атрибуту элемента 
+Array.from - из коллекции дом элементов - превращает в массив 
+  .find() - метод массива - возвращает первый элемент, который */
+
+  if (foundKey) {
+    addClass(foundKey,'migaet');
+  }
+};
+// был ли найден элемент или нет, если да, то
 
   // Наблюдатель за изменениями в DOM
   function Observe() {
@@ -590,7 +624,6 @@ keyboardContainer.innerHTML = `
     <ul class="line">
         <li class="key" id="Space" style="width: 200px;"></li>
     </ul>
-    </ul>
 `;
 }
 
@@ -642,5 +675,4 @@ function RUSSIAN () {
      <li class="key" id="Space" style="width: 270px;"></li>
   </ul>`
 }
-
 
