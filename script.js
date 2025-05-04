@@ -353,10 +353,7 @@ function updateCursorPosition() {
     if (nextWord && target === nextWord && nextWord.lastElementChild) {
       addClass (space, 'migaet');
     } 
-/* !!!!!!!!!!!!!!!не только когда курсор дошел до последней буквы, 
-но и когда всем буквам присвоилось incor
-или же просто убрать возможность у последнего слова нажимать пробел 
-если это последнее слово  */
+/* */
     if (target === nextWord && !nextWord.nextElementSibling) {
       modal3.style.display = "block";
     }
@@ -392,7 +389,10 @@ document.addEventListener('keydown', updateCursorPosition);
 
 // Обновление курсора при изменении размера окна
 window.addEventListener('resize', updateCursorPosition);
-  
+
+    var incorrectcheck = 0;
+    var correctcheck = 0;
+
 // Обработчик нажатия клавиш
   const pole = document.getElementById('pole')
   pole.addEventListener('keydown', ev => {
@@ -413,7 +413,7 @@ window.addEventListener('resize', updateCursorPosition);
   // проверяте что нажата одна буква и это не пробел
   const isSpace = key === ' '; 
   const isBackspace = key === 'Backspace'; // удалить
-  const isFirstLetter = currentLetter === currentWord?.firstChild;
+  const isFirstLetter = currentLetter === currentWord?.firstElementChild;
   /* .firstChild свойство объекта- доступ к первому дочернему элементу
   (или узлу)данного элемента в документе html) 
  -Может вернуть любой узел: Это может быть элемент, 
@@ -425,8 +425,10 @@ firstElementChild: Если вы хотите получить только пе
   // Обработка ввода буквы
   // если это одна буква и внимание направлено на нее
   if (isLetter && currentLetter) { 
+   
     /* нажатая буква === буква которая содержится в span */
     addClass(currentLetter, key === expected ? 'correct' : 'incorrect');
+
     /* если эта буква находится в span(то есть правильная буква),
     а ввели неправильную букву, то присвоится другой класс*/
     removeClass(currentLetter, 'current');
@@ -435,9 +437,13 @@ firstElementChild: Если вы хотите получить только пе
   el.classList.add(name); 
   name- это имя класса, который мы хотим добавить к элементу 
 }*/
-   if (key === expected.incorrect) {
-   
-   }
+
+     // Обновляем счетчики
+     if (key === expected) {
+      correctcheck++;
+    } else {
+      incorrectcheck++;
+    }
 
 // добавляем класс к следующий букве
     if (currentLetter.nextSibling) {
@@ -454,70 +460,107 @@ firstElementChild: Если вы хотите получить только пе
 // ожидаемое значение не является пробелом и это буква       
       // Помечаем все неправильные буквы в текущем слове
       [...currentWord.children].forEach(letter => { // [] преобразуют коллекциию узлов в массив 
-        if (!letter.classList.contains('correct')) { 
+        if (!letter.classList.contains('correct') && !letter.classList.contains('incorrect') ) { 
           //  если буква не имеет correct
           addClass(letter, 'incorrect');
-        }
+          incorrectcheck ++;
+        } 
       });
-     const words = document.querySelectorAll('.word')
-     const isLastWord = currentWord === words[words.length - 1]
-     if (isLastWord ){
-      modal3.style.display = "block"
-     }
     } 
     
+  const words = document.querySelectorAll('.word')
+     const isLastWord = currentWord === words[words.length - 1]
+     if (isLastWord){
+      modal3.style.display = "block"     
+     }
     /* property children —для HTML-элементов ,
     возвращает коллекцию всех дочерних элементов (узлов) данного 
-    элемента. Получить доступ к элементам, 
-    которые находятся внутри указанного элемента, 
-    не включая текстовые узлы или комментарии. 
-    childNodes
-    */
+    элемента. Получить доступ к элементам,которые находятся внутри указанного элемента, 
+    не включая текстовые узлы или комментарии. childNodes */
     
-// существует ли следующее слово ? получает следующий узел (проверяет на наличие слудующего узла)
+// ПЕРЕХОД К СЛЕДУЮЩЕМУ СЛОВУ 
+//  существует ли следующее слово ? получает следующий узел (проверяет на наличие слудующего узла)
     if (currentWord?.nextElementSibling) {
       removeClass(currentWord, 'current'); // удаляем класс у текущего СЛОВА 
       addClass(currentWord.nextSibling, 'current');// добавляем класс следующей СЛОВУ
       // если существует текущая буква, то у нее удаляется класс и при...
       if (currentLetter) removeClass(currentLetter, 'current');/*  удаляем у буквы класс */
-      addClass(currentWord.nextSibling.firstChild, 'current');   
+      addClass(currentWord.nextElementSibling.firstElementChild, 'current');   
 /* add class к первой букве в слове  */
     } 
   }
 
-   
   // processing (Обработка) backspace (возврат назад)
   if (isBackspace) {
-    if (currentLetter && isFirstLetter && currentWord?.previousSibling) {
+    if (currentLetter && isFirstLetter && currentWord?.previousElementSibling) {
       // previousSibling- property, которое используется для получения previous node
 // current letter \ current is first letter in a word \ is there a previous word 
 
       // return to previous WORD
+      const prevWord = currentWord.previousElementSibling// предыдущее слово 
+      const prevLastLetter = prevWord.lastElementChild // последняя буква в слове
+
       removeClass(currentWord, 'current'); // удаляет current у слова
-      addClass(currentWord.previousSibling, 'current');//add к previous
       removeClass(currentLetter, 'current');// удаляет current у буквы 
-      addClass(currentWord.previousSibling.lastChild, 'current');
+      addClass(prevWord, 'current');//add к previous
+      addClass(prevLastLetter, 'current');
       // lastCild- property returns the last node for the current node
-      removeClass(currentWord.previousSibling.lastChild, 'incorrect');
-      removeClass(currentWord.previousSibling.lastChild, 'correct');
+
+      if (prevLastLetter.classList.contains('incorrect')) {   
+      removeClass(prevLastLetter, 'incorrect')
+      incorrectcheck--;
+      }
+      if (prevLastLetter.classList.contains('correct')){
+      removeClass(prevLastLetter, 'correct');
+      correctcheck--;
+      }
+    
       // remove both classes
     } else if (currentLetter && !isFirstLetter) { //
 
-      // return to previous LETTER
-      removeClass(currentLetter, 'current');// remove current letter class
-      addClass(currentLetter.previousSibling, 'current');// add previous letter current
-      removeClass(currentLetter.previousSibling, 'incorrect');//
-      removeClass(currentLetter.previousSibling, 'correct');// remove both classes
+      const prevLetter = currentLetter.previousElementSibling
 
-    } else if (!currentLetter && currentWord?.lastChild) { 
-      //если это не current letter and lastChild 
+      // return to previous LETTER    Возврат к предыдущей букве 
+      removeClass(currentLetter, 'current');// remove current letter class
+      addClass(prevLetter, 'current');// add previous letter current
+
+      if (prevLetter.classList.contains('incorrect')) { 
+      removeClass(prevLetter, 'incorrect');
+      incorrectcheck--;
+     }
+
+      if (prevLetter.classList.contains('correct')) { 
+        removeClass(prevLetter, 'correct');// remove both classes
+      correctcheck--;
+      }
+
+/*  
+ может быть currentLetter = null
+ то есть когда я напечатала слово, курсор стоит на последней букве, 
+ -- нажимаю пробел и курсор стоит на первой букве, но слово еще пустое,
+  после того как я напечатаю букву оно будет непустое   */
+    } else if (!currentLetter && currentWord?.lastElementChild) { 
+        //если это не current letter and lastChild 
+
+      const wordLast = currentWord.lastChild
+
       // Возврат к последней букве текущего слова
-      addClass(currentWord.lastChild, 'current'); 
-      removeClass(currentWord.lastChild, 'incorrect');
+      addClass(wordLast, 'current'); 
+
+      if (wordLast.classList.contains('incorrect')){
+      removeClass(wordLast, 'incorrect');
+      incorrectcheck--;
+      }
+
+      if (wordLast.classList.contains('correct')){
       removeClass(currentWord.lastChild, 'correct'); 
+      correctcheck--;
+      }
     }
   }
-
+  
+    console.log (`✅ ${correctcheck}`)
+    console.log(`❌ ${incorrectcheck}`)
     updateCursorPosition(); // Обновляем позицию курсора после изменений
   });
 
