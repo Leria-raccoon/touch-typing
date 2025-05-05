@@ -133,13 +133,13 @@ document.getElementById('download').addEventListener('click', () => {
 });
 
 const wordsRU = [
-  "вулкан", "парашют", "алгоритм", "восторг", "кристалл", "гармония", "цунами", "робот", "мечта", "гейзер", "радуга", "искра", "бриллиант", "лазер", "энергия", "комета", "вихрь", "орбита", "закат", "голограмма", "метеорит", "иллюзия", "палитра", "эволюция", "фейерверк", "калейдоскоп", "квант", "ностальгия", "архипелаг", "трансформер", "самовар", "эхо", "фреска", "дирижабль", "атом", "мозаика", "витраж", "компас", "сфинкс", "осьминог", "лавина", "пазл", "граффити", "колибри", "пещера", "мираж", "магма", "рация", "алхимия", "телескоп","батискаф", "капля", "громоотвод", "айсберг", "коралл", "мерцание", "парусник", "электричество", "кенгуру", "маятник", "пеликан", "радар", "торнадо", "фламинго", "хамелеон", "циклон", "шахматы", "щепка", "энциклопедия", "юла", "якорь", "аметист", "броненосец", "вертолет", "глобус", "дротик", "жасмин", "зефир", "иней", "йогурт", "кварц", "лабиринт", "метель", "нефрит", "озон", "память", "рассвет", "светлячок", "талисман", "ураган", "факел", "хрусталь", "цветение", "чертополох", "шалаш", "щебет", "эгоист", "юнга", "ящерица", "азарт",
-  "блеск", "вибрация", "галактика", "долголетие", "жернова", "зодиак", "импульс", "каравелла", "ласточка", "метроном", "нимб", "океан", "палисадник", "рапсодия", "сатурн", "титаник", "улей", "феникс", "хаос", "цельсий", "чернила", "штурвал", "щелочь", "эпос", "юстиция", "ягуар", "аквамарин", "болид", "верность", "гравюра", "древо", "жажда", "зенит", "искусство", "листва", "магнит", "небоскреб", "оберег", "памятник", "район", "созвездие", "топаз", "устойчивость", "фактура", "хроника", "цветок", "чердак", "шарм", "щепотка", "эскиз", "юмор","ярость", "алмаз", "благодать", "вдохновение", "горизонт", "дыхание", "жемчуг", "заря", "изумруд", "караван", "лукоморье", "метафора", "нимфа", "огонь", "покровитель", "радушие", "самоцвет", "талант", "удача", "фантазия", "холст", "царство", "чародей", "шёпот", "щегол", "эльф", "юность", "ясень", "авантюра", "бесконечность", "волшебство", "грация", "доблесть", "жизнь", "звёзды", "источник", "кружево", "легенда", "магия", "нежность", "оптимизм", "прозрачность", "радость", "свобода", "творчество", "улыбка", "храбрость", "цвета", "чувство", "щедрость","энергия", "яркость", "абсолют", "благородство", "воля", "душа", "жар", "закат", "изобретение", "кокон", "любовь", "мелодия", "надежда", "оригами", "поколение", "рассвет", "сила", "тепло", "уют", "факел", "харизма", "цель", "чаша", "шедевр", "эволюция", "яблоко", "баланс", "вспышка", "гравитация", "добро", "жест", "знание", "истина", "кодекс", "луч", "молния", "наука", "образ", "порыв", "ритм", "свет", "тайна", "успех", "факт", "холод", "цифра", "чудо", "щель", "эра", "юла", "язык"
+  "вулкан", "парашют", "алгоритм", "восторг", "кристалл", "гармония", "цунами", "робот", "мечта", "гейзер", "радуга", "искра", "бриллиант", "лазер", "энергия", "комета", "вихрь", "орбита", "закат", "голограмма", "метеорит", "иллюзия","палитра", "эволюция", "фейерверк", "калейдоскоп", "квант", "ностальгия", "архипелаг", "трансформер", "самовар", "эхо", "фреска", "дирижабль", "атом", "мозаика", "витраж", "компас", "сфинкс", "осьминог", "лавина", "пазл", "граффити", "колибри", "пещера", "факел", "хрусталь", "цветение", "чертополох", "шалаш", "щебет", "от", "за", "при", "из", "к", "о", "через", "что", "так", "или", "да", "если", "вдоль","по", "для", "от", "за", "при", "в",
+  "мираж", "магма",  "рация", "алхимия", "телескоп", "батискаф", "капля", "громоотвод", "айсберг", "коралл", "мерцание", "парусник", "электричество", "кенгуру", "маятник", "пеликан", "радар", "торнадо", "фламинго", "хамелеон", "циклон", "шахматы", "щепка", "энциклопедия", "юла", "якорь", "аметист", "броненосец", "вертолет", "глобус", "дротик", "жасмин", "зефир", "иней", "мозг", "кварц", "лабиринт", "метель",  "нефрит", "озон", "память", "рассвет", "светлячок", "талисман", "ураган",  "эгоист", "юнга", "ящерица", "азарт", "в", "на", "с", "по", "для","между", "над", "под", "вместо", "без", "как", "вокруг", "внутри", "после", "до", "в", "на","с", "к", "из", "на", "при", "за", "от", "в", "по", "с"
 ];
-          
-  const wordsEN = [
-    "quasar", "flamingo", "portal", "albatross", "geyser", "graffiti", "crystal", "tent", "armadillo", "hologram", "tsunami", "origami", "porcupine", "telescope", "safari", "meteorite", "firework", "kangaroo", "laser", "eclipse", "stainedglass", "canyon", "octopus", "hoverboard", "comet", "archeology", "parachute", "jellyfish", "mosaic", "walkietalkie", "hummingbird", "vacuum", "funicular", "pelican", "avalanche", "biology", "squid", "robot", "waterfall", "saxophone", "drone", "eiffel", "paleontology", "kayak", "illusion", "volcano", "camping", "rainbow", "mountaineering", "microscope", "chameleon", "iceberg", "animation", "ecosystem", "narwhal", "compass", "blizzard", "koala", "evolution", "cablecar", "physics", "dew", "diving", "globe", "chemistry", "sunset", "transformer", "quartz", "ballet", "bubble", "savanna", "passport", "echo", "isotope", "droplet", "taiga", "navigator", "visa", "maze", "coral", "easel", "paradox", "projector", "cruise", "artifact", "relic", "hieroglyph", "suitcase", "sunfish", "map", "ornament", "silencer", "manuscript", "alphabet", "expedition", "cave", "silhouette", "fresco", "astronaut", "lake", "kaleidoscope", "shadow", "sketch", "emerald", "puzzle", "galaxy", "zodiac",
-    "abstraction", "aggression", "alchemy", "analysis", "aristocracy", "aroma", "astronomy", "gratitude", "nobility", "blitz", "vigil", "throw", "inspiration", "empathy", "interaction", "grandeur", "loyalty", "merriment", "admiration", "universe", "hypothesis", "smoothness", "calm", "depth", "humanism", "taoism", "debate", "kindness", "achievement", "friendship", "spirituality", "care", "riddle", "completion", "delusion", "knowledge", "invention", "amazement", "intuition", "classic", "communication", "creativity", "culture", "leadership", "love", "magic", "peace", "wisdom", "hope", "science", "charm", "optimism", "paradigm", "transmission", "learning", "flow", "progress", "reflection", "joy", "reality", "freedom", "power", "compassion", "serenity", "happiness", "art", "tranquility", "success", "philosophy", "color", "emotion", "experiment", "youth", "absolute", "agent", "activity", "antidote", "argument", "atmosphere", "prosperity", "closest", "grace", "blessing", "era", "majestic", "faith", "connection", "inspiring", "rebirth", "enchantment", "recovery", "impression", "versatile", "genius", "profound", "nation", "humanity", "foresight", "actuality", "durability", "accessibility", "warmth", "amusing", "amusement", "mysterious", "merit", "change", "astonishing", "innovation", "integration", "picture", "catastrophe", "cool", "complex", "cosmos", "creativity", "line", "logic", "magnet", "modernization", "module", "award", "direction", "flaw", "unification", "lens", "discovery", "reflection", "parameter", "perspective", "planet", "potential", "excellence", "principle", "issue", "productivity", "diversity", "development", "reaction", "system", "consciousness", "state", "strategy", "destiny", "sphere", "creation", "technology", "transformation", "skill", "phenomenon", "function", "character", "integrity", "miracle", "ecology", "legal", "abstract", "adequate", "accent", "reasoned", "association", "grateful", "charity", "beneficial", "motivating"
+
+const wordsEN = [
+  "quasar", "flamingo", "portal", "albatross", "geyser", "graffiti", "crystal", "tent", "armadillo", "hologram",  "tsunami", "origami", "porcupine", "telescope", "safari", "meteorite", "firework", "kangaroo", "laser",  "eclipse", "stainedglass", "canyon", "octopus", "hoverboard", "comet", "archeology", "parachute", "jellyfish",  "mosaic", "walkietalkie", "hummingbird", "vacuum", "funicular", "pelican", "avalanche","biology","droplet", "taiga", "navigator", "visa", "maze","cruise", "artifact", "relic", "hieroglyph", "silencer", "manuscript", "alphabet", "astronaut", "lake", "kaleidoscope", "shadow", "zodiac", "of", "in", "on", "at", "by", "for","through", "during", "before", "after", "above", "out", "from", "to", "as", "within", "except", "along","near", "after", "during", "before",
+  "squid",  "robot", "waterfall", "saxophone", "drone", "eiffel", "paleontology", "kayak", "illusion", "volcano", "camping", "rainbow", "mountaineering", "microscope", "chameleon", "iceberg", "animation", "ecosystem", "narwhal", "compass", "blizzard", "koala", "evolution", "cablecar", "physics", "dew", "diving", "globe", "chemistry", "sunset", "transformer", "quartz", "ballet", "bubble", "savanna", "passport", "echo", "isotope", "coral", "easel", "paradox", "projector",  "suitcase", "sunfish", "map", "ornament", "expedition", "cave", "silhouette", "fresco", "sketch", "emerald", "puzzle", "galaxy", "with", "about", "against", "between", "among", "below", "under", "over", "across", "toward", "into", "like", "without", "despite", "until", "around", "besides", "alongside", "about", "against"
 ];
 
 const language = document.getElementById('language')
@@ -150,8 +150,8 @@ document.addEventListener('DOMContentLoaded', ()=>{
   newGame(wordsEN, 10); 
   addremoveClass (id10, Ten)
   Observe()
-  ENGLISH ()
-  D = 'EN'
+  ENGLISH ('keyboard')
+  D = 'EN';
 });
 
 document.getElementById('button2').addEventListener('click',() =>{
@@ -161,7 +161,7 @@ document.getElementById('button2').addEventListener('click',() =>{
   language.textContent = 'russian';
   D = 'RU'; 
   F = 100;
-  Observe()
+  Observe ()
   RUSSIAN ()
 });
 
@@ -170,10 +170,10 @@ document.getElementById('button3').addEventListener('click',() =>{
   newGame(wordsEN, 100);
   addremoveClass (id100, OneHundred)
   language.textContent = 'english';
-  D = 'EN'; // показывает какой именно сейчас массив слов рус или англ
-  F = 100; // показывает сколько слов попало в контейнер
-  Observe()
-  ENGLISH()
+  D = 'EN';
+  F = 100;
+  Observe ()
+  ENGLISH ()
 });
 
   const Ten = document.getElementById('Ten')
@@ -268,7 +268,7 @@ document.getElementById('button3').addEventListener('click',() =>{
  }
  }
 
-// Добавить\ убавить класс
+// Добавить\ убрать класс
 function addClass(el, name) {
   el.classList.add(name); 
 }
@@ -353,9 +353,11 @@ function updateCursorPosition() {
     if (nextWord && target === nextWord && nextWord.lastElementChild) {
       addClass (space, 'migaet');
     } 
-/* */
+
     if (target === nextWord && !nextWord.nextElementSibling) {
       modal3.style.display = "block";
+      Result ()
+      
     }
 
     /* проверяет на существование 
@@ -390,13 +392,13 @@ document.addEventListener('keydown', updateCursorPosition);
 // Обновление курсора при изменении размера окна
 window.addEventListener('resize', updateCursorPosition);
 
-    var incorrectcheck = 0;
-    var correctcheck = 0;
-
+    let incorrectcheck = 0;
+    let correctcheck = 0;
+ 
 // Обработчик нажатия клавиш
   const pole = document.getElementById('pole')
   pole.addEventListener('keydown', ev => {
-  const key = ev.key; 
+  const key = ev.key;
   const currentWord = document.querySelector('.word.current');
   const currentLetter = document.querySelector('.letter.current');
   const expected = currentLetter?.innerHTML || ' ';
@@ -405,7 +407,7 @@ window.addEventListener('resize', updateCursorPosition);
  оператор опциональной цепочки  ?.. Этот оператор позволяет
  обращаться к свойствам объектов, 
  которые могут быть null или undefined, не вызывая ошибки 
- (он просто вернет undefined)
+ (он просто вернет undefined) 
  1 проверяет на существование currentLetter (если не равен null\undefined)
  обращается к его свойству (innerHTML), а если = null\undefined, 
  то выводится ' '  */
@@ -417,32 +419,17 @@ window.addEventListener('resize', updateCursorPosition);
   /* .firstChild свойство объекта- доступ к первому дочернему элементу
   (или узлу)данного элемента в документе html) 
  -Может вернуть любой узел: Это может быть элемент, 
-  текстовый узел(пробелы или перенос строк) или комментарий. 
+  текстовый узел(пробелы или перенос строк) или комментарий. */
 
-firstElementChild: Если вы хотите получить только первый дочерний 
-элемент (т.е. только элементы HTML, игнорируя текстовые узлы)*/
 
-  // Обработка ввода буквы
   // если это одна буква и внимание направлено на нее
   if (isLetter && currentLetter) { 
-   
-    /* нажатая буква === буква которая содержится в span */
     addClass(currentLetter, key === expected ? 'correct' : 'incorrect');
-
-    /* если эта буква находится в span(то есть правильная буква),
-    а ввели неправильную букву, то присвоится другой класс*/
     removeClass(currentLetter, 'current');
-    // удаляется то, что на нее направлено внимание
-    /* function addClass(el, name) {
-  el.classList.add(name); 
-  name- это имя класса, который мы хотим добавить к элементу 
-}*/
-
+   
      // Обновляем счетчики
-     if (key === expected) {
-      correctcheck++;
-    } else {
-      incorrectcheck++;
+     if (key === expected)  correctcheck++;
+     else { incorrectcheck++;
     }
 
 // добавляем класс к следующий букве
@@ -472,6 +459,7 @@ firstElementChild: Если вы хотите получить только пе
      const isLastWord = currentWord === words[words.length - 1]
      if (isLastWord){
       modal3.style.display = "block"     
+      Result ()
      }
     /* property children —для HTML-элементов ,
     возвращает коллекцию всех дочерних элементов (узлов) данного 
@@ -527,7 +515,7 @@ firstElementChild: Если вы хотите получить только пе
       if (prevLetter.classList.contains('incorrect')) { 
       removeClass(prevLetter, 'incorrect');
       incorrectcheck--;
-     }
+      }
 
       if (prevLetter.classList.contains('correct')) { 
         removeClass(prevLetter, 'correct');// remove both classes
@@ -558,11 +546,17 @@ firstElementChild: Если вы хотите получить только пе
       }
     }
   }
-  
-    console.log (`✅ ${correctcheck}`)
-    console.log(`❌ ${incorrectcheck}`)
+ 
     updateCursorPosition(); // Обновляем позицию курсора после изменений
-  });
+     
+    });
+
+function Result () {
+   const cModal3 = document.getElementById('cModal3');
+   const result = Math.floor(correctcheck / (correctcheck + incorrectcheck) *100 );
+   cModal3.innerHTML = `${result}%`;
+ }
+ 
 
 /* 
 const play = document.getElementById('play')
