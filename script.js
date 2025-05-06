@@ -31,16 +31,18 @@ window.addEventListener('click', (ev) =>{
  }
 });
 
+
+
 // таблица
 const element = [];
 
 // Загружаем данные из localStorage при загрузке страницы
 document.addEventListener('DOMContentLoaded', () => {
-    const tabble = localStorage.getItem('Table');
+    const tabble = localStorage.getItem('Table'); // получаем данные сохраненные под ключом таблица
     if (tabble) {
         const parse = JSON.parse(tabble);
         parse.forEach(elem => element.push(elem));
-        updateTable();
+        updateTable();// обновление таблицы, чтобы пользователь видел эти данные 
     }
 });
 
@@ -74,10 +76,9 @@ document.getElementById('addWord').addEventListener('click', () => {
         // Очищаем первую строку 
         const firstpop = pop[0];
         firstpop.innerHTML = `
-            <td><input type="text" id='en' placeholder="введите слово"></td>
-            <td><input type="text" id='ru' placeholder="введите перевод"></td>
+            <td><input type="text" id='en' class="vod" placeholder="введите слово"></td>
+            <td><input type="text" id='ru' class="vod" placeholder="введите перевод"></td>
         `;
-
         updateTable();
         save();
     } else {
@@ -97,40 +98,93 @@ function updateTable() {
     }
 
     // Добавляем новые слова в таблицу
-    element.forEach(elem => {
+    element.forEach((elem, index) => {
         const newPop = document.createElement('tr');
         newPop.innerHTML = `
             <td>${elem.key}</td>
             <td>${elem.value}</td>
+            <td><button class="deleteBtn" data-index="${index}">k</button></td>
         `;
+        /*  data-index="${index}" - атрибут, который хранит индекс эдемента в массиве, 
+        то есть он запоминает индекс (храним номер строки) */
         TTbody.appendChild(newPop);
     });
-}
+     // Добавляем обработчики событий для кнопок удаления
+     document.querySelectorAll('.deleteBtn').forEach(btn => {
+      btn.addEventListener('click', function() {
+          const index = parseInt(this.getAttribute('data-index'));
+ /* parseInt - преобразует строку в число 
+    this – это кнопка "Удалить"- происходит клик и записывается в переменную this
+    getAttribute() – метод, который читает значение любого атрибута HTML-элемента.
+    */
+          element.splice(index, 1); // Удаляем элемент из массива
+          updateTable(); // Обновляем таблицу
+          save(); // Сохраняем изменения
+      });
+    });
+  // обработчик добавляется каждый раз, когда я обновляю таблицу
+    
+    const elements = element.map( el => el.key);
+  return elements
+
+    document.getElementById('begin').addEventListener('click', () => {
+      Modal.style.display = "none";
+      newGame(returnsMyWordS, 10);
+      addremoveClass (id10, Ten)
+      Observe()
+      ENGLISH ()
+      D = 'MY'
+     })
+
+  }
+
+
+    const returnsMyWordS = updateTable()
+    console.log(returnsMyWordS)
+
+
+
+
+
+
+
+
+
+
+
+
 
 // Сохранение в LocalStorage
 function save() {
     localStorage.setItem('Table', JSON.stringify(element));
 }
- 
+
+
+
 document.getElementById('download').addEventListener('click', () => {
-    const jsonBabe = {}; // пустой объект для хранения пар ключ-значение
+  const jsonArray = []; // пустой массив для хранения объектов
 
-    element.forEach(elem => {
-        jsonBabe[elem.key] = elem.value; // добавляем непустые пары
-    });
+  element.forEach(elem => {
+      jsonArray.push({ key: elem.key, value: elem.value }); // добавляем объекты в массив
+  });
 
-    const jsonString = JSON.stringify(jsonBabe, null, 2); // форматируем в JSON
-    const BOB = new Blob([jsonString], { type: 'application/json' }); // создаем Blob
-    const url = URL.createObjectURL(BOB); // создаем URL для Blob
-
-    const a = document.createElement('a'); // создаем элемент <a>
-    a.href = url; // устанавливаем ссылку на Blob
-    a.download = 'data.json'; // устанавливаем имя файла для скачивания
-    document.body.appendChild(a); // добавляем элемент на страницу (необязательно, но может помочь)
-    a.click(); // имитируем клик для скачивания
-    document.body.removeChild(a); // удаляем элемент после скачивания
-    URL.revokeObjectURL(url); // освобождаем память
+  const jsonString = JSON.stringify(jsonArray, null, 2); // форматируем в JSON
+// объект, представ собой файл или данные, которые могут быть использованы в веб - прилож
+  const BOB = new Blob([jsonString], { type: 'application/json' }); 
+// URL.createObjectURL() создает временный url для объекта blob
+  const url = URL.createObjectURL(BOB); 
+  const a = document.createElement('a'); // создаем элемент <a>
+// атрибут задает адрес url
+  a.href = url; 
+// атрибут указывает браузеру не просто перейти по адресу, а СКАЧАТЬ
+  a.download = 'data.json'; 
+  document.body.appendChild(a); // добавляем элемент на страницу (необязательно, но может помочь)
+  a.click(); //  браузер выполняет действия, связанные с кликом по ссылке
+  document.body.removeChild(a); // удаляет элемент после скачивания
+  URL.revokeObjectURL(url); // освобождает память
 });
+/* при каждом скачивании создается новый элемент <а> - добавляется в дом,
+но после того как произошло скачивание элемент не нужен и его надобно удалить */
 
 const wordsRU = [
   "вулкан", "парашют", "алгоритм", "восторг", "кристалл", "гармония", "цунами", "робот", "мечта", "гейзер", "радуга", "искра", "бриллиант", "лазер", "энергия", "комета", "вихрь", "орбита", "закат", "голограмма", "метеорит", "иллюзия","палитра", "эволюция", "фейерверк", "калейдоскоп", "квант", "ностальгия", "архипелаг", "трансформер", "самовар", "эхо", "фреска", "дирижабль", "атом", "мозаика", "витраж", "компас", "сфинкс", "осьминог", "лавина", "пазл", "граффити", "колибри", "пещера", "факел", "хрусталь", "цветение", "чертополох", "шалаш", "щебет", "от", "за", "при", "из", "к", "о", "через", "что", "так", "или", "да", "если", "вдоль","по", "для", "от", "за", "при", "в",
@@ -150,7 +204,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
   newGame(wordsEN, 10); 
   addremoveClass (id10, Ten)
   Observe()
-  ENGLISH ('keyboard')
+  ENGLISH ()
   D = 'EN';
 });
 
@@ -178,7 +232,7 @@ document.getElementById('button3').addEventListener('click',() =>{
 
   const Ten = document.getElementById('Ten')
   Ten.addEventListener('click',() =>{
-  const words = D === 'RU' ? wordsRU : wordsEN;
+  const words = D === 'RU' ? ( wordsRU || returnsMyWordS ) : ( wordsEN || elements )
   newGame(words, 10);
   F = 10; 
   addremoveClass (id10, Ten);
@@ -187,7 +241,7 @@ document.getElementById('button3').addEventListener('click',() =>{
 
   const TwentyFive = document.getElementById('TwentyFive')
   TwentyFive.addEventListener('click',() =>{
-  const words = D === 'RU' ? wordsRU : wordsEN;
+  const words = D === 'RU' ? ( wordsRU || elements ) : ( wordsEN || elements )
   newGame(words, 25);
   F = 25
   Ten.classList.toggle('WordCount2');
@@ -197,7 +251,7 @@ document.getElementById('button3').addEventListener('click',() =>{
 
   const Fifty = document.getElementById('Fifty')
   Fifty.addEventListener('click',() =>{
-  const words = D === 'RU' ? wordsRU : wordsEN;
+  const words = D === 'RU' ? ( wordsRU || elements ) : ( wordsEN || elements )
   newGame(words, 50);
   F = 50
   addremoveClass (id50, Fifty)
@@ -206,7 +260,7 @@ document.getElementById('button3').addEventListener('click',() =>{
 
   const SeventyFive = document.getElementById('SeventyFive')
   SeventyFive.addEventListener('click',() =>{
-  const words = D === 'RU' ? wordsRU : wordsEN;
+  const words = D === 'RU' ? ( wordsRU || elements ) : ( wordsEN || elements )
   newGame(words, 75);
   F = 75
   addremoveClass (id75, SeventyFive)
@@ -215,7 +269,7 @@ document.getElementById('button3').addEventListener('click',() =>{
 
   const OneHundred= document.getElementById('OneHundred')
   OneHundred.addEventListener('click',() =>{
-  const words = D === 'RU' ? wordsRU : wordsEN;
+  const words = D === 'RU' ? ( wordsRU || elements ) : ( wordsEN || elements )
   newGame(words, 100);
   F = 100
   addremoveClass (id100, OneHundred)
@@ -223,7 +277,7 @@ document.getElementById('button3').addEventListener('click',() =>{
 });
 
  document.getElementById('Reboot').addEventListener('click', () =>{
-    const words = D === 'RU' ? wordsRU : wordsEN ;
+  const words = D === 'RU' ? ( wordsRU || elements ) : ( wordsEN || elements )
     if (F === 10){
       const F = 10;
       newGame(words, F);
@@ -246,6 +300,8 @@ document.getElementById('button3').addEventListener('click',() =>{
     }
     Observe()
  });
+
+
 
  // массивы с названиями идентификаторов
  const id10 = ['TwentyFive','Fifty','SeventyFive','OneHundred']

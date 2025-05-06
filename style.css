@@ -135,7 +135,7 @@ body{
     font-family:Arial, Helvetica, sans-serif ;
     color: #fdfdff;
     margin: 0;
-    /* background-image: url('image (25).png'); /* Укажите путь к вашему изображению */
+   /* background-image: url('светлая тема.jpg'); /* Укажите путь к вашему изображению */
     background-size: cover; /* Изображение будет заполнять весь экран, сохраняя пропорции */
     background-position: center; /* Центрируем изображение */
     height: 100vh; /* Высота 100% от высоты окна */
@@ -202,6 +202,10 @@ h1{
     border-radius: 8px;
     padding: 6px;
    
+}
+
+.deleteBtn{
+    
 }
 
 input{
