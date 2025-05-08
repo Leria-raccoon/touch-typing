@@ -15,302 +15,205 @@ window.addEventListener('click', (ev) => {
     }
 });
 
-let Modal = document.getElementById('modal2');
-document.getElementById('addWords').addEventListener("click", () => {
-    MModal.style.display = 'none';
-    Modal.style.display = "block";
-});
+const easyWordsRU = [
+  "в", "на", "с", "по", "за", "из", "от", "к", "у", "о", "до", "без", "про", "при", "под", "над", "перед", "после", "между", "через", "дом", "кот", "сад", "рот", "нос", "год", "сон", "зуб", "дым", "шар", "суп", "мяч", "лес", "мост", "лист", "стол", "пол", "код", "час", "мех", "ест", "пил", "спит", "шел", "брал", "дал", "жил", "бил", "мыл", "пел", "сел", "рвал", "лил", "пил", "жил", "был", "брал", "дал", "ждал", "спал", "тихий", "злой", "громкий", "новый", "старый", "белый", "черный", "добрый", "здоровый", "горячий", "холодный", "мокрый", "сухой", "глухой", "слепой", "вода", "земля", "огонь", "воздух", "камень", "песок", "глина", "железо", "золото", "серебро", "медь", "уголь", "соль", "сахар", "молоко", "птица", "рыба", "зверь", "конь", "волк", "лось", "заяц", "лось", "лось", "лось", "лось", "лось", "лось", "лось", "лось", "лось", "лось", "день", "ночь", "утро", "вечер", "зима", "весна", "лето", "осень", "месяц", "год", "час", "минута", "секунда", "неделя", "понедельник", "рука", "нога", "голова", "спина", "грудь", "шея", "палец", "волос", "глаз", "ухо", "нос", "рот", "зуб", "язык", "сердце", "печень", "стол", "стул", "кровать", "шкаф", "полка", "лампа", "окно", "дверь", "стена", "потолок", "пол", "крыша", "лестница", "забор", "ворота",  
+  "книга", "лист", "бумага", "перо", "карандаш", "ручка", "тетрадь", "дневник", "журнал", "газета", "письмо", "конверт", "адрес", "почта", "дождь", "снег", "ветер", "град", "туман", "роса", "иней", "гроза", "молния", "гром", "радуга", "солнце", "луна", "звезда", "облако", "город", "село", "деревня", "улица", "дорога", "площадь", "парк", "сад", "река", "мост", "берег", "остров", "гора", "лес", "поле", "работа", "завод", "фабрика", "магазин", "рынок", "школа", "больница", "театр", "кино", "музей", "библиотека", "церковь", "храм", "суд", "друг", "враг", "брат", "сестра", "мать", "отец", "дед", "баба", "дядя", "тетя", "сын", "дочь", "муж", "жена", "сват", "цвет", "форма", "размер", "вес", "объем", "цена", "стоимость", "количество", "расстояние", "скорость", "сила", "давление", "температура", "время", "я", "ты", "он", "она", "оно", "мы", "вы", "они", "себя", "мой", "твой", "его", "ее", "наш", "ваш", "их", "свой", "кто", "что", "какой", "чей", "где", "куда", "откуда", "когда", "как", "почему", "зачем", "сколько", "который", "тот", "этот", "такой", "или", "и", "а", "но", "да", "нет", "не", "ни", "же", "бы", "ли", "раз", "ведь", "вот", "еще", "уже", "тоже", "очень", "почти", "совсем", "еле", "чуть", "едва", "вдруг", "сразу", "потом", "теперь", "здесь", "там", "тут", "везде", "нигде", "никогда", "можно", "нельзя", "нужно", "должен", "возможно", "надо", "хочу", "могу", "знаю", "вижу", "слышу", "чувствую", "думаю", "верю", "боюсь", "люблю", "иди", "стой", "беги", "прыгай", "лети", "плыви", "лежи", "сиди", "стой", "гляди", "слушай", "молчи", "кричи", "шепчи", "говори", "читай", "правый", "левый", "верхний", "нижний", "передний", "задний", "боковой", "центральный", "крайний", "средний", "внутренний", "наружный", "дальний", "ближний", "первый", "второй", "третий", "четвертый", "пятый", "шестой", "седьмой", "восьмой", "девятый", "десятый", "последний", "следующий", "предыдущий", "каждый", "любой", "свет", "тьма", "деньги", "богатство", "бедность", "счастье", "горе", "радость", "грусть", "страх", "гнев", "любовь", "ненависть", "добро", "зло", "правда", "ложь"
+];
 
-document.getElementById("close").addEventListener("click", () => {
-    Modal.style.display = "none";
-}); 
-
-window.addEventListener('click', (ev) =>{
- if (ev.target === modal2){
- Modal.style.display = 'none';
- }
-});
-
-
-
-// таблица
-const element = [];
-
-// Загружаем данные из localStorage при загрузке страницы
-document.addEventListener('DOMContentLoaded', () => {
-    const tabble = localStorage.getItem('Table'); // получаем данные сохраненные под ключом таблица
-    if (tabble) {
-        const parse = JSON.parse(tabble);
-        parse.forEach(elem => element.push(elem));
-        updateTable();// обновление таблицы, чтобы пользователь видел эти данные 
-    }
-});
-
-document.getElementById('addWord').addEventListener('click', () => { 
-    Fy()
- });
-
-  document.addEventListener('keydown', (ev)=> {
-    if(ev.target.matches('#en') || ev.target.matches('#ru')){
-        if (ev.code === 'Enter'){
-            ev.preventDefault();
-            Fy();
-        }
-    } 
- });
- 
-  function Fy() {
-    const TTable = document.getElementById('Table');
-    const TTbody = TTable.querySelector('tbody');
-    const pop = TTbody.querySelectorAll('tr');
-    const firstInputs = pop[0].querySelectorAll('input');
-
-    // Получаем значение из первой строки
-    const key = firstInputs[0].value.trim();
-    const value = firstInputs[1].value.trim();
-
-    // Проверяем на непустоту + добавляем в массив 
-    if (key && value) {
-        element.unshift({ key, value });
-
-        // Очищаем первую строку 
-        const firstpop = pop[0];
-        firstpop.innerHTML = `
-            <td><input type="text" id='en' class="vod" placeholder="введите слово"></td>
-            <td><input type="text" id='ru' class="vod" placeholder="введите перевод"></td>
-        `;
-        updateTable();
-        save();
-    } else {
-        alert('Пожалуйста, заполните все строки ❤️');
-    }
-    };
-
-// Обновление таблицы 
-function updateTable() {
-    const TTable = document.getElementById('Table');
-    const TTbody = TTable.querySelector('tbody');
-
-    // Очищаем все строки, кроме 0
-    const pops = TTbody.querySelectorAll('tr');
-    for (let i = 1; i < pops.length; i++) {
-        pops[i].remove();
-    }
-
-    // Добавляем новые слова в таблицу
-    element.forEach((elem, index) => {
-        const newPop = document.createElement('tr');
-        newPop.innerHTML = `
-            <td>${elem.key}</td>
-            <td>${elem.value}</td>
-            <td><button class="deleteBtn" data-index="${index}">k</button></td>
-        `;
-        /*  data-index="${index}" - атрибут, который хранит индекс эдемента в массиве, 
-        то есть он запоминает индекс (храним номер строки) */
-        TTbody.appendChild(newPop);
-    });
-     // Добавляем обработчики событий для кнопок удаления
-     document.querySelectorAll('.deleteBtn').forEach(btn => {
-      btn.addEventListener('click', function() {
-          const index = parseInt(this.getAttribute('data-index'));
- /* parseInt - преобразует строку в число 
-    this – это кнопка "Удалить"- происходит клик и записывается в переменную this
-    getAttribute() – метод, который читает значение любого атрибута HTML-элемента.
-    */
-          element.splice(index, 1); // Удаляем элемент из массива
-          updateTable(); // Обновляем таблицу
-          save(); // Сохраняем изменения
-      });
-    });
-  // обработчик добавляется каждый раз, когда я обновляю таблицу
-    
-    const elements = element.map( el => el.key);
-  return elements
-
-    document.getElementById('begin').addEventListener('click', () => {
-      Modal.style.display = "none";
-      newGame(returnsMyWordS, 10);
-      addremoveClass (id10, Ten)
-      Observe()
-      ENGLISH ()
-      D = 'MY'
-     })
-
-  }
-
-
-    const returnsMyWordS = updateTable()
-    console.log(returnsMyWordS)
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Сохранение в LocalStorage
-function save() {
-    localStorage.setItem('Table', JSON.stringify(element));
-}
-
-
-
-document.getElementById('download').addEventListener('click', () => {
-  const jsonArray = []; // пустой массив для хранения объектов
-
-  element.forEach(elem => {
-      jsonArray.push({ key: elem.key, value: elem.value }); // добавляем объекты в массив
-  });
-
-  const jsonString = JSON.stringify(jsonArray, null, 2); // форматируем в JSON
-// объект, представ собой файл или данные, которые могут быть использованы в веб - прилож
-  const BOB = new Blob([jsonString], { type: 'application/json' }); 
-// URL.createObjectURL() создает временный url для объекта blob
-  const url = URL.createObjectURL(BOB); 
-  const a = document.createElement('a'); // создаем элемент <a>
-// атрибут задает адрес url
-  a.href = url; 
-// атрибут указывает браузеру не просто перейти по адресу, а СКАЧАТЬ
-  a.download = 'data.json'; 
-  document.body.appendChild(a); // добавляем элемент на страницу (необязательно, но может помочь)
-  a.click(); //  браузер выполняет действия, связанные с кликом по ссылке
-  document.body.removeChild(a); // удаляет элемент после скачивания
-  URL.revokeObjectURL(url); // освобождает память
-});
-/* при каждом скачивании создается новый элемент <а> - добавляется в дом,
-но после того как произошло скачивание элемент не нужен и его надобно удалить */
-
-const wordsRU = [
+const normalWordsRU = [
   "вулкан", "парашют", "алгоритм", "восторг", "кристалл", "гармония", "цунами", "робот", "мечта", "гейзер", "радуга", "искра", "бриллиант", "лазер", "энергия", "комета", "вихрь", "орбита", "закат", "голограмма", "метеорит", "иллюзия","палитра", "эволюция", "фейерверк", "калейдоскоп", "квант", "ностальгия", "архипелаг", "трансформер", "самовар", "эхо", "фреска", "дирижабль", "атом", "мозаика", "витраж", "компас", "сфинкс", "осьминог", "лавина", "пазл", "граффити", "колибри", "пещера", "факел", "хрусталь", "цветение", "чертополох", "шалаш", "щебет", "от", "за", "при", "из", "к", "о", "через", "что", "так", "или", "да", "если", "вдоль","по", "для", "от", "за", "при", "в",
   "мираж", "магма",  "рация", "алхимия", "телескоп", "батискаф", "капля", "громоотвод", "айсберг", "коралл", "мерцание", "парусник", "электричество", "кенгуру", "маятник", "пеликан", "радар", "торнадо", "фламинго", "хамелеон", "циклон", "шахматы", "щепка", "энциклопедия", "юла", "якорь", "аметист", "броненосец", "вертолет", "глобус", "дротик", "жасмин", "зефир", "иней", "мозг", "кварц", "лабиринт", "метель",  "нефрит", "озон", "память", "рассвет", "светлячок", "талисман", "ураган",  "эгоист", "юнга", "ящерица", "азарт", "в", "на", "с", "по", "для","между", "над", "под", "вместо", "без", "как", "вокруг", "внутри", "после", "до", "в", "на","с", "к", "из", "на", "при", "за", "от", "в", "по", "с"
 ];
 
-const wordsEN = [
+const hardWordsRU = [
+  "абстракция", "автономия", "агрессия", "акклиматизация", "аккомпанемент", "алгоритм", "аналогия", "антидот", "антифриз", "апостроф", "аристократия", "ассимиляция", "атмосфера", "аффект", "балансировка", "бюрократия", "вакцинация", "вальсировка", "взаимодействие", "взаимозависимость", "взаимопонимание", "взаимосвязь", "вдохновение", "взаимозаменяемость", "гипотеза", "глобализация", "гуманитаризм", "декларация", "декомпозиция", "демократия", "дискриминация", "дисфункция", "дистанция", "долгосрочный", "досуг", "доступность", "достаточность", "древесина", "заблуждение", "заимствование", "зависимость", "законодательство", "запрет", "заслуженность", "инновация", "интерпретация", "интеграция", "инфраструктура", "квалификация", "климатизация", "коллаборация", "комплексность", "концепция", "конфликт", "критерий", "критика", "критический", "лицензирование", "логистика", "манипуляция", "математика", "медитация", "модернизация", "модификация", "мультипликация", "наследие", "научность", "недостаточность", "недоразумение", "недостаток", "нормализация", "объективность", "обоснование", "объединение", "обсуждение", "оптимизация", "организация", "оригинальность", "парадигма", "параметр", "параллелепипед", "первоначальность", "планирование", "платформа", "познавательность", "познавательный", "практика", "приоритет", "принятие", "принцип", "продуктивность", "психология", "разнообразие", "разработка", "размышление", "реализация", "реакция", "реальность", "реформирование", "результативность", 
+  "согласование", "система", "систематизация", "системность", "системный", "сложность", "сознание", "способность", "стратегия", "структура", "субъективность", "субъект", "технология", "трансформация", "управление", "упрощение", "успешность", "феномен", "философия", "функция", "функциональность", "эксперимент", "экспертиза", "экспрессия", "эксплуатация", "эксплорация", "юриспруденция", "абстрактный", "агрессивный", "активный", "алгоритмический", "анализ", "антисоциальный", "архаичный", "ассоциативный", "базовый", "бюрократический", "взаимозаменяемый", "взаимосвязанность", "взаимозависимый", "взаимопонимание", "взаимосвязанный", "вдохновляющий", "взаимодействующий", "глобальный", "гуманитарный", "декларативный", "демократический", "дисфункциональный", "долгосрочный", "заблуждающийся", "заимствованный", "зависимый", "законодательный", "заслуживающий", "инновационный", "информативный", "интернациональный", "критический", "модернизированный"
+];
+
+const easyWordsEN = [
+  "apple", "ball", "cat", "dog", "egg", "fish", "goat", "hat", "ice", "jam", "kite", "leaf", "moon", "nest", "owl", "pen", "queen", "rose", "sun", "toy", "ant", "box", "car", "duck", "ear", "fan", "grape", "hand", "ink", "jet", "key", "lamp", "man", "nut", "orange", "pig", "quilt", "ring", "star", "tree", "umbrella", "van", "whale", "xray", "yarn", "zebra", "bat", "cup", "drum", "ear", "frog", "gate", "hill", "iron", "joke", "kite", "lamp", "moon", "nose", "pear", "quack", "road", "sock", "tent", "unit", "vase", "wind", "yolk", "zoo", "arch", "bark", "clap", "dive", "echo", "flame", "glow", "hike", "jump", "kick", "leap", "mop", "nod", "owl", "palm", "quiz", "race", "sink", "tide", "urge", "vow", "warp", "yell", "zoom", "axe", "breeze", "chill", "dawn", "ease", "frost", "gaze", "hush", "idle", "jolt", "keel", "lure", "mend", "nest", "ogle", "plum", "quill", "ride", "sway", "tuck", "urge", "vow", "wade", "yarn", "zest", "bowl", "cage",
+  "dare", "ease", "fend", "gash", "hike", "inch", "jibe", "knot", "lump", "moth", "nook", "peep", "quiz", "rack", "slip", "tame", "urge", "veil", "warp", "yolk", "bake", "chop", "drip", "exit", "flee", "gaze", "heal", "ink", "jog", "kite", "loop", "mop", "nail", "oak", "plow", "quilt", "rush", "sail", "tide", "urge", "vibe", "whip", "yarn", "zip", "bark", "clog", "dare", "ease", "fawn", "glow", "hush", "idle", "jive", "kite", "lure", "mend", "nook", "ogle", "plum", "quill", "race", "sway", "tame", "urge", "vow", "warp", "yolk", "zest", "arch", "bark"
+];
+
+const normalWordsEN = [
   "quasar", "flamingo", "portal", "albatross", "geyser", "graffiti", "crystal", "tent", "armadillo", "hologram",  "tsunami", "origami", "porcupine", "telescope", "safari", "meteorite", "firework", "kangaroo", "laser",  "eclipse", "stainedglass", "canyon", "octopus", "hoverboard", "comet", "archeology", "parachute", "jellyfish",  "mosaic", "walkietalkie", "hummingbird", "vacuum", "funicular", "pelican", "avalanche","biology","droplet", "taiga", "navigator", "visa", "maze","cruise", "artifact", "relic", "hieroglyph", "silencer", "manuscript", "alphabet", "astronaut", "lake", "kaleidoscope", "shadow", "zodiac", "of", "in", "on", "at", "by", "for","through", "during", "before", "after", "above", "out", "from", "to", "as", "within", "except", "along","near", "after", "during", "before",
   "squid",  "robot", "waterfall", "saxophone", "drone", "eiffel", "paleontology", "kayak", "illusion", "volcano", "camping", "rainbow", "mountaineering", "microscope", "chameleon", "iceberg", "animation", "ecosystem", "narwhal", "compass", "blizzard", "koala", "evolution", "cablecar", "physics", "dew", "diving", "globe", "chemistry", "sunset", "transformer", "quartz", "ballet", "bubble", "savanna", "passport", "echo", "isotope", "coral", "easel", "paradox", "projector",  "suitcase", "sunfish", "map", "ornament", "expedition", "cave", "silhouette", "fresco", "sketch", "emerald", "puzzle", "galaxy", "with", "about", "against", "between", "among", "below", "under", "over", "across", "toward", "into", "like", "without", "despite", "until", "around", "besides", "alongside", "about", "against"
 ];
 
+const hardWordsEN = [
+  "abomination", "accelerate", "accessibility", "accompaniment", "acquaintance", "adventurous", "aesthetically", "aggressiveness", "allegiance", "ambitious", "anesthetize", "apprehension", "articulation", "assassination", "atmospheric", "authorization", "beneficiary", "brilliantly", "calculation", "characteristic", "collaboration", "communication", "complication", "concentration", "congratulation", "consequences", "consideration", "contribution", "conventional", "cooperation", "declaration", "dedication", "demonstration", "development", "deterioration", "determination", "disappointment", "discrimination", "distinction", "education", "embarrassment", "exaggeration", "exhilaration", "expectation", "explanation", "extraordinary", "fascination", "formidable", "friendliness", "fundamental", "generosity", "governmental", "graciousness", "imagination", "implementation", "individuality", "information", "inspiration", "intelligence", "introduction", "justification", "knowledgeable", "legislation", "manipulation", "mathematical", "metamorphosis", "motivation", "observation", "organization", "participation",
+  "perseverance", "personification", "philosophical", "preparation", "procrastination", "professionalism", "progression", "protection", "qualification", "realization", "recommendation", "relationship", "representation", "responsibility", "satisfaction", "significance", "simplification", "speculation", "substantial", "sophisticated", "sustainability", "technological", "transformation", "understanding", "vulnerability", "abstruse", "adventitious", "allegorical", "apprehensive", "arbitrary", "camaraderie", "categorial", "circumference", "conscientious", "conspicuous", "contemplation", "debilitating", "differentiation", "discombobulated", "disparity", "effervescence", "efficiency", "exasperation", "exhilarating", "fellowship", "heterogeneous", "hypothetical", "imperturbable", "incomprehensible", "incongruous", "inconvenience", "interdisciplinary", "intermediary", "irrefutable", "juxtaposition", "metaphorical", "multidimensional", "nonchalant", "opportunistic", "overwhelming", "paradoxical", "perpendicular", "perspective", "preliminary", "proficient", "proliferation", "quintessential", "reconciliation", "revolutionary", "sophistication", "spontaneity", "synchronization", "unprecedented", "vicariously", "vulnerability", "zealousness", "abstruseness", "acclimatization", "adventurousness", "antagonistic", "artificiality", "characterization", "compartmentalization", "differentiation", "disillusionment", "disproportionate", "excommunication", "exclusivity", "extraordinariness", "generalization", "interrelationship", "misinterpretation", "neuroscientific", "overcompensation", "overgeneralization", "philosophical", "preoccupation", "rejuvenation", "revolutionizing", "uncontrollability"
+];
+
 const language = document.getElementById('language')
 let D = 'RU' // показывает какой именно сейчас массив слов рус или англ
-let F = 10 // показывает сколько слов попало в контейнер
+let X = 'easy' // показывает какой уровень 
+let F = 10 // показывает количестово слов 
 
 document.addEventListener('DOMContentLoaded', ()=>{
-  newGame(wordsEN, 10); 
-  addremoveClass (id10, Ten)
+  newGame(normalWordsEN, 10); 
+  removeaddClass (id10, Ten)
   Observe()
   ENGLISH ()
   D = 'EN';
 });
 
 document.getElementById('button2').addEventListener('click',() =>{
-  MModal.style.display = 'none';
-  newGame(wordsRU, 100);
-  addremoveClass (id100, OneHundred)
+  newGame(normalWordsRU, 10);
+  removeaddClass (id10, Ten)
   language.textContent = 'russian';
   D = 'RU'; 
-  F = 100;
   Observe ()
   RUSSIAN ()
 });
 
 document.getElementById('button3').addEventListener('click',() =>{
-  MModal.style.display = 'none';
-  newGame(wordsEN, 100);
-  addremoveClass (id100, OneHundred)
+  newGame(normalWordsEN, 10);
+  removeaddClass (id10, Ten)
   language.textContent = 'english';
   D = 'EN';
-  F = 100;
   Observe ()
   ENGLISH ()
 });
+  
+  const easy = document.getElementById('easy');
+  easy.addEventListener('click', () => {
+  const words = D === 'RU' ? easyWordsRU : easyWordsEN;
+  howManyWords (words);
+  X = 'easy'
+  removeaddClass (eeasy, easy)
+  })
+
+  const normal = document.getElementById('normal');
+  normal.addEventListener('click', () => {
+  const words = D === 'RU' ? normalWordsRU : normalWordsEN;
+  howManyWords (words);
+  X = 'normal'
+  removeaddClass (nnormal, normal)
+  })
+
+  const hard = document.getElementById('hard');
+  hard.addEventListener('click', () => {
+  const words = D === 'RU' ? hardWordsRU : hardWordsEN;
+  howManyWords (words);
+  X = 'hard'
+  removeaddClass (hhard, hard)
+  })
 
   const Ten = document.getElementById('Ten')
   Ten.addEventListener('click',() =>{
-  const words = D === 'RU' ? ( wordsRU || returnsMyWordS ) : ( wordsEN || elements )
-  newGame(words, 10);
-  F = 10; 
-  addremoveClass (id10, Ten);
-  Observe()//
+  F = 10  
+  whatLevel (F)
+  removeaddClass (id10, Ten);
+  Observe()
+  console.log ( ' получилось 10 слов ')
+  
 });
 
   const TwentyFive = document.getElementById('TwentyFive')
   TwentyFive.addEventListener('click',() =>{
-  const words = D === 'RU' ? ( wordsRU || elements ) : ( wordsEN || elements )
-  newGame(words, 25);
-  F = 25
+  F = 25;
+  whatLevel (F)
   Ten.classList.toggle('WordCount2');
-  addremoveClass(id25, TwentyFive)
+  removeaddClass(id25, TwentyFive)
   Observe()
+  console.log ( ' получилось 25 слов ')
 });
 
   const Fifty = document.getElementById('Fifty')
   Fifty.addEventListener('click',() =>{
-  const words = D === 'RU' ? ( wordsRU || elements ) : ( wordsEN || elements )
-  newGame(words, 50);
-  F = 50
-  addremoveClass (id50, Fifty)
+  F = 50;
+  whatLevel (F)
+  removeaddClass (id50, Fifty)
   Observe()
 });
 
   const SeventyFive = document.getElementById('SeventyFive')
   SeventyFive.addEventListener('click',() =>{
-  const words = D === 'RU' ? ( wordsRU || elements ) : ( wordsEN || elements )
-  newGame(words, 75);
-  F = 75
-  addremoveClass (id75, SeventyFive)
+  F = 75;
+  whatLevel (F)
+  removeaddClass (id75, SeventyFive)
   Observe()
 });
 
   const OneHundred= document.getElementById('OneHundred')
   OneHundred.addEventListener('click',() =>{
-  const words = D === 'RU' ? ( wordsRU || elements ) : ( wordsEN || elements )
-  newGame(words, 100);
-  F = 100
-  addremoveClass (id100, OneHundred)
+  F = 100;
+  whatLevel (F)
+  removeaddClass (id100, OneHundred)
   Observe()
 });
 
  document.getElementById('Reboot').addEventListener('click', () =>{
-  const words = D === 'RU' ? ( wordsRU || elements ) : ( wordsEN || elements )
-    if (F === 10){
-      const F = 10;
-      newGame(words, F);
-
-    } else if ( F === 25){
-      const F = 25;
-      newGame (words, F);
-
-    } else if (F === 50){
-      const F = 50;
-      newGame (words, F);
-
-    } else if (F === 75){
-      const F = 75;
-      newGame (words, F);
-
-    } else if (F === 100){
-      const F = 100;
-      newGame (words, F);
-    }
+    whatLevel (F) 
+    console.log(`количество слов ${F} tttttttt`)
     Observe()
  });
 
+// определяет уровень сложности массива, но нужно вставить количество слов
+  function whatLevel (F){
+   if (D === 'RU') {
+    if (X === 'easy') {
+       newGame(easyWordsRU, F)
+       console.log( "легкий уровень ру")
+    } else if ( X === 'normal') {
+      newGame (normalWordsRU, F)
+      console.log( "норм уровень ру")
+    } else if ( X === 'hard') {
+      newGame (hardWordsRU, F)
+      console.log( "сложный уровень ру")
+    }
+  }  
+  if (D === 'EN') {
+    if (X === 'easy') {
+      newGame(easyWordsEN, F)
+      console.log( "легкий уровень ен")
+   } else if ( X === 'normal') {
+     newGame (normalWordsEN, F)
+     console.log( " норм уровень ен")
+   } else if ( X === 'hard') {
+     newGame (hardWordsEN, F)
+     console.log( "сложный уровень ен")
+   }
+  }
+}
 
+// определяет количество слов, но нужно вставить уровень сложности массива
+ function howManyWords (words) {
+  if (F === 10){
+    const F = 10;
+    newGame(words, F);
+
+  } else if ( F === 25){
+    const F = 25;
+    newGame (words, F);
+
+  } else if (F === 50){
+    const F = 50;
+    newGame (words, F);
+
+  } else if (F === 75){
+    const F = 75;
+    newGame (words, F);
+
+  } else if (F === 100){
+    const F = 100;
+    newGame (words, F);
+  }
+ }
 
  // массивы с названиями идентификаторов
- const id10 = ['TwentyFive','Fifty','SeventyFive','OneHundred']
- const id25 = ['Ten','Fifty','SeventyFive','OneHundred']
- const id50 = ['Ten','TwentyFive','SeventyFive','OneHundred']
- const id75 = ['Ten','TwentyFive', 'Fifty','OneHundred']
- const id100 = ['Ten','TwentyFive', 'SeventyFive','Fifty']
+ const eeasy = ['normal', 'hard'];
+ const nnormal = ['easy', 'hard'];
+ const hhard = ['easy', 'normal']
+ 
+ const id10 = ['TwentyFive','Fifty','SeventyFive','OneHundred'];
+ const id25 = ['Ten','Fifty','SeventyFive','OneHundred'];
+ const id50 = ['Ten','TwentyFive','SeventyFive','OneHundred'];
+ const id75 = ['Ten','TwentyFive', 'Fifty','OneHundred'];
+ const id100 = ['Ten','TwentyFive', 'SeventyFive','Fifty'];
 
- function addremoveClass (ID, num) {
+ function removeaddClass (ID, num) {
   // перебирает каждый элемент, ищет идентификатор, после того как находит, помещает в новый массивм
   const element = ID.map(i => document.getElementById(i));
 

@@ -197,26 +197,6 @@ h1{
     border-width: 2px;
 }
 
-
-.vod{
-    border-radius: 8px;
-    padding: 6px;
-   
-}
-
-.deleteBtn{
-    
-}
-
-input{
-    border: none;
-}
-
-input:focus{
-    outline: none;
-    border: none;
-}
-
 #modal1{
     display: none;
     z-index: 3;
@@ -262,80 +242,6 @@ input:focus{
     border-color: #dedede;
     border-style: solid;
     border-width: 2px;
-}
-
-#modal2 {
-    display: none;
-    position: fixed; 
-    z-index:5;
-    left: 0; 
-    top: 0; 
-    width: 100%; 
-    height: 100%; 
-    background-color: rgba(0, 0, 0, 0.5);
-}
-
-#cotainterModal2 { 
-    padding: 20px; /* Отступы снаружи */
-    background-color:  rgba(177, 174, 174 ); 
-    position: absolute;
-    z-index: 6;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%); 
-    height: 85%; 
-    width: 60%; 
-    border-radius: 16px;
-    overflow-y: auto;
-}
-
-.button-container {
-    display:flex;
-    justify-content: center;
-}
-
-.button-container button{
-  color: #dedede;
-  background-color:  rgb(142, 140, 140);
-  border-radius: 16px;
-  border: none;
-  padding: 15px;
-  font-family: Arial, Helvetica, sans-serif;
-  cursor: pointer;
-}
-
-.button-container button:hover{
- border-width: 2px;
- border-color: #dedede;
- border: solid;
-}
-
-.Close {
-    border: none;
-    background: none;
-    cursor: pointer;
-    position: absolute;
-    top: 10px; 
-    right: 10px; 
-    font-size: 24px;
-    color: #dedede;
-}
-
-#Table {
-    max-width: 600px; /* Максимальная ширина таблицы */
-    margin-left: 0; /* Убираем отступ слева */
-    border-collapse: collapse; /* Убираем пробелы между ячейками */
-}
-
-#TABLE{
-    display: flex;
-    justify-content: center;
-}
-
-#Table th, #Table td {
-    padding: 10px; /* Отступы внутри ячеек */
-    border: 1px solid #ccc; /* Граница ячеек */
-    text-align: center; /* Выравнивание текста по центру */
 }
 
 #keyboard {
