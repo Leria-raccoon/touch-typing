@@ -49,31 +49,42 @@ const language = document.getElementById('language')
 let D = 'RU' // показывает какой именно сейчас массив слов рус или англ
 let X = 'easy' // показывает какой уровень 
 let F = 10 // показывает количестово слов 
+let P = 'ENGLISH' // раскладка
 
 document.addEventListener('DOMContentLoaded', ()=>{
   newGame(normalWordsEN, 10); 
-  removeaddClass (id10, Ten)
   Observe()
-  ENGLISH ()
+  removeaddClass (id10, Ten)
+  removeaddClass (nnormal, normal)
+  ENGLISH ('keyboard')
+  language.textContent = 'english'
   D = 'EN';
+  P = 'ENGLISH'
+  X = 'normal'
 });
 
 document.getElementById('button2').addEventListener('click',() =>{
   newGame(normalWordsRU, 10);
-  removeaddClass (id10, Ten)
-  language.textContent = 'russian';
-  D = 'RU'; 
-  Observe ()
-  RUSSIAN ()
+   removeaddClass (id10, Ten)
+  removeaddClass (nnormal, normal)
+   language.textContent = 'russian';
+  RUSSIAN ('keyboard')
+  Observe()
+  D = 'RU' 
+  P = 'RUSSIAN'
+  X = 'normal'
 });
 
 document.getElementById('button3').addEventListener('click',() =>{
   newGame(normalWordsEN, 10);
   removeaddClass (id10, Ten)
+  removeaddClass (nnormal, normal)
   language.textContent = 'english';
-  D = 'EN';
+  ENGLISH ('keyboard')
   Observe ()
-  ENGLISH ()
+  D = 'EN';
+  P = 'ENGLISH';
+  X = 'normal';
 });
   
   const easy = document.getElementById('easy');
@@ -82,6 +93,7 @@ document.getElementById('button3').addEventListener('click',() =>{
   howManyWords (words);
   X = 'easy'
   removeaddClass (eeasy, easy)
+  console.log ( ' easy')
   })
 
   const normal = document.getElementById('normal');
@@ -90,6 +102,7 @@ document.getElementById('button3').addEventListener('click',() =>{
   howManyWords (words);
   X = 'normal'
   removeaddClass (nnormal, normal)
+  console.log ( 'normal')
   })
 
   const hard = document.getElementById('hard');
@@ -98,6 +111,7 @@ document.getElementById('button3').addEventListener('click',() =>{
   howManyWords (words);
   X = 'hard'
   removeaddClass (hhard, hard)
+  console.log ( 'hard')
   })
 
   const Ten = document.getElementById('Ten')
@@ -105,9 +119,7 @@ document.getElementById('button3').addEventListener('click',() =>{
   F = 10  
   whatLevel (F)
   removeaddClass (id10, Ten);
-  Observe()
-  console.log ( ' получилось 10 слов ')
-  
+  console.log ( ' 10 слов ')
 });
 
   const TwentyFive = document.getElementById('TwentyFive')
@@ -116,8 +128,7 @@ document.getElementById('button3').addEventListener('click',() =>{
   whatLevel (F)
   Ten.classList.toggle('WordCount2');
   removeaddClass(id25, TwentyFive)
-  Observe()
-  console.log ( ' получилось 25 слов ')
+  console.log ( ' 25 слов ')
 });
 
   const Fifty = document.getElementById('Fifty')
@@ -125,7 +136,7 @@ document.getElementById('button3').addEventListener('click',() =>{
   F = 50;
   whatLevel (F)
   removeaddClass (id50, Fifty)
-  Observe()
+  console.log ( ' 50 слов ')
 });
 
   const SeventyFive = document.getElementById('SeventyFive')
@@ -133,7 +144,7 @@ document.getElementById('button3').addEventListener('click',() =>{
   F = 75;
   whatLevel (F)
   removeaddClass (id75, SeventyFive)
-  Observe()
+  console.log ( ' 75 слов ')
 });
 
   const OneHundred= document.getElementById('OneHundred')
@@ -141,13 +152,12 @@ document.getElementById('button3').addEventListener('click',() =>{
   F = 100;
   whatLevel (F)
   removeaddClass (id100, OneHundred)
-  Observe()
+  console.log ( ' 100 слов ')
 });
 
  document.getElementById('Reboot').addEventListener('click', () =>{
     whatLevel (F) 
     console.log(`количество слов ${F} tttttttt`)
-    Observe()
  });
 
 // определяет уровень сложности массива, но нужно вставить количество слов
@@ -176,6 +186,7 @@ document.getElementById('button3').addEventListener('click',() =>{
      console.log( "сложный уровень ен")
    }
   }
+  Observe();
 }
 
 // определяет количество слов, но нужно вставить уровень сложности массива
@@ -200,6 +211,7 @@ document.getElementById('button3').addEventListener('click',() =>{
     const F = 100;
     newGame (words, F);
   }
+  Observe();
  }
 
  // массивы с названиями идентификаторов
@@ -254,6 +266,11 @@ function formatWord(word) {
 
 // НАЧАЛО 
 function newGame(words, num) {
+  correctcheck = 0;
+  incorrectcheck = 0;
+
+  wrongLetters = [];
+  // если перезагрузить или запустить игру через DOMContentLoaded, то обнуление не нужно
   // Функция для перемешивания массива (Фишер-Йетс)
   function shuffleArray(array) {
     const newArray = [...array];
@@ -303,7 +320,7 @@ function updateCursorPosition() {
     const targetRect = target.getBoundingClientRect();
     const poleRect = pole.getBoundingClientRect();
 
-    cursor.style.top = `${targetRect.top + 11 + window.scrollY}px`; 
+    cursor.style.top = `${targetRect.top + 16 + window.scrollY}px`; 
     // расстояние от верхней границы видимоф области окна до верхней границы элемента +11 вниз 
     cursor.style.left = `${targetRect [nextLetter ? 'left':'right'] + window.scrollX}px`;
     // hotizontal
@@ -313,12 +330,12 @@ function updateCursorPosition() {
       addClass (space, 'migaet');
     } 
 
+// если это последняя буква в слове и нет следующего узла
     if (target === nextWord && !nextWord.nextElementSibling) {
-      modal3.style.display = "block";
       Result ()
-      
+      console.log (wrongLetters)
     }
-
+   
     /* проверяет на существование 
      target === nextWord - именно текущее СЛОВО - работаем со словом*/
     
@@ -344,7 +361,7 @@ function updateCursorPosition() {
  → мгновенно перерисовывает страницу, сдвигая содержимое.
 Это встроенная функция, как например background-color  */
 }
-
+ 
 // Обновление курсора при нажатии клавиш
 document.addEventListener('keydown', updateCursorPosition);
 
@@ -353,7 +370,8 @@ window.addEventListener('resize', updateCursorPosition);
 
     let incorrectcheck = 0;
     let correctcheck = 0;
- 
+    
+    let  wrongLetters = [];
 // Обработчик нажатия клавиш
   const pole = document.getElementById('pole')
   pole.addEventListener('keydown', ev => {
@@ -361,6 +379,7 @@ window.addEventListener('resize', updateCursorPosition);
   const currentWord = document.querySelector('.word.current');
   const currentLetter = document.querySelector('.letter.current');
   const expected = currentLetter?.innerHTML || ' ';
+  const innerLetter = currentLetter?.innerHTML.toUpperCase() || ' ';
  /* пытается понять что именно находится в span
  innerHTML (получает содержимое элемента)- это одна буква, которая находится в span
  оператор опциональной цепочки  ?.. Этот оператор позволяет
@@ -414,10 +433,11 @@ window.addEventListener('resize', updateCursorPosition);
       });
     } 
     
+// если это последнее слово и ты нажал пробел 
   const words = document.querySelectorAll('.word')
      const isLastWord = currentWord === words[words.length - 1]
-     if (isLastWord){
-      modal3.style.display = "block"     
+     if (isLastWord && isSpace ){
+       console.log(wrongLetters)
       Result ()
      }
     /* property children —для HTML-элементов ,
@@ -507,16 +527,43 @@ window.addEventListener('resize', updateCursorPosition);
   }
  
     updateCursorPosition(); // Обновляем позицию курсора после изменений
-     
-    });
+
+    R (key, expected, innerLetter)
+  });
+
+ function R (key, expected, innerLetter) {
+ if (key !== expected) {
+    // Добавляем в массив ошибок
+    if (!wrongLetters.includes(innerLetter)) {
+       if ( innerLetter !== null ){
+       wrongLetters.push(innerLetter);
+       }
+       }
+    }
+  }
 
 function Result () {
+   modal3.style.display = "block";
    const cModal3 = document.getElementById('cModal3');
    const result = Math.floor(correctcheck / (correctcheck + incorrectcheck) *100 );
    cModal3.innerHTML = `${result}%`;
- }
- 
 
+if (D === 'EN') ENGLISH ('ccModal3')
+else if (D === "RU") RUSSIAN ('ccModal3')
+  
+const keyboardContainer = document.getElementById('ccModal3');
+
+    wrongLetters.forEach(id => {
+const keyEl = keyboardContainer.querySelector(`#${id}`);
+    if (keyEl) {
+      addClass(keyEl, 'nomigaet');
+      } 
+    })
+     document.querySelectorAll('#keyboard .key.migaet').forEach(key => {
+    removeClass(key, 'migaet');
+  });  
+}
+  
 /* 
 const play = document.getElementById('play')
   play.addEventListener('click',() => {
@@ -551,10 +598,14 @@ Array.from - из коллекции дом элементов - превращ�
   }
 };
 // был ли найден элемент или нет, если да, то
-
+let observer = null; 
   // Наблюдатель за изменениями в DOM
   function Observe() {
-  const observer = new MutationObserver((mutations) => {
+     if (observer) {
+    observer.disconnect();
+  }
+// создается новый обработчик
+  observer = new MutationObserver((mutations) => {
 /* передаете функуию обратного вызова, будет вызвана каждый раз,
  как происходит изменения в dom, эта функция получает массив mutations
   (в массиве есть объекты) */    
@@ -577,10 +628,10 @@ Array.from - из коллекции дом элементов - превращ�
   // Выводим первую букву сразу
   logCurrentLetter();
 }
-setTimeout(Observe, 1000)
+setTimeout(Observe, 500)
 
-function ENGLISH () {
-const keyboardContainer = document.getElementById('keyboard');
+function ENGLISH (keyboardLayout) {
+const keyboardContainer = document.getElementById(keyboardLayout);
 keyboardContainer.innerHTML = `
     <ul class="line">
       <li class="key" id="Q">Q</li>
@@ -623,8 +674,8 @@ keyboardContainer.innerHTML = `
 `;
 }
 
-function RUSSIAN () {
-  const keyboardContainer = document.getElementById('keyboard');
+function RUSSIAN (keyboardLayout) {
+  const keyboardContainer = document.getElementById(keyboardLayout);
   keyboardContainer.innerHTML = `
    <ul class="line">
      <li class="key" id="Й">Й</li>
@@ -671,4 +722,9 @@ function RUSSIAN () {
      <li class="key" id="Space" style="width: 270px;"></li>
   </ul>`
 }
+
+
+ let time = 30;
+ const timer =  document.getElementById('timer');
+
 

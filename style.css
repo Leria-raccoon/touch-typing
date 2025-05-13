@@ -78,13 +78,13 @@
     left: 50%;
     transform: translate(-50%, -50%); /* Центрирование */ 
     width: 85%;
-    height: 89px; 
- /*    background-color:  rgb(75, 72, 69) ;   */ 
-    padding: 1px;
+    height: 80px; 
+   /*  background-color:  rgb(75, 72, 69) ;  */  
+    padding: 3px;
     display: flex;
     flex-wrap: wrap;
     justify-content: start;
-    font-size: 23px;
+    font-size: 27px;
     color: var(--text-color);
     /*  filter: blur(10px);  */
     overflow: hidden; /* скрывает переполнение контейнера */
@@ -131,7 +131,7 @@
 body{
      /* background-image: url('image (11) (2).png');
     background-size: cover;  */
-    background-color: rgb(45, 44, 42);  
+    background-color: rgb(42, 42, 46);  
     font-family:Arial, Helvetica, sans-serif ;
     color: #fdfdff;
     margin: 0;
@@ -287,7 +287,14 @@ h1{
      }
 
 .migaet {
-    background-color: rgb(126, 126, 125);
+    background-color: rgb(202, 202, 190);
+    color: #88827a;
+    transform: translate(5px, -5px);
+      transition: 0.3s;
+}
+
+.nomigaet {
+    background-color: #a92727;
 }
 
 #modal3{
@@ -316,3 +323,16 @@ h1{
     width: 300px;
     background-color: rgb(130, 141, 141);
 }
+
+#ccModal3 {
+    background-color: #88827a;
+    display: flex; /* 3 блока выстраиваются в линию  */
+    flex-direction: column; /* потом в вертикаль */
+    gap: 7px; /* вертикальный отступ */
+}
+
+/* .wrong-key {
+    background-color: #ff6b6b;
+    color: white;
+    box-shadow: 0 0 5px rgba(255, 107, 107, 0.7);
+} */
