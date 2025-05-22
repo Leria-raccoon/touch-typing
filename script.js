@@ -1,7 +1,13 @@
 // открытие и закрытие 
-document.getElementById('MenuButtom').addEventListener('click', () => {
-    Menu.classList.toggle('open'); // Переключаем класс 'open'
-    //если есть класс, то он удаляется, если нет, то добавляется
+let Menu = document.getElementById('MENU');
+document.getElementById('MenuButtom').addEventListener('click', () =>{
+ Menu.style.display = "block";
+});
+
+window.addEventListener('click', (ev) => {
+    if (ev.target === Menu ){
+    Menu.style.display = 'none';
+    }
 });
 
 let MModal = document.getElementById('modal1');
@@ -10,7 +16,7 @@ document.getElementById('language').addEventListener('click', () => {
 });
 
 window.addEventListener('click', (ev) => {
-    if (ev.target === modal1 ){
+    if (ev.target === MModal ){
     MModal.style.display = 'none';
     }
 });
@@ -47,41 +53,51 @@ const hardWordsEN = [
 
 const language = document.getElementById('language')
 let D = 'RU' // показывает какой именно сейчас массив слов рус или англ
-let X = 'easy' // показывает какой уровень 
+let X = 'easy' // показывает уровень 
 let F = 10 // показывает количестово слов 
 let P = 'ENGLISH' // раскладка
+let T = 15 // время  
+
+const RUbutton2 = document.getElementById('button2');
+const ENbutton3 = document.getElementById('button3');
 
 document.addEventListener('DOMContentLoaded', ()=>{
   newGame(normalWordsEN, 10); 
-  Observe()
-  removeaddClass (id10, Ten)
-  removeaddClass (nnormal, normal)
-  ENGLISH ('keyboard')
-  language.textContent = 'english'
+  Observe();
+  addClass(ENbutton3, 'navod')
+  removeaddClass (id10, Ten);
+  removeaddClass (nnormal, normal);
+  ENGLISH ('keyboard');
+  language.textContent = 'english';
   D = 'EN';
-  P = 'ENGLISH'
-  X = 'normal'
+  P = 'ENGLISH';
+  X = 'normal'; 
 });
 
 document.getElementById('button2').addEventListener('click',() =>{
   newGame(normalWordsRU, 10);
-   removeaddClass (id10, Ten)
-  removeaddClass (nnormal, normal)
-   language.textContent = 'russian';
-  RUSSIAN ('keyboard')
-  Observe()
-  D = 'RU' 
-  P = 'RUSSIAN'
-  X = 'normal'
+  removeaddClass (id10, Ten);
+  removeaddClass (nnormal, normal);
+  addClass(RUbutton2, 'navod')
+  removeClass( ENbutton3, 'navod')
+  language.textContent = 'russian';
+  RUSSIAN ('keyboard');
+  Observe();
+  D = 'RU';
+  P = 'RUSSIAN';
+  X = 'normal';
+  
 });
 
 document.getElementById('button3').addEventListener('click',() =>{
   newGame(normalWordsEN, 10);
-  removeaddClass (id10, Ten)
-  removeaddClass (nnormal, normal)
+  removeaddClass (id10, Ten);
+  removeaddClass (nnormal, normal);
+  addClass(ENbutton3, 'navod')
+  removeClass( RUbutton2, 'navod')
   language.textContent = 'english';
-  ENGLISH ('keyboard')
-  Observe ()
+  ENGLISH ('keyboard');
+  Observe ();
   D = 'EN';
   P = 'ENGLISH';
   X = 'normal';
@@ -91,99 +107,139 @@ document.getElementById('button3').addEventListener('click',() =>{
   easy.addEventListener('click', () => {
   const words = D === 'RU' ? easyWordsRU : easyWordsEN;
   howManyWords (words);
-  X = 'easy'
-  removeaddClass (eeasy, easy)
-  console.log ( ' easy')
+  X = 'easy';
+  removeaddClass (eeasy, easy);
   })
 
   const normal = document.getElementById('normal');
   normal.addEventListener('click', () => {
   const words = D === 'RU' ? normalWordsRU : normalWordsEN;
   howManyWords (words);
-  X = 'normal'
-  removeaddClass (nnormal, normal)
-  console.log ( 'normal')
+  X = 'normal';
+  removeaddClass (nnormal, normal);
   })
 
   const hard = document.getElementById('hard');
   hard.addEventListener('click', () => {
   const words = D === 'RU' ? hardWordsRU : hardWordsEN;
   howManyWords (words);
-  X = 'hard'
-  removeaddClass (hhard, hard)
-  console.log ( 'hard')
+  X = 'hard';
+  removeaddClass (hhard, hard);
   })
 
   const Ten = document.getElementById('Ten')
   Ten.addEventListener('click',() =>{
-  F = 10  
-  whatLevel (F)
+  F = 10;
+  whatLevel (F);
   removeaddClass (id10, Ten);
-  console.log ( ' 10 слов ')
-});
+  });
 
-  const TwentyFive = document.getElementById('TwentyFive')
+  const TwentyFive = document.getElementById('TwentyFive');
   TwentyFive.addEventListener('click',() =>{
   F = 25;
-  whatLevel (F)
-  Ten.classList.toggle('WordCount2');
-  removeaddClass(id25, TwentyFive)
-  console.log ( ' 25 слов ')
-});
+  whatLevel (F);
+  removeaddClass(id25, TwentyFive);
+  });
 
-  const Fifty = document.getElementById('Fifty')
+  const Fifty = document.getElementById('Fifty');
   Fifty.addEventListener('click',() =>{
   F = 50;
-  whatLevel (F)
-  removeaddClass (id50, Fifty)
-  console.log ( ' 50 слов ')
-});
+  whatLevel (F);
+  removeaddClass (id50, Fifty);
+  });
 
-  const SeventyFive = document.getElementById('SeventyFive')
+  const SeventyFive = document.getElementById('SeventyFive');
   SeventyFive.addEventListener('click',() =>{
   F = 75;
-  whatLevel (F)
-  removeaddClass (id75, SeventyFive)
-  console.log ( ' 75 слов ')
-});
+  whatLevel (F);
+  removeaddClass (id75, SeventyFive);
+  });
 
-  const OneHundred= document.getElementById('OneHundred')
+  const OneHundred = document.getElementById('OneHundred');
   OneHundred.addEventListener('click',() =>{
   F = 100;
-  whatLevel (F)
-  removeaddClass (id100, OneHundred)
-  console.log ( ' 100 слов ')
-});
+  whatLevel (F);
+  removeaddClass (id100, OneHundred);
+  });
 
+  const WordCountTime = document.getElementById('WordCountTime')
+  const choiceOfWords = document.getElementById('choiceOfWords')
+  const TiMe = document.getElementById('timer')
+  
+  TiMe.addEventListener('click', () =>{
+  WordCountTime.style.display = 'block'
+  removeaddClass(TT45s, T45s);
+  TTIMER(45)
+  whatLevel (15)
+  })
+
+  choiceOfWords.addEventListener('click', () =>{
+  WordCountTime.style.display = 'none' 
+ })
+
+  const T15s = document.getElementById('T15s')
+  T15s.addEventListener('click', () =>{
+   removeaddClass(TT15s, T15s);
+   TTIMER(15)
+   T = 15
+   whatLevel (200)
+  })
+
+  const T30s = document.getElementById('T30s')
+  T30s.addEventListener('click', () =>{
+   removeaddClass(TT30s, T30s);
+   TTIMER(30);
+   T = 30
+   whatLevel (200)
+  })
+   
+  const T45s = document.getElementById('T45s')
+  T45s.addEventListener('click', () =>{
+   removeaddClass(TT45s, T45s);
+   TTIMER(45);
+   T = 45
+   whatLevel (200)
+  })
+   
+  const T1m = document.getElementById('T1m')
+  T1m.addEventListener('click', () =>{
+   removeaddClass(TT1m, T1m);
+   TTIMER(60);
+   T = 60
+   whatLevel (200)
+  })
+  
+  const T2m = document.getElementById('T2m')
+  T2m.addEventListener('click', () =>{
+  removeaddClass(TT2m, T2m);
+  TTIMER(120);
+  T = 120
+  whatLevel (200)
+  })
+  
  document.getElementById('Reboot').addEventListener('click', () =>{
     whatLevel (F) 
     console.log(`количество слов ${F} tttttttt`)
  });
 
-// определяет уровень сложности массива, но нужно вставить количество слов
+// определяет уровень сложности и язык массива, но нужно вставить количество слов
   function whatLevel (F){
    if (D === 'RU') {
     if (X === 'easy') {
-       newGame(easyWordsRU, F)
-       console.log( "легкий уровень ру")
+      newGame(easyWordsRU, F)
     } else if ( X === 'normal') {
       newGame (normalWordsRU, F)
-      console.log( "норм уровень ру")
     } else if ( X === 'hard') {
       newGame (hardWordsRU, F)
-      console.log( "сложный уровень ру")
     }
   }  
   if (D === 'EN') {
     if (X === 'easy') {
       newGame(easyWordsEN, F)
-      console.log( "легкий уровень ен")
    } else if ( X === 'normal') {
      newGame (normalWordsEN, F)
-     console.log( " норм уровень ен")
    } else if ( X === 'hard') {
      newGame (hardWordsEN, F)
-     console.log( "сложный уровень ен")
    }
   }
   Observe();
@@ -194,7 +250,7 @@ document.getElementById('button3').addEventListener('click',() =>{
   if (F === 10){
     const F = 10;
     newGame(words, F);
-
+ 
   } else if ( F === 25){
     const F = 25;
     newGame (words, F);
@@ -225,17 +281,23 @@ document.getElementById('button3').addEventListener('click',() =>{
  const id75 = ['Ten','TwentyFive', 'Fifty','OneHundred'];
  const id100 = ['Ten','TwentyFive', 'SeventyFive','Fifty'];
 
+ const TT15s = ['T30s', 'T45s', 'T1m', 'T2m'];
+ const TT30s = ['T15s', 'T45s', 'T1m', 'T2m'];
+ const TT45s = ['T30s', 'T15s', 'T1m', 'T2m'];
+ const TT1m = ['T30s', 'T15s', 'T45s', 'T2m'];
+ const TT2m = ['T30s', 'T15s', 'T45s', 'T1m'];
+
  function removeaddClass (ID, num) {
   // перебирает каждый элемент, ищет идентификатор, после того как находит, помещает в новый массивм
   const element = ID.map(i => document.getElementById(i));
 
   element.forEach(idishci => {
     if (idishci) {
-      idishci.classList.remove('WordCount2');
+      idishci.classList.remove('navod');
   }
 });
   if (num){
-  num.classList.add('WordCount2');
+  num.classList.add('navod');
  }
  }
 
@@ -308,7 +370,7 @@ const shuffledWords = shuffleArray(words).slice(0, num);
 
 const modal3 = document.getElementById('modal3');
 
-//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!обновление курсора 
+//обновление курсора 
 function updateCursorPosition() {
   const nextLetter = document.querySelector('.letter.current');
   const nextWord = document.querySelector('.word.current');
@@ -588,11 +650,9 @@ const logCurrentLetter = () => {
   // Ищем конкретную клавишу
   const foundKey = Array.from(keys).find(key => 
     key.id.toLowerCase() === currentChar);
-
 /* key.id обращение к атрибуту элемента 
 Array.from - из коллекции дом элементов - превращает в массив 
   .find() - метод массива - возвращает первый элемент, который */
-
   if (foundKey) {
     addClass(foundKey,'migaet');
   }
@@ -629,6 +689,54 @@ let observer = null;
   logCurrentLetter();
 }
 setTimeout(Observe, 500)
+
+// timer
+let timeL; //  хранит индефикатор таймера 
+let timerCheckInterval; // хранит идентификатор основного таймера
+ function TIMER (number) {
+ clearInterval(timeL);
+ let timeLeft = number; 
+
+  timeLeft = number; // сбрасывает в секундах
+  document.getElementById('time').textContent = timeLeft;// находит id и записывает в него новое значение 
+
+  document.querySelector('.progress-fill').style.width = '100%';
+
+  timeL = setInterval(() => { // создает повторяющийся интервал, каждую секунду 
+    timeLeft--;
+    document.getElementById('time').textContent = timeLeft;
+    const predictable = (timeLeft / number )* 100;
+    document.querySelector('.progress-fill').style.width = `${predictable}%`;
+    console.log(timeLeft)
+    if (timeLeft <= 0) {
+      clearInterval(timeL);
+      Result();
+    }
+  }, 1000);
+  
+ }
+  function TTIMER(number) {
+    if (timerCheckInterval) {
+        clearInterval(timerCheckInterval);// останавливает выполнение интервала 
+    }
+    
+    // Останавливаем основной таймер, если он работает
+    if (timeL) {
+        clearInterval(timeL);
+    }
+    document.querySelector('.progress-fill').style.width = '100%';
+
+    T = number;
+  timerCheckInterval = setInterval(() => {// создает номер айди
+  const firstLetter = document.querySelector('.word.current')?.firstElementChild;
+  if (firstLetter && (firstLetter.classList.contains('correct') || firstLetter.classList.contains('incorrect'))) {
+    TIMER(number);
+    clearInterval(timerCheckInterval);// останавливает его работу
+    console.log('jpp')
+  }
+}, 100);
+  
+ }
 
 function ENGLISH (keyboardLayout) {
 const keyboardContainer = document.getElementById(keyboardLayout);
@@ -723,8 +831,6 @@ function RUSSIAN (keyboardLayout) {
   </ul>`
 }
 
-
- let time = 30;
- const timer =  document.getElementById('timer');
+  
 
 

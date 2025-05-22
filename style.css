@@ -2,59 +2,47 @@
     к CSS-селекторам, которые позволяют изменять стиль 
     элементов на веб-странице в зависимости от их состояния 
     или положения.*/
+    --first-color: rgb(42, 42, 46);
     --secondary-color: #e9e9e980; /* Вторичный цвет */
     --text-color: rgb(123, 119, 119);
+    --navod-color: #7e7e85;
 }  
 
-#language{
-    position: absolute;
-    top: 58%;
-    left: 220px;
-    transform: translate(-50%, -50%);
-    background-color:  rgb(56, 55, 53);
-    padding: 5px 10px;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    color: #b5b5b5;
-    width: 100px;
-}
-
-#language:hover{
-    color: #dedede;
-    background-color: var(--secondary-color);
-}
-
-#Reboot{
-    position: absolute;
-    top: 58%;
-    left: 90px;
-    transform: translate(-50%, -50%);
-}
-
-#WORDCOUNT{
+.WORDCOUNT{
     position: absolute;
     top: 58%;
     left: 400px;
     transform: translate(-50%, -50%);
+    background-color:  rgb(56, 55, 53);
+    border-radius: 5px;
 }
 
 .WordCount{
     background-color:  rgb(56, 55, 53);
     padding: 5px 5px;
     border: none;
-    border-radius: 10px;
+    border-radius: 5px;
     cursor: pointer;
     color: #b5b5b5;
+    font-size: 16px;
 }
 
 .WordCount:hover{
     color: #dedede;
     background-color: var(--secondary-color);
 }
+
 .WordCount2 {
     color: #dedede;
     background-color: var(--secondary-color);
+}
+
+#WordCountQuantity {
+ display: block;
+}
+
+#WordCountTime{
+ display: none;
 }
 
 /* #play{
@@ -131,15 +119,10 @@
 body{
      /* background-image: url('image (11) (2).png');
     background-size: cover;  */
-    background-color: rgb(42, 42, 46);  
+    background-color: var(--first-color); 
     font-family:Arial, Helvetica, sans-serif ;
     color: #fdfdff;
     margin: 0;
-   /* background-image: url('светлая тема.jpg'); /* Укажите путь к вашему изображению */
-    background-size: cover; /* Изображение будет заполнять весь экран, сохраняя пропорции */
-    background-position: center; /* Центрируем изображение */
-    height: 100vh; /* Высота 100% от высоты окна */
-    width: 100vw; /* Ширина 100% от ширины окна */ 
     user-select: none;  /* Блокирует выделение текста */
   -webkit-user-select: none; /* Для Safari */
   -moz-user-select: none;    /* Для Firefox */
@@ -165,36 +148,32 @@ h1{
     cursor: pointer; 
 }
 
-#Menu{
-    position: fixed;
-    width: 250px;
-    height: 100%;
-    top: 0;
-    right: -250px;
-    transition: right 0.4s ease;
-    background-color: rgba(57, 56, 56, 0.9);
-    z-index:1;
+#MENU {
+  position: fixed;
+  z-index: 5;
+  display: none;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+#Menu {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); 
+    height: 300px; 
+    width: 400px; 
+    background-color: var(--first-color);
+    border-radius: 5px;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
     justify-content: center;
-}
-
-#Menu.open {
-    right: 0; /* прижат к правой стороне */
-}
-
-.menu{
-   background-color: transparent; /* прозрачный фон */
-   border: none;
-   border-radius: 10px;
-   cursor: pointer; 
-}
-
-.menu:hover{
-    border-color: #dedede;
-    border-style: solid;
-    border-width: 2px;
+    align-items: center;
+    border-radius: 5px;
+    gap: 10px;
 }
 
 #modal1{
@@ -216,32 +195,49 @@ h1{
     transform: translate(-50%, -50%); 
     height: 300px; 
     width: 400px; 
-    background-color: rgba(177, 174, 174 );
+    background-color: var(--first-color);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border-radius: 16px;
+    border-radius: 5px;
     gap: 10px;
+}
+
+.level{
+    background-color: rgb(76, 76, 80);;
+    color: #dedede;
+    border-radius: 5px;
+    cursor:pointer;
+     border: none;
+     height: 40px;
+     width: 60px;
+}
+
+.level:hover{
+    background-color: var(--navod-color);
 }
 
 .Q{
  padding: 20px;
  color: #ffffff;
- background-color: rgb(142, 140, 140);
+ background-color: rgb(76, 76, 80);
  border: none;
  font-size:17px ;
  font-family: Arial, Helvetica, sans-serif;
- border-radius: 16px;
+ border-radius: 5px;
  width: 350px;
  height: 60px; 
  cursor: pointer;
 }
 
 .Q:hover {
-    border-color: #dedede;
-    border-style: solid;
-    border-width: 2px;
+    background-color: var(--navod-color);
+}
+
+.navod {
+ background-color: var(--navod-color);
+ color: rgb(255, 255, 254) ;
 }
 
 #keyboard {
@@ -264,12 +260,12 @@ h1{
 } 
 
 .key {
-    width: 35px;
-    height: 35px;
+    width: 36px;
+    height: 36px;
     border: var(--secondary-color);
     border-style: solid; /* сплошная граница */
     border-width: 2px;
-    border-radius: 10px;
+    border-radius: 5px;
     display: flex;
 /* просто идеально центрурует букву внутри кнопки */
     align-items: center;
@@ -312,16 +308,18 @@ h1{
     position: absolute;
     left: 50%;
     top: 50%;
-    width: 80%;
-    height: 80%;
+    width: 90%;
+    height: 90%;
     transform: translate(-50%, -50%); 
-    background-color: rgb(104, 98, 98);
+    background-color: var(--first-color);
+    border-radius: 5px;
 }
 
 #cModal3{
     height: 200px;
     width: 300px;
-    background-color: rgb(130, 141, 141);
+    background-color: rgb(62, 65, 68);
+    border-radius: 5px;
 }
 
 #ccModal3 {
@@ -331,8 +329,22 @@ h1{
     gap: 7px; /* вертикальный отступ */
 }
 
-/* .wrong-key {
-    background-color: #ff6b6b;
-    color: white;
-    box-shadow: 0 0 5px rgba(255, 107, 107, 0.7);
-} */
+.progress-bar {
+    width: 220px;
+    height: 15px;
+    background-color: #aa3535;
+    border-radius: 5px;
+    overflow: hidden;/*содержимое элемента выходит за границы, оно будет скрыто  */
+    position: relative;
+}
+
+.progress-fill {
+  height: 100%;
+  background-color: #212d6d;
+  width: 100%;
+  transition: width 1s linear;
+}
+
+
+
+
