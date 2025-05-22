@@ -57,6 +57,7 @@ let X = 'easy' // показывает уровень
 let F = 10 // показывает количестово слов 
 let P = 'ENGLISH' // раскладка
 let T = 15 // время  
+let O = 'words'// показывае втоит у тебя время или слова 
 
 const RUbutton2 = document.getElementById('button2');
 const ENbutton3 = document.getElementById('button3');
@@ -72,12 +73,11 @@ document.addEventListener('DOMContentLoaded', ()=>{
   D = 'EN';
   P = 'ENGLISH';
   X = 'normal'; 
+  O = "words"
 });
 
 document.getElementById('button2').addEventListener('click',() =>{
-  newGame(normalWordsRU, 10);
-  removeaddClass (id10, Ten);
-  removeaddClass (nnormal, normal);
+   removeaddClass (nnormal, normal);
   addClass(RUbutton2, 'navod')
   removeClass( ENbutton3, 'navod')
   language.textContent = 'russian';
@@ -86,12 +86,16 @@ document.getElementById('button2').addEventListener('click',() =>{
   D = 'RU';
   P = 'RUSSIAN';
   X = 'normal';
-  
+  if (O === "words") {
+  newGame(normalWordsRU, 10);
+  removeaddClass (id10, Ten);
+  } else {
+   TTIMER(T)
+   whatLevel(200)
+  }
 });
 
 document.getElementById('button3').addEventListener('click',() =>{
-  newGame(normalWordsEN, 10);
-  removeaddClass (id10, Ten);
   removeaddClass (nnormal, normal);
   addClass(ENbutton3, 'navod')
   removeClass( RUbutton2, 'navod')
@@ -101,30 +105,52 @@ document.getElementById('button3').addEventListener('click',() =>{
   D = 'EN';
   P = 'ENGLISH';
   X = 'normal';
+  if (O === "words") {
+  newGame(normalWordsEN, 10);
+  removeaddClass (id10, Ten);  
+  } else {
+    
+    whatLevel(200)
+  }
 });
   
   const easy = document.getElementById('easy');
   easy.addEventListener('click', () => {
   const words = D === 'RU' ? easyWordsRU : easyWordsEN;
-  howManyWords (words);
   X = 'easy';
   removeaddClass (eeasy, easy);
+  if ( O === "words") {
+    howManyWords (words);
+  } else {
+    TTIMER(T)
+    whatLevel(200)
+  }
   })
 
   const normal = document.getElementById('normal');
   normal.addEventListener('click', () => {
   const words = D === 'RU' ? normalWordsRU : normalWordsEN;
-  howManyWords (words);
   X = 'normal';
   removeaddClass (nnormal, normal);
+  if ( O === "words") {
+    howManyWords (words);
+  } else {
+    TTIMER(T)
+    whatLevel(200)
+  }
   })
 
   const hard = document.getElementById('hard');
   hard.addEventListener('click', () => {
   const words = D === 'RU' ? hardWordsRU : hardWordsEN;
-  howManyWords (words);
   X = 'hard';
   removeaddClass (hhard, hard);
+  if ( O === "words") {
+    howManyWords (words);
+  } else {
+    TTIMER(T)
+    whatLevel(200)
+  }
   })
 
   const Ten = document.getElementById('Ten')
@@ -170,11 +196,21 @@ document.getElementById('button3').addEventListener('click',() =>{
   WordCountTime.style.display = 'block'
   removeaddClass(TT45s, T45s);
   TTIMER(45)
-  whatLevel (15)
+  whatLevel (200)
+  O = "time"
   })
 
   choiceOfWords.addEventListener('click', () =>{
   WordCountTime.style.display = 'none' 
+  O = "words"
+  newGame(normalWordsEN, 10); 
+  Observe();
+  addClass(ENbutton3, 'navod')
+  removeaddClass (id10, Ten);
+  removeaddClass (nnormal, normal);
+  ENGLISH ('keyboard');
+  language.textContent = 'english';
+  STOP()
  })
 
   const T15s = document.getElementById('T15s')
@@ -327,6 +363,8 @@ function formatWord(word) {
 }
 
 // НАЧАЛО 
+let Length = []
+
 function newGame(words, num) {
   correctcheck = 0;
   incorrectcheck = 0;
@@ -363,10 +401,17 @@ const shuffledWords = shuffleArray(words).slice(0, num);
  
   const cursor = document.getElementById('cursor')
   cursor.style.display = 'block'
+
+  Length = words.length
+
   
+
   pole.focus();
   updateCursorPosition();
+
 } 
+
+
 
 const modal3 = document.getElementById('modal3');
 
@@ -438,6 +483,7 @@ window.addEventListener('resize', updateCursorPosition);
   const pole = document.getElementById('pole')
   pole.addEventListener('keydown', ev => {
   const key = ev.key;
+  console.log(ev)
   const currentWord = document.querySelector('.word.current');
   const currentLetter = document.querySelector('.letter.current');
   const expected = currentLetter?.innerHTML || ' ';
@@ -460,7 +506,7 @@ window.addEventListener('resize', updateCursorPosition);
   (или узлу)данного элемента в документе html) 
  -Может вернуть любой узел: Это может быть элемент, 
   текстовый узел(пробелы или перенос строк) или комментарий. */
-
+ 
 
   // если это одна буква и внимание направлено на нее
   if (isLetter && currentLetter) { 
@@ -715,8 +761,9 @@ let timerCheckInterval; // хранит идентификатор основн�
   }, 1000);
   
  }
-  function TTIMER(number) {
-    if (timerCheckInterval) {
+
+ function STOP (){
+if (timerCheckInterval) {
         clearInterval(timerCheckInterval);// останавливает выполнение интервала 
     }
     
@@ -725,8 +772,10 @@ let timerCheckInterval; // хранит идентификатор основн�
         clearInterval(timeL);
     }
     document.querySelector('.progress-fill').style.width = '100%';
-
-    T = number;
+ }
+  function TTIMER(number) {
+  STOP()
+  T = number;
   timerCheckInterval = setInterval(() => {// создает номер айди
   const firstLetter = document.querySelector('.word.current')?.firstElementChild;
   if (firstLetter && (firstLetter.classList.contains('correct') || firstLetter.classList.contains('incorrect'))) {
