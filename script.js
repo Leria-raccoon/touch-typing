@@ -254,7 +254,12 @@ document.getElementById('button3').addEventListener('click',() =>{
   })
   
  document.getElementById('Reboot').addEventListener('click', () =>{
-    whatLevel (F) 
+    if ( O === "words") {
+    whatLevel (F)
+  } else if (O ==="time") {
+    whatLevel(200)
+    TTIMER(T)
+  }
     console.log(`количество слов ${F} tttttttt`)
  });
 
@@ -512,12 +517,14 @@ window.addEventListener('resize', updateCursorPosition);
   if (isLetter && currentLetter) { 
     addClass(currentLetter, key === expected ? 'correct' : 'incorrect');
     removeClass(currentLetter, 'current');
-   
+    
      // Обновляем счетчики
      if (key === expected)  correctcheck++;
-     else { incorrectcheck++;
+     else { incorrectcheck++; 
+     
     }
-
+     const LL = Length--;
+       console.log(LL)
 // добавляем класс к следующий букве
     if (currentLetter.nextSibling) {
       addClass(currentLetter.nextSibling, 'current');
@@ -631,7 +638,9 @@ window.addEventListener('resize', updateCursorPosition);
       removeClass(currentWord.lastChild, 'correct'); 
       correctcheck--;
       }
+      
     }
+    
   }
  
     updateCursorPosition(); // Обновляем позицию курсора после изменений
@@ -662,14 +671,17 @@ else if (D === "RU") RUSSIAN ('ccModal3')
 const keyboardContainer = document.getElementById('ccModal3');
 
     wrongLetters.forEach(id => {
+      if (id && id.trim() !==""){
 const keyEl = keyboardContainer.querySelector(`#${id}`);
     if (keyEl) {
       addClass(keyEl, 'nomigaet');
       } 
+      }
     })
      document.querySelectorAll('#keyboard .key.migaet').forEach(key => {
     removeClass(key, 'migaet');
   });  
+  
 }
   
 /* 
