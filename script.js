@@ -1,5 +1,5 @@
-// открытие и закрытие 
-let Menu = document.getElementById('MENU');
+// открытие и закрытие окон
+const Menu = document.getElementById('MENU');
 document.getElementById('MenuButtom').addEventListener('click', () =>{
  Menu.style.display = "block";
 });
@@ -10,7 +10,7 @@ window.addEventListener('click', (ev) => {
     }
 });
 
-let MModal = document.getElementById('modal1');
+const MModal = document.getElementById('modal1');
 document.getElementById('language').addEventListener('click', () => {
  MModal.style.display = "block";
 });
@@ -20,6 +20,18 @@ window.addEventListener('click', (ev) => {
     MModal.style.display = 'none';
     }
 });
+
+const ABOUTSITE = document.getElementById('ABOUTSITE')
+document.getElementById('AboutSite').addEventListener('click', () =>{
+   ABOUTSITE.style.display = 'block';
+   Menu.style.display = 'none'
+})
+
+window.addEventListener('click', (ev) => {
+ if (ev.target === ABOUTSITE){
+  ABOUTSITE.style.display= 'none'
+ }
+})
 
 const easyWordsRU = [
   "в", "на", "с", "по", "за", "из", "от", "к", "у", "о", "до", "без", "про", "при", "под", "над", "перед", "после", "между", "через", "дом", "кот", "сад", "рот", "нос", "год", "сон", "зуб", "дым", "шар", "суп", "мяч", "лес", "мост", "лист", "стол", "пол", "код", "час", "мех", "ест", "пил", "спит", "шел", "брал", "дал", "жил", "бил", "мыл", "пел", "сел", "рвал", "лил", "пил", "жил", "был", "брал", "дал", "ждал", "спал", "тихий", "злой", "громкий", "новый", "старый", "белый", "черный", "добрый", "здоровый", "горячий", "холодный", "мокрый", "сухой", "глухой", "слепой", "вода", "земля", "огонь", "воздух", "камень", "песок", "глина", "железо", "золото", "серебро", "медь", "уголь", "соль", "сахар", "молоко", "птица", "рыба", "зверь", "конь", "волк", "лось", "заяц", "лось", "лось", "лось", "лось", "лось", "лось", "лось", "лось", "лось", "лось", "день", "ночь", "утро", "вечер", "зима", "весна", "лето", "осень", "месяц", "год", "час", "минута", "секунда", "неделя", "понедельник", "рука", "нога", "голова", "спина", "грудь", "шея", "палец", "волос", "глаз", "ухо", "нос", "рот", "зуб", "язык", "сердце", "печень", "стол", "стул", "кровать", "шкаф", "полка", "лампа", "окно", "дверь", "стена", "потолок", "пол", "крыша", "лестница", "забор", "ворота",  
@@ -58,11 +70,13 @@ let F = 10 // показывает количестово слов
 let P = 'ENGLISH' // раскладка
 let T = 15 // время  
 let O = 'words'// показывае втоит у тебя время или слова 
+let FF = 100
 
 const RUbutton2 = document.getElementById('button2');
 const ENbutton3 = document.getElementById('button3');
 
 document.addEventListener('DOMContentLoaded', ()=>{
+document.querySelector('.progress-fill2').style.display = 'block'
   newGame(normalWordsEN, 10); 
   Observe();
   addClass(ENbutton3, 'navod')
@@ -74,18 +88,20 @@ document.addEventListener('DOMContentLoaded', ()=>{
   P = 'ENGLISH';
   X = 'normal'; 
   O = "words"
+  FF = 100
 });
 
 document.getElementById('button2').addEventListener('click',() =>{
-   removeaddClass (nnormal, normal);
+document.querySelector('.progress-fill2').style.width = '100%';
+  removeaddClass (nnormal, normal);
   addClass(RUbutton2, 'navod')
   removeClass( ENbutton3, 'navod')
   language.textContent = 'russian';
   RUSSIAN ('keyboard');
-  Observe();
   D = 'RU';
   P = 'RUSSIAN';
   X = 'normal';
+  FF = 100
   if (O === "words") {
   newGame(normalWordsRU, 10);
   removeaddClass (id10, Ten);
@@ -93,32 +109,36 @@ document.getElementById('button2').addEventListener('click',() =>{
    TTIMER(T)
    whatLevel(200)
   }
+  Observe();
 });
 
 document.getElementById('button3').addEventListener('click',() =>{
+document.querySelector('.progress-fill2').style.width = '100%';
   removeaddClass (nnormal, normal);
   addClass(ENbutton3, 'navod')
   removeClass( RUbutton2, 'navod')
   language.textContent = 'english';
   ENGLISH ('keyboard');
-  Observe ();
   D = 'EN';
   P = 'ENGLISH';
   X = 'normal';
+  FF = 100
   if (O === "words") {
   newGame(normalWordsEN, 10);
   removeaddClass (id10, Ten);  
   } else {
-    
     whatLevel(200)
   }
+  Observe ();
 });
   
   const easy = document.getElementById('easy');
   easy.addEventListener('click', () => {
+  document.querySelector('.progress-fill2').style.width = '100%';
   const words = D === 'RU' ? easyWordsRU : easyWordsEN;
   X = 'easy';
   removeaddClass (eeasy, easy);
+  FF = 100
   if ( O === "words") {
     howManyWords (words);
   } else {
@@ -129,9 +149,11 @@ document.getElementById('button3').addEventListener('click',() =>{
 
   const normal = document.getElementById('normal');
   normal.addEventListener('click', () => {
+  document.querySelector('.progress-fill2').style.width = '100%';
   const words = D === 'RU' ? normalWordsRU : normalWordsEN;
   X = 'normal';
   removeaddClass (nnormal, normal);
+  FF = 100
   if ( O === "words") {
     howManyWords (words);
   } else {
@@ -142,9 +164,11 @@ document.getElementById('button3').addEventListener('click',() =>{
 
   const hard = document.getElementById('hard');
   hard.addEventListener('click', () => {
+  document.querySelector('.progress-fill2').style.width = '100%';
   const words = D === 'RU' ? hardWordsRU : hardWordsEN;
   X = 'hard';
   removeaddClass (hhard, hard);
+  FF = 100
   if ( O === "words") {
     howManyWords (words);
   } else {
@@ -155,37 +179,47 @@ document.getElementById('button3').addEventListener('click',() =>{
 
   const Ten = document.getElementById('Ten')
   Ten.addEventListener('click',() =>{
+  document.querySelector('.progress-fill2').style.width = '100%';
   F = 10;
   whatLevel (F);
   removeaddClass (id10, Ten);
+  FF = 100
   });
 
   const TwentyFive = document.getElementById('TwentyFive');
   TwentyFive.addEventListener('click',() =>{
+  document.querySelector('.progress-fill2').style.width = '100%';
   F = 25;
   whatLevel (F);
   removeaddClass(id25, TwentyFive);
+  FF = 100
   });
 
   const Fifty = document.getElementById('Fifty');
   Fifty.addEventListener('click',() =>{
+  document.querySelector('.progress-fill2').style.width = '100%';
   F = 50;
   whatLevel (F);
   removeaddClass (id50, Fifty);
+  FF = 100
   });
 
   const SeventyFive = document.getElementById('SeventyFive');
   SeventyFive.addEventListener('click',() =>{
+  document.querySelector('.progress-fill2').style.width = '100%';
   F = 75;
   whatLevel (F);
   removeaddClass (id75, SeventyFive);
+  FF = 100
   });
 
   const OneHundred = document.getElementById('OneHundred');
   OneHundred.addEventListener('click',() =>{
+  document.querySelector('.progress-fill2').style.width = '100%';
   F = 100;
   whatLevel (F);
   removeaddClass (id100, OneHundred);
+  FF = 100
   });
 
   const WordCountTime = document.getElementById('WordCountTime')
@@ -193,6 +227,9 @@ document.getElementById('button3').addEventListener('click',() =>{
   const TiMe = document.getElementById('timer')
   
   TiMe.addEventListener('click', () =>{
+  document.querySelector('.progress-fill2').style.display = 'none'
+  document.querySelector('.progress-fill').style.display = 'block'
+  document.querySelector('.progress-fill').style.width = '100%';
   WordCountTime.style.display = 'block'
   removeaddClass(TT45s, T45s);
   TTIMER(45)
@@ -201,15 +238,24 @@ document.getElementById('button3').addEventListener('click',() =>{
   })
 
   choiceOfWords.addEventListener('click', () =>{
+  document.querySelector('.progress-fill2').style.display = 'block'
+  document.querySelector('.progress-fill2').style.width = '100%';
+  document.querySelector('.progress-fill').style.display = 'none'
   WordCountTime.style.display = 'none' 
-  O = "words"
+  
   newGame(normalWordsEN, 10); 
-  Observe();
   addClass(ENbutton3, 'navod')
+  removeClass(RUbutton2, 'navod')
   removeaddClass (id10, Ten);
   removeaddClass (nnormal, normal);
   ENGLISH ('keyboard');
   language.textContent = 'english';
+  Observe();
+  D = 'EN';
+  P = 'ENGLISH';
+  X = 'normal'; 
+  O = "words"
+  FF = 100
   STOP()
  })
 
@@ -260,7 +306,9 @@ document.getElementById('button3').addEventListener('click',() =>{
     whatLevel(200)
     TTIMER(T)
   }
-    console.log(`количество слов ${F} tttttttt`)
+  document.querySelector('.progress-fill').style.width = '100%';
+  document.querySelector('.progress-fill2').style.width = '100%';
+  console.log(`количество слов ${F} tttttttt`)
  });
 
 // определяет уровень сложности и язык массива, но нужно вставить количество слов
@@ -309,6 +357,10 @@ document.getElementById('button3').addEventListener('click',() =>{
     newGame (words, F);
   }
   Observe();
+ }
+
+ if(O === 'words'){
+
  }
 
  // массивы с названиями идентификаторов
@@ -368,8 +420,6 @@ function formatWord(word) {
 }
 
 // НАЧАЛО 
-let Length = []
-
 function newGame(words, num) {
   correctcheck = 0;
   incorrectcheck = 0;
@@ -407,9 +457,45 @@ const shuffledWords = shuffleArray(words).slice(0, num);
   const cursor = document.getElementById('cursor')
   cursor.style.display = 'block'
 
-  Length = words.length
+  pole.focus();
+  updateCursorPosition();
+} 
 
-  
+function newGamePunctu(words, num) {
+  correctcheck = 0;
+  incorrectcheck = 0;
+
+  wrongLetters = [];
+  // если перезагрузить или запустить игру через DOMContentLoaded, то обнуление не нужно
+  // Функция для перемешивания массива (Фишер-Йетс)
+  function shuffleArray(array) {
+    const newArray = [...array];
+    for (let i = newArray.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+    }
+    return newArray;
+  }
+
+// Перемешиваем слова и добавляем определенное количество МАССИВ 
+const shuffledWords = shuffleArray(words).slice(0, num);
+// перемешанные слова добавляем в поле 
+  updateWordsContainer(shuffledWords); 
+
+  // Обновляем контейнер со словами
+  function updateWordsContainer(wordsToShow) {
+    const wordsContainer = document.getElementById('pole');
+    wordsContainer.innerHTML = wordsToShow.map(formatWord).join('');
+// если есть пробел, то перестает работать
+  // разделяет с помощью пробела
+// вызывается функция для каждого слова в МАССИВЕ - возвращает СЛОВО
+  }
+  // Устанавливаем текущее слово и букву
+  document.querySelector('.word').classList.add('current');
+  document.querySelector('.letter').classList.add('current');
+ 
+  const cursor = document.getElementById('cursor')
+  cursor.style.display = 'block'
 
   pole.focus();
   updateCursorPosition();
@@ -511,7 +597,12 @@ window.addEventListener('resize', updateCursorPosition);
   (или узлу)данного элемента в документе html) 
  -Может вернуть любой узел: Это может быть элемент, 
   текстовый узел(пробелы или перенос строк) или комментарий. */
- 
+
+  // Запрет пробела на первой букве
+  if (isSpace && isFirstLetter) {
+    ev.preventDefault();
+    return;
+  }
 
   // если это одна буква и внимание направлено на нее
   if (isLetter && currentLetter) { 
@@ -523,8 +614,6 @@ window.addEventListener('resize', updateCursorPosition);
      else { incorrectcheck++; 
      
     }
-     const LL = Length--;
-       console.log(LL)
 // добавляем класс к следующий букве
     if (currentLetter.nextSibling) {
       addClass(currentLetter.nextSibling, 'current');
@@ -535,7 +624,14 @@ window.addEventListener('resize', updateCursorPosition);
 
   // Обработка пробела (переход к следующему слову)
   // НАЖАЛИ ПРОБЕЛ И ПЕРЕШЛИ К НОВОМУ СЛОВУ
+  
   if (isSpace) {
+    if ( O === 'words'){
+    const F1 = 100 / F
+    FF-=F1 ; // Уменьшаем на 1 при каждом нажатии пробела
+    document.querySelector('.progress-fill2').style.width = FF + '%';
+    console.log(FF); 
+    }
     if (expected !== ' ' && currentWord) {
 // ожидаемое значение не является пробелом и это буква       
       // Помечаем все неправильные буквы в текущем слове
@@ -546,7 +642,8 @@ window.addEventListener('resize', updateCursorPosition);
           incorrectcheck ++;
         } 
       });
-    } 
+     
+        } 
     
 // если это последнее слово и ты нажал пробел 
   const words = document.querySelectorAll('.word')
@@ -596,7 +693,12 @@ window.addEventListener('resize', updateCursorPosition);
       removeClass(prevLastLetter, 'correct');
       correctcheck--;
       }
-    
+        if ( O === 'words'){
+    const F1 = 100 / F
+    FF+=F1 ; // Уменьшаем на 1 при каждом нажатии пробела
+    document.querySelector('.progress-fill2').style.width = FF + '%';
+    console.log(FF); 
+    }
       // remove both classes
     } else if (currentLetter && !isFirstLetter) { //
 
@@ -615,7 +717,7 @@ window.addEventListener('resize', updateCursorPosition);
         removeClass(prevLetter, 'correct');// remove both classes
       correctcheck--;
       }
-
+      
 /*  
  может быть currentLetter = null
  то есть когда я напечатала слово, курсор стоит на последней букве, 
@@ -638,9 +740,9 @@ window.addEventListener('resize', updateCursorPosition);
       removeClass(currentWord.lastChild, 'correct'); 
       correctcheck--;
       }
-      
-    }
-    
+                                                                                                          
+    } 
+
   }
  
     updateCursorPosition(); // Обновляем позицию курсора после изменений
