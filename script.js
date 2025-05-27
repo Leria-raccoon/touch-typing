@@ -70,18 +70,20 @@ let F = 10 // показывает количестово слов
 let P = 'ENGLISH' // раскладка
 let T = 15 // время  
 let O = 'words'// показывае втоит у тебя время или слова 
-let FF = 100
+let FF = 100 // счетчик линии каждый раз начинается со 100%
+let Y = 'nopunctuation' // пунктуация 
 
 const RUbutton2 = document.getElementById('button2');
 const ENbutton3 = document.getElementById('button3');
 
 document.addEventListener('DOMContentLoaded', ()=>{
 document.querySelector('.progress-fill2').style.display = 'block'
-  newGame(normalWordsEN, 10); 
+  newGame(normalWordsEN, 10);  
   Observe();
   addClass(ENbutton3, 'navod')
   removeaddClass (id10, Ten);
   removeaddClass (nnormal, normal);
+  addClass(choiceOfWords, 'navod')
   ENGLISH ('keyboard');
   language.textContent = 'english';
   D = 'EN';
@@ -89,6 +91,7 @@ document.querySelector('.progress-fill2').style.display = 'block'
   X = 'normal'; 
   O = "words"
   FF = 100
+  
 });
 
 document.getElementById('button2').addEventListener('click',() =>{
@@ -102,9 +105,12 @@ document.querySelector('.progress-fill2').style.width = '100%';
   P = 'RUSSIAN';
   X = 'normal';
   FF = 100
-  if (O === "words") {
-  newGame(normalWordsRU, 10);
+  if (O === "words" && Y === 'punctuation') {
+  newGamePunctu(normalWordsRU, 10);
   removeaddClass (id10, Ten);
+  } else if (O === "words" && Y === 'nopunctuation') {
+   newGame(normalWordsRU, 10)
+   removeaddClass(id10, Ten)
   } else {
    TTIMER(T)
    whatLevel(200)
@@ -123,9 +129,12 @@ document.querySelector('.progress-fill2').style.width = '100%';
   P = 'ENGLISH';
   X = 'normal';
   FF = 100
-  if (O === "words") {
-  newGame(normalWordsEN, 10);
+  if (O === "words" &&  Y === 'punctuation') {
+  newGamePunctu(normalWordsEN, 10);
   removeaddClass (id10, Ten);  
+  } else if (O === "words" &&  Y === 'punctuation') {
+  newGame(normalWordsEN, 10)
+  removeaddClass(id10, Ten)
   } else {
     whatLevel(200)
   }
@@ -234,6 +243,8 @@ document.querySelector('.progress-fill2').style.width = '100%';
   removeaddClass(TT45s, T45s);
   TTIMER(45)
   whatLevel (200)
+  addClass(TiMe,'navod')
+  removeClass(choiceOfWords, 'navod')
   O = "time"
   })
 
@@ -242,7 +253,6 @@ document.querySelector('.progress-fill2').style.width = '100%';
   document.querySelector('.progress-fill2').style.width = '100%';
   document.querySelector('.progress-fill').style.display = 'none'
   WordCountTime.style.display = 'none' 
-  
   newGame(normalWordsEN, 10); 
   addClass(ENbutton3, 'navod')
   removeClass(RUbutton2, 'navod')
@@ -251,6 +261,8 @@ document.querySelector('.progress-fill2').style.width = '100%';
   ENGLISH ('keyboard');
   language.textContent = 'english';
   Observe();
+  addClass(choiceOfWords, 'navod')
+  removeClass(TiMe, 'navod')
   D = 'EN';
   P = 'ENGLISH';
   X = 'normal'; 
@@ -311,24 +323,70 @@ document.querySelector('.progress-fill2').style.width = '100%';
   console.log(`количество слов ${F} tttttttt`)
  });
 
+  const Punctuation = document.getElementById('Punctuation')
+  Punctuation.addEventListener('click', ()=> {
+    
+  if(Punctuation.classList.contains('navod')){
+    Y = 'nopunctuation'
+      removeClass(Punctuation, 'navod')
+       
+       whatLevel (F)
+  } else {
+      Y = 'punctuation'
+      addClass(Punctuation, 'navod')
+      
+       whatLevel (F)
+  }
+})
+
 // определяет уровень сложности и язык массива, но нужно вставить количество слов
   function whatLevel (F){
    if (D === 'RU') {
+
     if (X === 'easy') {
+      if (Y === 'punctuation'){
+      newGamePunctu(easyWordsRU, F)
+      } else {
       newGame(easyWordsRU, F)
+      }
+
     } else if ( X === 'normal') {
+      if ( Y === 'punctuation'){
+      newGamePunctu(normalWordsRU, F)
+      } else {
       newGame (normalWordsRU, F)
+      }
+
     } else if ( X === 'hard') {
+      if (Y === 'punctuation'){
+        newGamePunctu(hardWordsRU, F)
+      } else {
       newGame (hardWordsRU, F)
+      }
     }
   }  
   if (D === 'EN') {
+
     if (X === 'easy') {
+      if (Y === 'punctuation') {
+      newGamePunctu (easyWordsEN, F)
+      } else {
       newGame(easyWordsEN, F)
+      }
+
    } else if ( X === 'normal') {
+    if (Y === 'punctuation') {
+    newGamePunctu (normalWordsEN, F)
+    } else {
      newGame (normalWordsEN, F)
+    }
+
    } else if ( X === 'hard') {
+    if (Y === 'punctuation') {
+      newGamePunctu (hardWordsEN, F)
+    } else {
      newGame (hardWordsEN, F)
+    }
    }
   }
   Observe();
@@ -338,29 +396,45 @@ document.querySelector('.progress-fill2').style.width = '100%';
  function howManyWords (words) {
   if (F === 10){
     const F = 10;
+    if (Y === 'punctuation'){
+      newGamePunctu(words, F)
+    } else {
     newGame(words, F);
- 
+    }
+
   } else if ( F === 25){
     const F = 25;
+    if(Y === 'punctuation'){
+      newGamePunctu(words, F)
+    } else {
     newGame (words, F);
+    }
 
   } else if (F === 50){
     const F = 50;
+    if(Y === 'punctuation'){
+      newGamePunctu(words, F)
+    } else {
     newGame (words, F);
+    }
 
   } else if (F === 75){
     const F = 75;
+    if(Y === 'punctuation'){
+      newGamePunctu(words, F)
+    } else {
     newGame (words, F);
+    }
 
   } else if (F === 100){
     const F = 100;
+    if(Y === 'punctuation'){
+      newGamePunctu(words, F)
+    } else {
     newGame (words, F);
+    }
   }
   Observe();
- }
-
- if(O === 'words'){
-
  }
 
  // массивы с названиями идентификаторов
@@ -419,6 +493,8 @@ function formatWord(word) {
   */
 }
 
+
+
 // НАЧАЛО 
 function newGame(words, num) {
   correctcheck = 0;
@@ -462,14 +538,17 @@ const shuffledWords = shuffleArray(words).slice(0, num);
 } 
 
 function newGamePunctu(words, num) {
+  const punctuation = [',', '', '.', '?', '!', '', '"', ';', ':'];
+  
   correctcheck = 0;
   incorrectcheck = 0;
 
   wrongLetters = [];
   // если перезагрузить или запустить игру через DOMContentLoaded, то обнуление не нужно
   // Функция для перемешивания массива (Фишер-Йетс)
-  function shuffleArray(array) {
-    const newArray = [...array];
+  
+function shuffleArray(words) {
+    const newArray = [...words];
     for (let i = newArray.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
@@ -477,8 +556,23 @@ function newGamePunctu(words, num) {
     return newArray;
   }
 
+  function addPunctuation(shuffledWords, punctuation) {
+    const newArr = [...shuffledWords];
+    for (let i = 0; i < newArr.length - 1; i++) {
+      const k = Math.floor(Math.random() * 8);
+            newArr[i] += punctuation[k];
+      if (punctuation[k] === '.' || punctuation[k] === '?' || punctuation[k] === '!') {
+        newArr[i + 1] = newArr[i + 1].charAt(0).toUpperCase() + newArr[i + 1].slice(1);
+      } else if (punctuation[k] === '"') {
+       newArr[i] = '"' + newArr[i];
+      }
+
+  }
+  return newArr;
+}
+
 // Перемешиваем слова и добавляем определенное количество МАССИВ 
-const shuffledWords = shuffleArray(words).slice(0, num);
+const shuffledWords = addPunctuation(shuffleArray(words).slice(0, num), punctuation);
 // перемешанные слова добавляем в поле 
   updateWordsContainer(shuffledWords); 
 
@@ -499,10 +593,8 @@ const shuffledWords = shuffleArray(words).slice(0, num);
 
   pole.focus();
   updateCursorPosition();
-
+  
 } 
-
-
 
 const modal3 = document.getElementById('modal3');
 
@@ -531,7 +623,6 @@ function updateCursorPosition() {
 // если это последняя буква в слове и нет следующего узла
     if (target === nextWord && !nextWord.nextElementSibling) {
       Result ()
-      console.log (wrongLetters)
     }
    
     /* проверяет на существование 
@@ -573,12 +664,11 @@ window.addEventListener('resize', updateCursorPosition);
 // Обработчик нажатия клавиш
   const pole = document.getElementById('pole')
   pole.addEventListener('keydown', ev => {
-  const key = ev.key;
-  console.log(ev)
+  const key = ev.key; // зависит от раскладки 
   const currentWord = document.querySelector('.word.current');
   const currentLetter = document.querySelector('.letter.current');
   const expected = currentLetter?.innerHTML || ' ';
-  const innerLetter = currentLetter?.innerHTML.toUpperCase() || ' ';
+  const innerLetter = currentLetter?.innerHTML || ' ';
  /* пытается понять что именно находится в span
  innerHTML (получает содержимое элемента)- это одна буква, которая находится в span
  оператор опциональной цепочки  ?.. Этот оператор позволяет
@@ -649,7 +739,7 @@ window.addEventListener('resize', updateCursorPosition);
   const words = document.querySelectorAll('.word')
      const isLastWord = currentWord === words[words.length - 1]
      if (isLastWord && isSpace ){
-       console.log(wrongLetters)
+       console.log(wrongLetters) 
       Result ()
      }
     /* property children —для HTML-элементов ,
@@ -750,6 +840,8 @@ window.addEventListener('resize', updateCursorPosition);
     R (key, expected, innerLetter)
   });
 
+// массив наполняется буквами на которые вы должны были нажать, но нажали на другую неправильную букву
+// записываются те буквы, к которым был присвоен класс incorrect 
  function R (key, expected, innerLetter) {
  if (key !== expected) {
     // Добавляем в массив ошибок
@@ -905,38 +997,38 @@ function ENGLISH (keyboardLayout) {
 const keyboardContainer = document.getElementById(keyboardLayout);
 keyboardContainer.innerHTML = `
     <ul class="line">
-      <li class="key" id="Q">Q</li>
-      <li class="key" id="W">W</li>
-      <li class="key" id="E">E</li>
-      <li class="key" id="R">R</li>
-      <li class="key" id="T">T</li>
-      <li class="key" id="Y">Y</li>
-      <li class="key" id="U">U</li>
-      <li class="key" id="I">I</li>
-      <li class="key" id="O">O</li>
-      <li class="key" id="P">P</li>
+      <li class="key" id="q">q</li>
+      <li class="key" id="w">w</li>
+      <li class="key" id="e">e</li>
+      <li class="key" id="r">r</li>
+      <li class="key" id="t">t</li>
+      <li class="key" id="y">y</li>
+      <li class="key" id="u">u</li>
+      <li class="key" id="i">i</li>
+      <li class="key" id="o">o</li>
+      <li class="key" id="p">p</li>
     </ul>
     
     <ul class="line">
-      <li class="key" id="A">A</li>
-      <li class="key" id="S">S</li>
-      <li class="key" id="D">D</li>
-      <li class="key" id="F">F</li>
-      <li class="key" id="G">G</li>
-      <li class="key" id="H">H</li>
-      <li class="key" id="J">J</li>
-      <li class="key" id="K">K</li>
-      <li class="key" id="L">L</li>
+      <li class="key" id="a">a</li>
+      <li class="key" id="s">s</li>
+      <li class="key" id="d">d</li>
+      <li class="key" id="f">f</li>
+      <li class="key" id="g">g</li>
+      <li class="key" id="h">h</li>
+      <li class="key" id="j">j</li>
+      <li class="key" id="k">k</li>
+      <li class="key" id="l">l</li>
     </ul>
     
     <ul class="line">
-      <li class="key" id="Z">Z</li>  
-      <li class="key" id="X">X</li>  
-      <li class="key" id="C">C</li>  
-      <li class="key" id="V">V</li>  
-      <li class="key" id="B">B</li>  
-      <li class="key" id="N">N</li>  
-      <li class="key" id="M">M</li>  
+      <li class="key" id="z">z</li>  
+      <li class="key" id="x">x</li>  
+      <li class="key" id="c">c</li>  
+      <li class="key" id="v">v</li>  
+      <li class="key" id="b">b</li>  
+      <li class="key" id="n">n</li>  
+      <li class="key" id="m">m</li>  
     </ul> 
 
     <ul class="line">
@@ -949,50 +1041,161 @@ function RUSSIAN (keyboardLayout) {
   const keyboardContainer = document.getElementById(keyboardLayout);
   keyboardContainer.innerHTML = `
    <ul class="line">
-     <li class="key" id="Й">Й</li>
-     <li class="key" id="Ц">Ц</li>
-     <li class="key" id="У">У</li>
-     <li class="key" id="К">К</li>
-     <li class="key" id="Е">Е</li>
-     <li class="key" id="Н">Н</li>
-     <li class="key" id="Г">Г</li>
-     <li class="key" id="Ш">Ш</li>
-     <li class="key" id="Щ">Щ</li>
-     <li class="key" id="З">З</li>
-     <li class="key" id="Х">Х</li>
-     <li class="key" id="Ъ">Ъ</li>
+     <li class="key" id="й">й</li>
+     <li class="key" id="ц">ц</li>
+     <li class="key" id="у">у</li>
+     <li class="key" id="к">к</li>
+     <li class="key" id="е">е</li>
+     <li class="key" id="н">н</li>
+     <li class="key" id="г">г</li>
+     <li class="key" id="ш">ш</li>
+     <li class="key" id="щ">щ</li>
+     <li class="key" id="з">з</li>
+     <li class="key" id="х">х</li>
+     <li class="key" id="ъ">ъ</li>
    </ul>
 
    <ul class="line">
-     <li class="key" id="Ф">Ф</li>
-     <li class="key" id="Ы">Ы</li>
-     <li class="key" id="В">В</li>
-     <li class="key" id="А">А</li>
-     <li class="key" id="П">П</li>
-     <li class="key" id="Р">Р</li>
-     <li class="key" id="О">О</li>
-     <li class="key" id="Л">Л</li>
-     <li class="key" id="Д">Д</li>
-     <li class="key" id="Ж">Ж</li>
-     <li class="key" id="Э">Э</li>
+     <li class="key" id="ф">ф</li>
+     <li class="key" id="ы">ы</li>
+     <li class="key" id="в">в</li>
+     <li class="key" id="а">а</li>
+     <li class="key" id="п">п</li>
+     <li class="key" id="р">р</li>
+     <li class="key" id="о">о</li>
+     <li class="key" id="л">л</li>
+     <li class="key" id="д">д</li>
+     <li class="key" id="ж">ж</li>
+     <li class="key" id="э">э</li>
    </ul>
 
    <ul class="line">
-     <li class="key" id="Я">Я</li>
-     <li class="key" id="Ч">Ч</li>
-     <li class="key" id="С">С</li>
-     <li class="key" id="М">М</li>
-     <li class="key" id="И">И</li>
-     <li class="key" id="Т">Т</li>
-     <li class="key" id="Ь">Ь</li>
-     <li class="key" id="Б">Б</li>
-     <li class="key" id="Ю">Ю</li>
+     <li class="key" id="я">я</li>
+     <li class="key" id="ч">ч</li>
+     <li class="key" id="с">с</li>
+     <li class="key" id="м">м</li>
+     <li class="key" id="и">и</li>
+     <li class="key" id="т">т</li>
+     <li class="key" id="ь">ь</li>
+     <li class="key" id="б">б</li>
+     <li class="key" id="ю">ю</li>
    </ul>     
 
    <ul class="line">
      <li class="key" id="Space" style="width: 270px;"></li>
   </ul>`
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function ENGLISHPUNCTUATION (keyboardLayout) {
+const keyboardContainer = document.getElementById(keyboardLayout);
+keyboardContainer.innerHTML = `
+
+  <ul class="line">
+      <li class="key" id="q">q</li>
+      <li class="key" id="w">w</li>
+      <li class="key" id="e">e</li>
+      <li class="key" id="r">r</li>
+      <li class="key" id="t">t</li>
+      <li class="key" id="y">y</li>
+      <li class="key" id="u">u</li>
+      <li class="key" id="i">i</li>
+      <li class="key" id="o">o</li>
+      <li class="key" id="p">p</li>
+    </ul>
+    
+    <ul class="line">
+      <li class="key" id="a">a</li>
+      <li class="key" id="s">s</li>
+      <li class="key" id="d">d</li>
+      <li class="key" id="f">f</li>
+      <li class="key" id="g">g</li>
+      <li class="key" id="h">h</li>
+      <li class="key" id="j">j</li>
+      <li class="key" id="k">k</li>
+      <li class="key" id="l">l</li>
+    </ul>
+    
+    <ul class="line">
+      <li class="key" id="z">z</li>  
+      <li class="key" id="x">x</li>  
+      <li class="key" id="c">c</li>  
+      <li class="key" id="v">v</li>  
+      <li class="key" id="b">b</li>  
+      <li class="key" id="n">n</li>  
+      <li class="key" id="m">m</li>  
+    </ul> 
+
+    <ul class="line">
+        <li class="key" id="Space" style="width: 200px;"></li>
+    </ul>
+`;
+}
+
+function RUSSIANPUNCTUATION  (keyboardLayout) {
+  const keyboardContainer = document.getElementById(keyboardLayout);
+  keyboardContainer.innerHTML = `
+  <ul class="line">
+     <li class="key" id="й">й</li>
+     <li class="key" id="ц">ц</li>
+     <li class="key" id="у">у</li>
+     <li class="key" id="к">к</li>
+     <li class="key" id="е">е</li>
+     <li class="key" id="н">н</li>
+     <li class="key" id="г">г</li>
+     <li class="key" id="ш">ш</li>
+     <li class="key" id="щ">щ</li>
+     <li class="key" id="з">з</li>
+     <li class="key" id="х">х</li>
+     <li class="key" id="ъ">ъ</li>
+   </ul>
+
+   <ul class="line">
+     <li class="key" id="ф">ф</li>
+     <li class="key" id="ы">ы</li>
+     <li class="key" id="в">в</li>
+     <li class="key" id="а">а</li>
+     <li class="key" id="п">п</li>
+     <li class="key" id="р">р</li>
+     <li class="key" id="о">о</li>
+     <li class="key" id="л">л</li>
+     <li class="key" id="д">д</li>
+     <li class="key" id="ж">ж</li>
+     <li class="key" id="э">э</li>
+   </ul>
+
+   <ul class="line">
+     <li class="key" id="я">я</li>
+     <li class="key" id="ч">ч</li>
+     <li class="key" id="с">с</li>
+     <li class="key" id="м">м</li>
+     <li class="key" id="и">и</li>
+     <li class="key" id="т">т</li>
+     <li class="key" id="ь">ь</li>
+     <li class="key" id="б">б</li>
+     <li class="key" id="ю">ю</li>
+   </ul>    
+   <ul class="line">
+     <li class="key" id="Space" style="width: 270px;"></li>
+  </ul>`
+}
+
 
   
 
