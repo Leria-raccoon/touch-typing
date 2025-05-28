@@ -63,6 +63,16 @@ const hardWordsEN = [
   "perseverance", "personification", "philosophical", "preparation", "procrastination", "professionalism", "progression", "protection", "qualification", "realization", "recommendation", "relationship", "representation", "responsibility", "satisfaction", "significance", "simplification", "speculation", "substantial", "sophisticated", "sustainability", "technological", "transformation", "understanding", "vulnerability", "abstruse", "adventitious", "allegorical", "apprehensive", "arbitrary", "camaraderie", "categorial", "circumference", "conscientious", "conspicuous", "contemplation", "debilitating", "differentiation", "discombobulated", "disparity", "effervescence", "efficiency", "exasperation", "exhilarating", "fellowship", "heterogeneous", "hypothetical", "imperturbable", "incomprehensible", "incongruous", "inconvenience", "interdisciplinary", "intermediary", "irrefutable", "juxtaposition", "metaphorical", "multidimensional", "nonchalant", "opportunistic", "overwhelming", "paradoxical", "perpendicular", "perspective", "preliminary", "proficient", "proliferation", "quintessential", "reconciliation", "revolutionary", "sophistication", "spontaneity", "synchronization", "unprecedented", "vicariously", "vulnerability", "zealousness", "abstruseness", "acclimatization", "adventurousness", "antagonistic", "artificiality", "characterization", "compartmentalization", "differentiation", "disillusionment", "disproportionate", "excommunication", "exclusivity", "extraordinariness", "generalization", "interrelationship", "misinterpretation", "neuroscientific", "overcompensation", "overgeneralization", "philosophical", "preoccupation", "rejuvenation", "revolutionizing", "uncontrollability"
 ];
 
+const MurkaQuotesRU = [
+  ["Счастье = реальность − ожидания"], ["Плохое вытесняй хорошим — влей кефир в бочку дерьма"], ["Лучше страдать на корабле, чем умереть в вакууме"], ["Интересный человек — это тот, кто интересуется. Где взять интерес к жизни? ИНТЕРЕСОВАТЬСЯ ЕЙ!!!"], ["Делай то, что нужно, а не то, что хочется"],  
+  ["Забудь о себе — делай для других"], ["Растворяй Я в коллективе — экипаж важнее индивидуализма"], ["Всегда говори «да»"], ["Будь предсказуемым"], ["Неискренних людей нет — есть невоспитанные"], ["Продавай себя правильно — внешний вид + содержание"], ["Деньги = свобода — пока их нет, нельзя говорить нет"], ["Не доверяй себе"], ["Будь готов к везению — шанс даётся подготовленным"], ["Учись через ассоциации и объяснения — если можешь научить другого, значит, понял сам"], ["Если ты никто, то тебя нельзя обидеть, ущемить, забыть или увидеть, потому что ты пустое место"]  
+];
+
+const MurkaQuotesEN = [
+  ["Happiness = reality - expectations"], ["Displace the bad with good - pour kefir into a barrel of shit"], ["Better to suffer on a ship than to die in a vacuum"], ["An interesting person is one who is interested. Where to find interest in life? BE INTERESTED IN IT!!!"], ["Do what needs to be done, not what you want to do"], ["Forget about yourself, do for others"], ["Dissolve your ego in the collective - the crew is more important than individualism"], ["Always say YES"], ["Be predictable"],
+  ["There are no insincere people - only ill-mannered ones"], ["Sell yourself right - appearance + substance"], ["Fuck you money"], ["Don't trust yourself"],["Be ready for luck - chance favors the prepared"], ["Learn through associations and explanations - if you can teach someone else, you've understood it yourself"], ["If you're nobody, then you can't be offended, oppressed, forgotten or seen, because you're an empty space"]
+];
+
 const language = document.getElementById('language')
 let D = 'RU' // показывает какой именно сейчас массив слов рус или англ
 let X = 'easy' // показывает уровень 
@@ -72,6 +82,7 @@ let T = 15 // время
 let O = 'words'// показывае втоит у тебя время или слова 
 let FF = 100 // счетчик линии каждый раз начинается со 100%
 let Y = 'nopunctuation' // пунктуация 
+let W = 'noquotes'
 
 const RUbutton2 = document.getElementById('button2');
 const ENbutton3 = document.getElementById('button3');
@@ -91,7 +102,7 @@ document.querySelector('.progress-fill2').style.display = 'block'
   X = 'normal'; 
   O = "words"
   FF = 100
-  
+
 });
 
 document.getElementById('button2').addEventListener('click',() =>{
@@ -132,7 +143,7 @@ document.querySelector('.progress-fill2').style.width = '100%';
   if (O === "words" &&  Y === 'punctuation') {
   newGamePunctu(normalWordsEN, 10);
   removeaddClass (id10, Ten);  
-  } else if (O === "words" &&  Y === 'punctuation') {
+  } else if (O === "words" &&  Y === 'nopunctuation') {
   newGame(normalWordsEN, 10)
   removeaddClass(id10, Ten)
   } else {
@@ -233,6 +244,7 @@ document.querySelector('.progress-fill2').style.width = '100%';
 
   const WordCountTime = document.getElementById('WordCountTime')
   const choiceOfWords = document.getElementById('choiceOfWords')
+  const WordCountQuantity = document.getElementById('WordCountQuantity')
   const TiMe = document.getElementById('timer')
   
   TiMe.addEventListener('click', () =>{
@@ -240,11 +252,11 @@ document.querySelector('.progress-fill2').style.width = '100%';
   document.querySelector('.progress-fill').style.display = 'block'
   document.querySelector('.progress-fill').style.width = '100%';
   WordCountTime.style.display = 'block'
+  WordCountQuantity.style.display = 'none'
   removeaddClass(TT45s, T45s);
   TTIMER(45)
   whatLevel (200)
-  addClass(TiMe,'navod')
-  removeClass(choiceOfWords, 'navod')
+  removeaddClass(Timer, TiMe)
   O = "time"
   })
 
@@ -253,7 +265,12 @@ document.querySelector('.progress-fill2').style.width = '100%';
   document.querySelector('.progress-fill2').style.width = '100%';
   document.querySelector('.progress-fill').style.display = 'none'
   WordCountTime.style.display = 'none' 
-  newGame(normalWordsEN, 10); 
+  WordCountQuantity.style.display = 'block'
+  if ( Y === 'punctuation') {
+  newGamePunctu(normalWordsEN, 10);
+  } else if ( Y === 'nopunctuation') {
+   newGame(normalWordsEN, 10)
+  } 
   addClass(ENbutton3, 'navod')
   removeClass(RUbutton2, 'navod')
   removeaddClass (id10, Ten);
@@ -261,8 +278,7 @@ document.querySelector('.progress-fill2').style.width = '100%';
   ENGLISH ('keyboard');
   language.textContent = 'english';
   Observe();
-  addClass(choiceOfWords, 'navod')
-  removeClass(TiMe, 'navod')
+  removeaddClass(ChoiceOfWordS, choiceOfWords)
   D = 'EN';
   P = 'ENGLISH';
   X = 'normal'; 
@@ -338,6 +354,20 @@ document.querySelector('.progress-fill2').style.width = '100%';
        whatLevel (F)
   }
 })
+  
+const WORDCOUNT = document.getElementsByName('WORDCOUNT')
+  
+  const Level = document.getElementById('Level')
+  const quote = document.getElementById('quote')
+  quote.addEventListener('click', () =>{
+  removeaddClass (Quote, quote)
+  Level.style.visibility = 'hidden'
+
+  WORDCOUNT.style.visibility = 'hidden'
+  W = 'quotes'
+  QUOTE (MurkaQuotesEN)
+
+  })
 
 // определяет уровень сложности и язык массива, но нужно вставить количество слов
   function whatLevel (F){
@@ -437,6 +467,10 @@ document.querySelector('.progress-fill2').style.width = '100%';
   Observe();
  }
 
+ const ChoiceOfWordS = ['timer','quote']
+ const Timer = ['choiceOfWords', 'quote']
+ const Quote = ['choiceOfWords', 'timer']
+
  // массивы с названиями идентификаторов
  const eeasy = ['normal', 'hard'];
  const nnormal = ['easy', 'hard'];
@@ -492,8 +526,6 @@ function formatWord(word) {
   </div>
   */
 }
-
-
 
 // НАЧАЛО 
 function newGame(words, num) {
@@ -595,6 +627,18 @@ const shuffledWords = addPunctuation(shuffleArray(words).slice(0, num), punctuat
   updateCursorPosition();
   
 } 
+// выводит цитаты 
+function QUOTE (MurkaQuotes) {
+  const number = Math.floor(Math.random()* 16)
+  const co= MurkaQuotes[number][0] // выводит сам массив!!!!!!!!!
+   
+  const wordsContainer = document.getElementById('pole');
+  wordsContainer.innerHTML = co;
+ 
+  
+  }
+  
+
 
 const modal3 = document.getElementById('modal3');
 
@@ -1086,117 +1130,59 @@ function RUSSIAN (keyboardLayout) {
   </ul>`
 }
 
+ const BACKGROUND = document.getElementById('BACKGROUND')
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-function ENGLISHPUNCTUATION (keyboardLayout) {
-const keyboardContainer = document.getElementById(keyboardLayout);
-keyboardContainer.innerHTML = `
-
-  <ul class="line">
-      <li class="key" id="q">q</li>
-      <li class="key" id="w">w</li>
-      <li class="key" id="e">e</li>
-      <li class="key" id="r">r</li>
-      <li class="key" id="t">t</li>
-      <li class="key" id="y">y</li>
-      <li class="key" id="u">u</li>
-      <li class="key" id="i">i</li>
-      <li class="key" id="o">o</li>
-      <li class="key" id="p">p</li>
-    </ul>
-    
-    <ul class="line">
-      <li class="key" id="a">a</li>
-      <li class="key" id="s">s</li>
-      <li class="key" id="d">d</li>
-      <li class="key" id="f">f</li>
-      <li class="key" id="g">g</li>
-      <li class="key" id="h">h</li>
-      <li class="key" id="j">j</li>
-      <li class="key" id="k">k</li>
-      <li class="key" id="l">l</li>
-    </ul>
-    
-    <ul class="line">
-      <li class="key" id="z">z</li>  
-      <li class="key" id="x">x</li>  
-      <li class="key" id="c">c</li>  
-      <li class="key" id="v">v</li>  
-      <li class="key" id="b">b</li>  
-      <li class="key" id="n">n</li>  
-      <li class="key" id="m">m</li>  
-    </ul> 
-
-    <ul class="line">
-        <li class="key" id="Space" style="width: 200px;"></li>
-    </ul>
-`;
-}
-
-function RUSSIANPUNCTUATION  (keyboardLayout) {
-  const keyboardContainer = document.getElementById(keyboardLayout);
-  keyboardContainer.innerHTML = `
-  <ul class="line">
-     <li class="key" id="й">й</li>
-     <li class="key" id="ц">ц</li>
-     <li class="key" id="у">у</li>
-     <li class="key" id="к">к</li>
-     <li class="key" id="е">е</li>
-     <li class="key" id="н">н</li>
-     <li class="key" id="г">г</li>
-     <li class="key" id="ш">ш</li>
-     <li class="key" id="щ">щ</li>
-     <li class="key" id="з">з</li>
-     <li class="key" id="х">х</li>
-     <li class="key" id="ъ">ъ</li>
-   </ul>
-
-   <ul class="line">
-     <li class="key" id="ф">ф</li>
-     <li class="key" id="ы">ы</li>
-     <li class="key" id="в">в</li>
-     <li class="key" id="а">а</li>
-     <li class="key" id="п">п</li>
-     <li class="key" id="р">р</li>
-     <li class="key" id="о">о</li>
-     <li class="key" id="л">л</li>
-     <li class="key" id="д">д</li>
-     <li class="key" id="ж">ж</li>
-     <li class="key" id="э">э</li>
-   </ul>
-
-   <ul class="line">
-     <li class="key" id="я">я</li>
-     <li class="key" id="ч">ч</li>
-     <li class="key" id="с">с</li>
-     <li class="key" id="м">м</li>
-     <li class="key" id="и">и</li>
-     <li class="key" id="т">т</li>
-     <li class="key" id="ь">ь</li>
-     <li class="key" id="б">б</li>
-     <li class="key" id="ю">ю</li>
-   </ul>    
-   <ul class="line">
-     <li class="key" id="Space" style="width: 270px;"></li>
-  </ul>`
-}
-
-
+ const Background = document.getElementById('Background');
+ Background.addEventListener('click', () =>{
+ Menu.style.display = 'none'
+ BACKGROUND.style.display = 'block'
+ })
+   
+  window.addEventListener('click', (ev) =>{
+    if (ev.target === BACKGROUND) {
+    BACKGROUND.style.display = 'none'
+  }
+  })
   
+  document.getElementById('')
 
+ const Profile = document.getElementById('Profile').addEventListener ('click', ()=> {
+  switchPage("page2");
+ })
+
+ function switchPage(pageId) {
+  // 1. Скрываем все страницы
+  document.querySelectorAll('.page').forEach(page => {
+  page.classList.remove('active');
+  });
+            
+  // 2. Показываем нужную
+  document.getElementById(pageId).classList.add('active');
+            
+  // 3. Меняем URL (был site.com - site.com#page2.), не вызывает перезагрузку страницы при изменении
+   window.location.hash = pageId;
+  }
+
+  // При загрузке страницы проверяем hash
+  window.onload = function() {
+  // событие загрузки страницы   
+  const pageId = window.location.hash.slice(1) || 'page1';
+  // window.location.hash возвращает url после #, если есть берет его, если нет возвращает первую страницу
+  switchPage(pageId);
+  };
+
+  // Обработка кнопки "Назад" в браузере
+  window.addEventListener('popstate', function() {
+  const pageId = window.location.hash.slice(1) || 'page1';
+  switchPage(pageId);
+  Menu.style.display = 'none'
+  });
+/* сначала нажала назад - браузер проверяет историю - заменяет URL на предыдущий 
+- а после этого срабатывает popstate - не находит вторую страницу, 
+так как мы уже перешли на предыдущую и возвращает первую  */
+
+
+ document.getElementById('').addEventListener('click', () =>{
+    window.open('trenazher.html', '_blank');
+ })
 

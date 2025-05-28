@@ -1,99 +1,132 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Слепая печать</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <header id="H1">
-        <h1>Touch Typing</h1>
-    </header>
+    <div id="page1" class="page active">
+        <header id="H1">
+            <h1>Touch Typing</h1>
+        </header>
 
-    <button id="MenuButtom">
-        <img src="https://i.ibb.co/d0JRmQkv/image-1.png" width="25" height="25">
-    </button>
+        <button id="MenuButtom">
+            <img src="https://i.ibb.co/d0JRmQkv/image-1.png" width="25" height="25">
+        </button>
 
-<div id="MENU">
-<div id="Menu">
- <button id="background" class="Q">Профиль</button>
- <button id="settings" class="Q">Настройки</button>
- <button id="AboutSite"class="Q">О сайте</button>
-</div>
-</div>
-
-<div id="ABOUTSITE">
-    <div id="aboutsite">
-    <p>О сайте</p>
-    </div>
-</div>
-
-<!-- <button id="play">Нажмите, чтобы начать</button> -->
-<div id="game">
-     <!-- делает div фокусированным  -->
-<div id="pole" tabindex="0"></div>
-<div id="cursor">_</div>
-</div>
-
-<div class="WORDCOUNT" id="WordCountQuantity">
-   <button id="Ten" class="WordCount">10</button>
-   <button id="TwentyFive" class="WordCount">25</button>
-   <button id="Fifty" class="WordCount">50</button>
-   <button id="SeventyFive" class="WordCount">75</button>
-   <button id="OneHundred" class="WordCount">100</button>
-</div>
-<button id="Punctuation" class="WordCount">Пунктуация</button>
-
-<div class="progress-bar">
-<div class="progress-fill"></div>
-<div class="progress-fill2"></div>
-</div>
-
-<div id="time"></div>
-
-<div class="WORDCOUNT" id="WordCountTime">
-<button id="T15s" class="WordCount">15s</button>
-<button id="T30s" class="WordCount">30s</button>
-<button id="T45s" class="WordCount">45s</button>
-<button id="T1m" class="WordCount">1m</button>
-<button id="T2m" class="WordCount">2m</button>
-</div>
-     
-<div id="ManyButtons">
-<div id="LANGUAGE">
-    <button id="Reboot" class="WordCount"><img src="image (33).png" width="11"></button>
-    <button id="language" class="WordCount"></button>
-</div>    
-<div id="CTQ"> 
-    <button id="choiceOfWords" class="WordCount">слова</button>
-    <button id="timer" class="WordCount">время</button>
-    <button id="quote"class="WordCount">цитата</button>
-</div>
-</div>
-
-    <div id="modal1">
-        <div id="cotaiterModal1">
-            <h4>язык</h4>
-    <button id="button3" class="Q">english</button>
-    <button id="button2" class="Q">russian</button>
-    <div id="Level">
-    <button id="easy" class="level">easy</button>
-    <button id="normal" class="level">normal</button>
-    <button id="hard" class="level">hard</button>
-</div>
-</div>
-</div>
-    <div id="keyboard"></div>
-
-    <div id="modal3">
-        <div id="cotainterModal3">
-         <div id="cModal3"></div>
-         <div id ="ccModal3"></div>
-         <button id="nextGame">➡️</button>
+        <div id="MENU">
+            <div id="Menu">
+                <button id="Profile" class="Q">Профиль</button>
+                <button id="Background" class="Q">Цвета</button>
+                <button id="AboutSite" class="Q">О сайте</button>
+            </div>
         </div>
+
+        <div id="BACKGROUND">
+            <div id="background">
+                <h4>Цвета</h4>
+                <button id="Lima" class="Q">Lima's sunny tears </button>
+                <button class="Q" id="Zhaniya">Zhaniya's Sovereign</button>
+                <button class="Q" id='lera'>Lerochka's tenderness</button>
+            </div>
+        </div>
+
+        <div id="ABOUTSITE">
+            <div id="aboutsite">
+                <div id="A">
+                    <h4>О сайте</h4>
+                </div>
+                <div id="thanks">
+                    <p style="color: var(--text-color);">Благодарности</p>
+                </div>
+
+                <div id="MURKA">
+                    <a href="https://murka-sensei.ru/" target="_blank" class="O">Murka Sensei</a>
+                    <a href="https://discord.com/invite/KxFcRazaUN" target="_blank" class="O">Discord</a>
+                    <a href="https://www.youtube.com/@Murka.Sensei/shorts" target="_blank" class="O">Youtube</a>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress-fill"></div>
+            <div class="progress-fill2"></div>
+        </div>
+
+        <!-- <button id="play">Нажмите, чтобы начать</button> -->
+       
+        <div id="game">
+            <!-- делает div фокусированным  -->
+            <div id="pole" tabindex="0"></div>
+            <div id="cursor">_</div>
+        </div>
+
+        <div id="time"></div>
+
+
+        <div id="ManyButtons">
+            <div id="RebootLanguage">
+                <button id="Reboot" class="WordCount"><img src="image (33).png" width="11"></button>
+                <button id="language" class="WordCount"></button>
+            </div>
+            <div id="ChoTimerquote">
+                <button id="choiceOfWords" class="WordCount">слова</button>
+                <button id="timer" class="WordCount">время</button>
+                <button id="quote" class="WordCount">цитата</button>
+            </div>
+            <div class="WORDCOUNT" id="WordCountQuantity">
+                <button id="Ten" class="WordCount">10</button>
+                <button id="TwentyFive" class="WordCount">25</button>
+                <button id="Fifty" class="WordCount">50</button>
+                <button id="SeventyFive" class="WordCount">75</button>
+                <button id="OneHundred" class="WordCount">100</button>
+            </div>
+            <div class="WORDCOUNT" id="WordCountTime">
+                <button id="T15s" class="WordCount">15s</button>
+                <button id="T30s" class="WordCount">30s</button>
+                <button id="T45s" class="WordCount">45s</button>
+                <button id="T1m" class="WordCount">1m</button>
+                <button id="T2m" class="WordCount">2m</button>
+            </div>
+            <div>
+                <button id="Punctuation" class="WordCount">Пунктуация</button>
+            </div>
+        </div>
+
+        <div id="modal1">
+            <div id="cotaiterModal1">
+                <h4>язык</h4>
+                <button id="button3" class="Q">english</button>
+                <button id="button2" class="Q">russian</button>
+                <div id="Level">
+                    <button id="easy" class="level">easy</button>
+                    <button id="normal" class="level">normal</button>
+                    <button id="hard" class="level">hard</button>
+                </div>
+            </div>
+        </div>
+        <div id="keyboard"></div>
+
+        <div id="modal3">
+            <div id="cotainterModal3">
+                <div id="cModal3"></div>
+                <div id="ccModal3"></div>
+                <button id="nextGame">➡️</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="page2" class="page">
+        <h1>Страница 2</h1>
+        <p>Здесь другой контент</p>
     </div>
 
     <script src="script.js"></script>
 </body>
+
 </html>
