@@ -81,16 +81,18 @@ let X = 'easy' // показывает уровень
 let F = 10 // показывает количестово слов 
 let P = 'ENGLISH' // раскладка
 let T = 15 // время  
-let O = 'words'// показывае втоит у тебя время или слова 
+let O = 'words'// показывае втоит у тебя время или слова или цитаты
 let FF = 100 // счетчик линии каждый раз начинается со 100%
 let Y = 'nopunctuation' // пунктуация 
 let W = 'noquotes'
+let G = 'noresult'
 
 const RUbutton2 = document.getElementById('button2');
 const ENbutton3 = document.getElementById('button3');
 
 document.addEventListener('DOMContentLoaded', ()=>{
 document.querySelector('.progress-fill2').style.display = 'block'
+  TTIMERWORDS ()
   newGame(normalWordsEN, 10);  
   Observe();
   addClass(ENbutton3, 'navod')
@@ -264,12 +266,24 @@ document.querySelector('.progress-fill2').style.width = '100%';
   Level.style.visibility = 'visible'
   cotaiterModal1.style.height ='300px'
   Punctuation.style.display = 'block'
+  progressBar.style.display = 'block'
+  language.textContent = 'english';
+  addClass(ENbutton3, 'navod')
+  removeClass( RUbutton2, 'navod')
   removeaddClass(TT45s, T45s);
   TTIMER(45)
   whatLevel (200)
   removeaddClass(Timer, TiMe)
+  if ( Y === 'punctuation') {
+  newGamePunctu(normalWordsEN, 200);
+  } else if ( Y === 'nopunctuation') {
+   newGame(normalWordsEN, 200)
+  } 
+  ENGLISH('keyboard')
   W = 'noquotes'
   O = "time"
+  D = 'EN';
+  SSTOP ()
   })
 
   choiceOfWords.addEventListener('click', () =>{
@@ -281,6 +295,7 @@ document.querySelector('.progress-fill2').style.width = '100%';
   Level.style.visibility = 'visible'
   cotaiterModal1.style.height ='300px'
   Punctuation.style.display = 'block'
+  progressBar.style.display = 'block'
   if ( Y === 'punctuation') {
   newGamePunctu(normalWordsEN, 10);
   } else if ( Y === 'nopunctuation') {
@@ -301,6 +316,7 @@ document.querySelector('.progress-fill2').style.width = '100%';
   O = "words"
   FF = 100
   STOP()
+  TTIMERWORDS ()
  })
 
   const T15s = document.getElementById('T15s')
@@ -386,6 +402,7 @@ document.querySelector('.progress-fill2').style.width = '100%';
   quote.addEventListener('click', () =>{
   removeaddClass (Quote, quote)
   STOP()
+  SSTOP ()
   Level.style.visibility = 'hidden'
   cotaiterModal1.style.height ='260px'
   language.textContent = 'english';
@@ -563,6 +580,7 @@ function formatWord(word) {
 
 // НАЧАЛО 
 function newGame(words, num) {
+  probel = 0;
   correctcheck = 0;
   incorrectcheck = 0;
 
@@ -605,7 +623,7 @@ const shuffledWords = shuffleArray(words).slice(0, num);
 
 function newGamePunctu(words, num) {
   const punctuation = [',', '', '.', '?', '!', '', '"', ';', ':'];
-  
+  probel = 0;
   correctcheck = 0;
   incorrectcheck = 0;
 
@@ -743,7 +761,7 @@ document.addEventListener('keydown', updateCursorPosition);
 
 // Обновление курсора при изменении размера окна
 window.addEventListener('resize', updateCursorPosition);
-
+    let probel = 0;
     let incorrectcheck = 0;
     let correctcheck = 0;
     
@@ -803,7 +821,8 @@ window.addEventListener('resize', updateCursorPosition);
   // НАЖАЛИ ПРОБЕЛ И ПЕРЕШЛИ К НОВОМУ СЛОВУ
   
   if (isSpace) {
-    if ( O === 'words'){
+    probel ++;
+    if ( O === 'words' && FF >= 0){
     const F1 = 100 / F
     FF-=F1 ; // Уменьшаем на 1 при каждом нажатии пробела
     document.querySelector('.progress-fill2').style.width = FF + '%';
@@ -921,6 +940,7 @@ window.addEventListener('resize', updateCursorPosition);
     } 
 
   }
+  console.log(probel + 'это пробел ')
  
     updateCursorPosition(); // Обновляем позицию курсора после изменений
 
@@ -940,11 +960,69 @@ window.addEventListener('resize', updateCursorPosition);
     }
   }
 
+const WPM = document.getElementById('WPM')
+const CPM = document.getElementById('CPM')
+
 function Result () {
+   G = 'result'
    modal3.style.display = "block";
    const cModal3 = document.getElementById('cModal3');
-   const result = Math.floor(correctcheck / (correctcheck + incorrectcheck) *100 );
+   const result = Math.round(correctcheck / (correctcheck + incorrectcheck) *100 );
    cModal3.innerHTML = `${result}%`;
+   console.log( correctcheck+'общее количество правильных слов')
+     
+   if (O === 'time' ){
+   let CPMT = 0;
+   if( T === 15 || T === 30 || T === 45 ){
+   CPMT = Math.round((correctcheck / T) * 60) 
+   } else if (T === 60) {
+   CPMT = correctcheck
+   } else if (T === 120){
+   CPMT = Math.round( correctcheck  / 2 ) 
+   } else if (correctcheck = 0) {
+    CPMT = 0
+   }
+   let WPMT = 0;
+   if (X === 'easy'){
+   WPMT = Math.round(CPMT / 4)
+   } else if (X === 'normal'){
+   WPMT = Math.round(CPMT / 8)
+   } else if ( X === 'hard'){
+   WPMT = Math.round(CPMT / 12)
+   } 
+
+   CPM.innerHTML = CPMT + ' CPM'
+   WPM.innerHTML = WPMT + '     WPM'
+  console.log(CPMT +  '   ПОЛУЧИЛОСЬ CPMT')
+  console.log(WPMT +  '   ПОЛУЧИЛОСЬ WPMT')
+   
+
+  }
+   if ( O === 'words'){
+    let CPMW = 0;
+    if (timeLef >= 5 ){
+    CPMW = Math.round((correctcheck / timeLef) * 60)
+    }
+    
+    let WPMW = 0;
+    if (X === 'easy'){
+    WPMW = Math.round(CPMW / 4)
+    } else if (X === 'normal'){
+    WPMW = Math.round(CPMW / 8)
+    } else if (X === 'hard'){
+    WPMW = Math.round(CPMW / 12)
+    }
+    
+    CPM.innerHTML = CPMW + '   CPM'
+    WPM.innerHTML = WPMW + '   WPM'
+
+   }
+
+
+
+console.log(timeLef  +' Секунды таймера слов')
+
+
 
 if (D === 'EN') ENGLISH ('ccModal3')
 else if (D === "RU") RUSSIAN ('ccModal3')
@@ -1055,6 +1133,18 @@ let timerCheckInterval; // хранит идентификатор основн�
   
  }
 
+  function TTIMER(number) {
+  STOP()
+  T = number;
+  timerCheckInterval = setInterval(() => {// создает номер айди
+  const firstLetter = document.querySelector('.word.current')?.firstElementChild;
+  if (firstLetter && (firstLetter.classList.contains('correct') || firstLetter.classList.contains('incorrect'))) {
+    TIMER(number);
+    clearInterval(timerCheckInterval);// останавливает его работу
+  }
+}, 100);
+ }
+
  function STOP (){
 if (timerCheckInterval) {
         clearInterval(timerCheckInterval);// останавливает выполнение интервала 
@@ -1066,19 +1156,50 @@ if (timerCheckInterval) {
     }
     document.querySelector('.progress-fill').style.width = '100%';
  }
-  function TTIMER(number) {
-  STOP()
-  T = number;
-  timerCheckInterval = setInterval(() => {// создает номер айди
+
+// таймер слов 
+ let timeLef = 0;
+ let wordTimerID; //  хранит индефикатор таймера 
+ let WordTimerID;
+ function TIMERWORDS (){
+  timeLef = 0;
+ 
+   if (wordTimerID !== null) {
+  // если wordTimerID не нул, значит он уже был запущен 
+    clearInterval(wordTimerID);// останавливает предыдущий таймер 
+  }
+
+ wordTimerID = setInterval(() => { // создает повторяющийся интервал, каждую секунду 
+    timeLef++;
+   
+    if ( G === 'result') {
+      clearInterval(wordTimerID);
+    }
+  }, 1000);
+    console.log('Таймер слов запущен');
+ }
+
+ function TTIMERWORDS (){
+  SSTOP()
+  WordTimerID = setInterval(() => {// создает номер айди
   const firstLetter = document.querySelector('.word.current')?.firstElementChild;
-  if (firstLetter && (firstLetter.classList.contains('correct') || firstLetter.classList.contains('incorrect'))) {
-    TIMER(number);
-    clearInterval(timerCheckInterval);// останавливает его работу
-    console.log('jpp')
+  if (firstLetter &&  O === 'words' && (firstLetter.classList.contains('correct') || firstLetter.classList.contains('incorrect'))) {
+    TIMERWORDS();
+    clearInterval(WordTimerID);// останавливает его работу
   }
 }, 100);
-  
  }
+
+ function SSTOP (){
+   if (wordTimerID) {
+   clearInterval(wordTimerID);
+   } 
+   if (WordTimerID) {
+    clearInterval(WordTimerID);
+   }
+   console.log('таймер слов выключен')
+ }
+
 
 function ENGLISH (keyboardLayout) {
 const keyboardContainer = document.getElementById(keyboardLayout);
@@ -1187,42 +1308,12 @@ function RUSSIAN (keyboardLayout) {
   }
   })
   
-  document.getElementById('')
-
- const Profile = document.getElementById('Profile').addEventListener ('click', ()=> {
-  switchPage("page2");
- })
-
- function switchPage(pageId) {
-  // 1. Скрываем все страницы
-  document.querySelectorAll('.page').forEach(page => {
-  page.classList.remove('active');
-  });
-            
-  // 2. Показываем нужную
-  document.getElementById(pageId).classList.add('active');
-            
-  // 3. Меняем URL (был site.com - site.com#page2.), не вызывает перезагрузку страницы при изменении
-   window.location.hash = pageId;
-  }
-
-  // При загрузке страницы проверяем hash
-  window.onload = function() {
-  // событие загрузки страницы   
-  const pageId = window.location.hash.slice(1) || 'page1';
-  // window.location.hash возвращает url после #, если есть берет его, если нет возвращает первую страницу
-  switchPage(pageId);
-  };
-
-  // Обработка кнопки "Назад" в браузере
-  window.addEventListener('popstate', function() {
-  const pageId = window.location.hash.slice(1) || 'page1';
-  switchPage(pageId);
+  const PROVALE = document.getElementById('PROVALE')
+  const Profile = document.getElementById('Profile')
+  Profile.addEventListener('click', () =>{
+  PROVALE.style.display = 'block'
   Menu.style.display = 'none'
-  });
-/* сначала нажала назад - браузер проверяет историю - заменяет URL на предыдущий 
-- а после этого срабатывает popstate - не находит вторую страницу, 
-так как мы уже перешли на предыдущую и возвращает первую  */
+  })
 
 /*  document.getElementById('').addEventListener('click', () =>{
     window.open('trenazher.html', '_blank');
@@ -1235,10 +1326,10 @@ const root = document.documentElement;
  document.getElementById('Lima').addEventListener('click', () =>{
     
     // Меняем CSS-переменные
-    root.style.setProperty('--secondary-color', 'rgb(64, 64, 71)');
+    root.style.setProperty('--secondary-color', 'rgb(221, 227, 187)');
     root.style.setProperty('--text-color', 'rgb(150, 150, 150)');
-    root.style.setProperty('--navod-color', 'rgb(177, 177, 112)');
-    root.style.setProperty('--three-color', 'rgb(90, 90, 94)');
+    root.style.setProperty('--navod-color', 'rgb(230, 230, 141)');
+    
 
     WordCount2.style.color = '#18181a';
 
