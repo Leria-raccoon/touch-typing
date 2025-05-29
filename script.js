@@ -1,4 +1,3 @@
-// открытие и закрытие окон
 const Menu = document.getElementById('MENU');
 document.getElementById('MenuButtom').addEventListener('click', () =>{
  Menu.style.display = "block";
@@ -64,17 +63,20 @@ const hardWordsEN = [
 ];
 
 const MurkaQuotesRU = [
-  ["Счастье = реальность − ожидания"], ["Плохое вытесняй хорошим — влей кефир в бочку дерьма"], ["Лучше страдать на корабле, чем умереть в вакууме"], ["Интересный человек — это тот, кто интересуется. Где взять интерес к жизни? ИНТЕРЕСОВАТЬСЯ ЕЙ!!!"], ["Делай то, что нужно, а не то, что хочется"],  
-  ["Забудь о себе — делай для других"], ["Растворяй Я в коллективе — экипаж важнее индивидуализма"], ["Всегда говори «да»"], ["Будь предсказуемым"], ["Неискренних людей нет — есть невоспитанные"], ["Продавай себя правильно — внешний вид + содержание"], ["Деньги = свобода — пока их нет, нельзя говорить нет"], ["Не доверяй себе"], ["Будь готов к везению — шанс даётся подготовленным"], ["Учись через ассоциации и объяснения — если можешь научить другого, значит, понял сам"], ["Если ты никто, то тебя нельзя обидеть, ущемить, забыть или увидеть, потому что ты пустое место"]  
+  ["Счастье", "=", "реальность", "-", "ожидания"], ["Плохое", "вытесняй", "хорошим", "-", "влей", "кефир", "в", "бочку", "дерьма"],["Лучше", "страдать", "на", "корабле,", "чем", "умереть", "в", "вакууме"], ["Интересный", "человек", "-", "это", "тот,", "кто", "интересуется.", "Где", "взять", "интерес", "к", "жизни?", "ИНТЕРЕСОВАТЬСЯ", "ЕЙ!!!"],
+  ["Делай", "то,", "что", "нужно,", "а", "не", "то,", "что", "хочется"], ["Забудь", "о", "себе", "-", "делай", "для", "других"], ["Растворяй", "Я", "в", "коллективе", "-", "экипаж", "важнее", "индивидуализма"], ["Всегда", "говори", "да"], ["Будь", "предсказуемым"], ["Неискренних", "людей", "нет", "-", "есть", "невоспитанные"], ["Продавай", "себя", "правильно", "-", "внешний", "вид", "+", "содержание"],
+  ["Деньги", "=", "свобода", "-", "пока", "их", "нет,", "нельзя", "говорить", "нет"], ["Не", "доверяй", "себе"], ["Будь", "готов", "к", "везению", "-", "шанс", "даётся", "подготовленным"], ["Учись", "через", "ассоциации", "и", "объяснения", "-", "если", "можешь", "научить", "другого,", "значит,", "понял", "сам"], ["Если", "ты", "никто,", "то", "тебя", "нельзя", "обидеть,", "ущемить,", "забыть", "или", "увидеть,", "потому", "что", "ты", "пустое", "место"]
 ];
 
 const MurkaQuotesEN = [
-  ["Happiness = reality - expectations"], ["Displace the bad with good - pour kefir into a barrel of shit"], ["Better to suffer on a ship than to die in a vacuum"], ["An interesting person is one who is interested. Where to find interest in life? BE INTERESTED IN IT!!!"], ["Do what needs to be done, not what you want to do"], ["Forget about yourself, do for others"], ["Dissolve your ego in the collective - the crew is more important than individualism"], ["Always say YES"], ["Be predictable"],
-  ["There are no insincere people - only ill-mannered ones"], ["Sell yourself right - appearance + substance"], ["Fuck you money"], ["Don't trust yourself"],["Be ready for luck - chance favors the prepared"], ["Learn through associations and explanations - if you can teach someone else, you've understood it yourself"], ["If you're nobody, then you can't be offended, oppressed, forgotten or seen, because you're an empty space"]
+  ["Happiness", "=", "reality", "-", "expectations"], ["Displace", "the", "bad", "with", "good", "-", "pour", "kefir", "into", "a", "barrel", "of", "shit"], ["Better", "to", "suffer", "on", "a", "ship", "than", "to", "die", "in", "a", "vacuum"], ["An", "interesting", "person", "is", "one", "who", "is", "interested.", "Where", "to", "find", "interest", "in", "life?", "BE", "INTERESTED", "IN", "IT!!!"],
+  ["Do", "what", "needs", "to", "be", "done,", "not", "what", "you", "want", "to", "do"], ["Forget", "about", "yourself,", "do", "for", "others"], ["Dissolve", "your", "ego", "in", "the", "collective", "-", "the", "crew", "is", "more", "important", "than", "individualism"], ["Always", "say", "YES"], ["Be", "predictable"], ["There", "are", "no", "insincere", "people", "-", "only", "ill-mannered", "ones"], ["Sell", "yourself", "right", "-", "appearance", "+", "substance"],
+  ["Fuck", "you", "money"], ["Don't", "trust", "yourself"], ["Be", "ready", "for", "luck", "-", "chance", "favors", "the", "prepared"], ["Learn", "through", "associations", "and", "explanations", "-", "if", "you", "can", "teach", "someone", "else,", "you've", "understood", "it", "yourself"], ["If", "you're", "nobody,", "then", "you", "can't", "be", "offended,", "oppressed,", "forgotten", "or", "seen,", "because", "you're", "an", "empty", "space"]
 ];
 
 const language = document.getElementById('language')
 let D = 'RU' // показывает какой именно сейчас массив слов рус или англ
+let Dq = 'EN'
 let X = 'easy' // показывает уровень 
 let F = 10 // показывает количестово слов 
 let P = 'ENGLISH' // раскладка
@@ -113,10 +115,13 @@ document.querySelector('.progress-fill2').style.width = '100%';
   language.textContent = 'russian';
   RUSSIAN ('keyboard');
   D = 'RU';
+  Dq = 'RU'
   P = 'RUSSIAN';
   X = 'normal';
   FF = 100
-  if (O === "words" && Y === 'punctuation') {
+  if( W === 'quotes'){
+    QUOTE (MurkaQuotesRU)
+  } else if (O === "words" && Y === 'punctuation') {
   newGamePunctu(normalWordsRU, 10);
   removeaddClass (id10, Ten);
   } else if (O === "words" && Y === 'nopunctuation') {
@@ -137,10 +142,13 @@ document.querySelector('.progress-fill2').style.width = '100%';
   language.textContent = 'english';
   ENGLISH ('keyboard');
   D = 'EN';
+  Dq = 'EN'
   P = 'ENGLISH';
   X = 'normal';
   FF = 100
-  if (O === "words" &&  Y === 'punctuation') {
+  if (W = 'quotes'){
+  QUOTE(MurkaQuotesEN)
+  } else if (O === "words" &&  Y === 'punctuation') {
   newGamePunctu(normalWordsEN, 10);
   removeaddClass (id10, Ten);  
   } else if (O === "words" &&  Y === 'nopunctuation') {
@@ -253,10 +261,14 @@ document.querySelector('.progress-fill2').style.width = '100%';
   document.querySelector('.progress-fill').style.width = '100%';
   WordCountTime.style.display = 'block'
   WordCountQuantity.style.display = 'none'
+  Level.style.visibility = 'visible'
+  cotaiterModal1.style.height ='300px'
+  Punctuation.style.display = 'block'
   removeaddClass(TT45s, T45s);
   TTIMER(45)
   whatLevel (200)
   removeaddClass(Timer, TiMe)
+  W = 'noquotes'
   O = "time"
   })
 
@@ -266,11 +278,15 @@ document.querySelector('.progress-fill2').style.width = '100%';
   document.querySelector('.progress-fill').style.display = 'none'
   WordCountTime.style.display = 'none' 
   WordCountQuantity.style.display = 'block'
+  Level.style.visibility = 'visible'
+  cotaiterModal1.style.height ='300px'
+  Punctuation.style.display = 'block'
   if ( Y === 'punctuation') {
   newGamePunctu(normalWordsEN, 10);
   } else if ( Y === 'nopunctuation') {
    newGame(normalWordsEN, 10)
   } 
+  W = 'noquotes'
   addClass(ENbutton3, 'navod')
   removeClass(RUbutton2, 'navod')
   removeaddClass (id10, Ten);
@@ -328,17 +344,23 @@ document.querySelector('.progress-fill2').style.width = '100%';
   })
   
  document.getElementById('Reboot').addEventListener('click', () =>{
-    if ( O === "words") {
+  if ( O === "quote" && Dq === 'EN' ){
+    QUOTE(MurkaQuotesEN)
+  } else if ( O === "quote" && Dq === 'RU'){
+    QUOTE(MurkaQuotesRU)
+  } else if ( O === "words") {
     whatLevel (F)
   } else if (O ==="time") {
     whatLevel(200)
     TTIMER(T)
   }
+  
   document.querySelector('.progress-fill').style.width = '100%';
   document.querySelector('.progress-fill2').style.width = '100%';
   console.log(`количество слов ${F} tttttttt`)
  });
 
+ // пунктуация 
   const Punctuation = document.getElementById('Punctuation')
   Punctuation.addEventListener('click', ()=> {
     
@@ -353,20 +375,32 @@ document.querySelector('.progress-fill2').style.width = '100%';
       
        whatLevel (F)
   }
+
 })
   
-const WORDCOUNT = document.getElementsByName('WORDCOUNT')
-  
   const Level = document.getElementById('Level')
+  const cotaiterModal1 = document.getElementById('cotaiterModal1')
+  const progressBar = document.querySelector('.progress-bar');
+// цитаты
   const quote = document.getElementById('quote')
   quote.addEventListener('click', () =>{
   removeaddClass (Quote, quote)
+  STOP()
   Level.style.visibility = 'hidden'
-
-  WORDCOUNT.style.visibility = 'hidden'
+  cotaiterModal1.style.height ='260px'
+  language.textContent = 'english';
+  WordCountTime.style.display = 'none' 
+  WordCountQuantity.style.display = 'none'
+  Punctuation.style.display = 'none'
+  progressBar.style.display = 'none'
+  O = "quote"
+  Dq = 'EN'
   W = 'quotes'
   QUOTE (MurkaQuotesEN)
-
+  ENGLISH('keyboard')
+  addClass(ENbutton3, 'navod')
+  removeClass( RUbutton2, 'navod')
+  Observe();
   })
 
 // определяет уровень сложности и язык массива, но нужно вставить количество слов
@@ -629,14 +663,23 @@ const shuffledWords = addPunctuation(shuffleArray(words).slice(0, num), punctuat
 } 
 // выводит цитаты 
 function QUOTE (MurkaQuotes) {
-  const number = Math.floor(Math.random()* 16)
-  const co= MurkaQuotes[number][0] // выводит сам массив!!!!!!!!!
-   
-  const wordsContainer = document.getElementById('pole');
-  wordsContainer.innerHTML = co;
+  const number = Math.floor(Math.random()* MurkaQuotes.length)
+  const co= MurkaQuotes[number] // выводит сам массив!!!!!!!!!
+     
+    const wordsContainer = document.getElementById('pole');
+    wordsContainer.innerHTML = co.map(formatWord).join('');
+
+    // Устанавливаем текущее слово и букву
+  document.querySelector('.word').classList.add('current');
+  document.querySelector('.letter').classList.add('current');
  
-  
+  const cursor = document.getElementById('cursor')
+  cursor.style.display = 'block'
+
+  pole.focus();
+  updateCursorPosition();
   }
+
   
 
 
@@ -1181,8 +1224,22 @@ function RUSSIAN (keyboardLayout) {
 - а после этого срабатывает popstate - не находит вторую страницу, 
 так как мы уже перешли на предыдущую и возвращает первую  */
 
-
- document.getElementById('').addEventListener('click', () =>{
+/*  document.getElementById('').addEventListener('click', () =>{
     window.open('trenazher.html', '_blank');
  })
+ */
 
+const WordCount2 = document.getElementById('WordCount2')
+const root = document.documentElement;
+
+ document.getElementById('Lima').addEventListener('click', () =>{
+    
+    // Меняем CSS-переменные
+    root.style.setProperty('--secondary-color', 'rgb(64, 64, 71)');
+    root.style.setProperty('--text-color', 'rgb(150, 150, 150)');
+    root.style.setProperty('--navod-color', 'rgb(177, 177, 112)');
+    root.style.setProperty('--three-color', 'rgb(90, 90, 94)');
+
+    WordCount2.style.color = '#18181a';
+
+ })

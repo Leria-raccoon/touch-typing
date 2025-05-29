@@ -12,7 +12,6 @@
 .WORDCOUNT{
     background-color: rgb(56, 55, 53);
     border-radius: 5px;
-    visibility: visible;
 }
 
 .WordCount{
@@ -28,12 +27,12 @@
 
 .WordCount:hover{
     color: #dedede;
-    background-color: var(--secondary-color);
+    background-color: var(--navod-color);
 }
 
 .WordCount2 {
     color: #dedede;
-    background-color: var(--secondary-color);
+    background-color: var(--navod-color);
 }
 
 #WordCountQuantity {
@@ -62,13 +61,12 @@
 
 
 #pole {
-    background-color: #b5b5b5;
     position: absolute;
     z-index:0;
     top: 46%;
     left: 50%;
     transform: translate(-50%, -50%); /* Центрирование */ 
-    width: 85%;
+    width: 80%;
     height: 80px; 
    /*  background-color:  rgb(75, 72, 69) ;  */  
     padding: 3px;
@@ -85,6 +83,19 @@
 #pole:focus {
     outline: none;/*  убирает стандартную внешнюю рамку*/
   }
+
+#ManyButtons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  position: relative;
+  top: 330px;
+  left: 10%;
+}
+
+#Punctuation{
+    display: block;
+}
 
 #cursor{
     position: absolute;
@@ -113,6 +124,8 @@
     overflow: hidden;/*содержимое элемента выходит за границы, оно будет скрыто  */
     position: relative;
     top: 190px;
+    left: 10%;
+    display: block;
 }
 
 .progress-fill {
@@ -132,10 +145,17 @@
   position: absolute;
   right: 0;
 }
- @media(min-width:900px){ /* если будет больше 780 > применяются слудующие условия */
+ @media(min-width:940px){ /* если будет больше 780 > применяются слудующие условия */
  #pole{
-    width: 60%;
+    width: 50%;
  }
+.progress-bar {
+    left: 25%;
+}
+#ManyButtons {
+    left: 25%;
+}
+
 } 
 
 body{
@@ -145,6 +165,7 @@ body{
     font-family:Arial, Helvetica, sans-serif ;
     color: #fdfdff;
     margin: 0;
+    overflow-x: hidden;
     user-select: none;  /* Блокирует выделение текста */
   -webkit-user-select: none; /* Для Safari */
   -moz-user-select: none;    /* Для Firefox */
@@ -422,14 +443,6 @@ h1{
     width: 500px;
     height: 200px;
     border-radius: 5px;
-}
-
-#ManyButtons {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 14px;
-  position: relative;
-  top: 310px;
 }
 
 #RebootLanguage {
