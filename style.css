@@ -7,7 +7,7 @@
     --text-color: rgb(123, 119, 119);
     --navod-color: #7e7e85;
     --three-color: rgb(76, 76, 80);
-    --hfirst-color: rgba(77, 81, 85, 0.5);
+    --hfirst-color:rgb(58, 58, 62);
 }  
 
 .WORDCOUNT{
@@ -86,12 +86,12 @@
   }
 
 #ManyButtons {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  position: relative;
-  top: 330px;
-  left: 10%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    position: absolute;
+    top: 400px;
+    left: 10%;
 }
 
 #Punctuation{
@@ -146,18 +146,7 @@
   position: absolute;
   right: 0;
 }
- @media(min-width:940px){ /* если будет больше 780 > применяются слудующие условия */
- #pole{
-    width: 50%;
- }
-.progress-bar {
-    left: 25%;
-}
-#ManyButtons {
-    left: 25%;
-}
 
-} 
 
 body{
      /* background-image: url('image (11) (2).png');
@@ -166,16 +155,17 @@ body{
     font-family:Arial, Helvetica, sans-serif ;
     color: #fdfdff;
     margin: 0;
-    overflow-x: hidden;
+    
     user-select: none;  /* Блокирует выделение текста */
   -webkit-user-select: none; /* Для Safari */
   -moz-user-select: none;    /* Для Firefox */
 }
 
 #H1{
-    background-color: rgba(77, 81, 85, 0.5);
+    background-color: var(--hfirst-color);
     position: relative;
-    z-index: 5;
+     z-index: 6;
+    visibility: visible;
  } 
 
 h1{ 
@@ -187,22 +177,41 @@ h1{
     position: absolute;
     top: 10px;
     right: 15px;
-    z-index: 5;
+     z-index: 6;
     border: none; 
     background-color: transparent;
     padding: 10px 20px;
     cursor: pointer; 
 }
 
+#MENU2 {
+    display: none;
+}
+
+.Mo {
+    background-color: var(--hfirst-color);
+    color: #dedede;
+    cursor: pointer;
+    padding: 10px;
+    text-decoration: none;
+    border: none;
+}
+
+.Mo:hover{
+    background-color: var(--navod-color);
+}
+
 #MENU {
   position: fixed;
-  z-index: 5;
+  z-index: 6;
   display: none;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
+  visibility: visible;
+  
 }
 
 #Menu {
@@ -220,7 +229,6 @@ h1{
     align-items: center;
     border-radius: 5px;
     gap: 10px;
-    
 }
 
 #ABOUTSITE {
@@ -228,7 +236,7 @@ h1{
     position: absolute;
     left: 0;
     top: 0;
-    z-index: 3;
+    z-index: 6;
     width: 100%;
     height: 100%;
     background-color:rgba(0, 0, 0, 0.5);
@@ -241,8 +249,8 @@ h1{
     left: 50%;
     transform: translate(-50%, -54%);
     background-color: var(--first-color);
-    width: 850PX;
-    height: 400px;
+    width: 700PX;
+    height: 450px;
     border-radius: 5px;
     display: flex;
     flex-direction: column;
@@ -250,26 +258,24 @@ h1{
 
 @media (max-width:893px) {
     #aboutsite {
-        width: 95%;
+        width: 80%;
     }
 }
 
 #MURKA {
     display: flex;
-    padding: 40px;
     gap: 10px;
+    justify-content: end;
 }
 
 #A {
     display: flex;
     justify-content: center;
-    background-color: #30307d;
+    background-color: var(--hfirst-color);
 }
 
 #thanks{
-
-    background-color: #5c2828;
-
+   margin: 30px;
 }
 
 #modal1{
@@ -298,18 +304,37 @@ h1{
     align-items: center;
     border-radius: 5px;
     gap: 10px;
-    display: block;
 }
 
 #PROVALE {
  left: 0;
  top: 0;
- background-color: var(--first-color);
+ background-color: var(--secondary-color);
  display: none;
  position: fixed;
  height: 100% ;
  width: 100% ;
- z-index: 4;
+ z-index: 5;
+}
+
+#provale {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); 
+    height: 550px;
+    width: 600px;
+    background-color: var(--first-color);
+}
+
+#pr{
+    left: 25%;
+}
+
+#av {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
 }
 
 #Level {
@@ -362,6 +387,10 @@ h1{
 .navod {
  background-color: var(--navod-color);
  color: #dedede ;
+}
+
+.OO {
+    
 }
 
 #keyboard {
@@ -425,19 +454,24 @@ h1{
    top: 0;
    width: 100%;
    height: 100%;
-   background-color: rgb(0, 0, 0, 0.7);
+   background-color: var(--first-color);
 }
 
 #cotainterModal3{
-    position: absolute;
+    position: relative;
     left: 50%;
     top: 50%;
-    width: 70%;
-    height: 90%;
+    width: 600px;
+    height: 80%;
     transform: translate(-50%, -50%); 
     background-color: var(--first-color);
     border-radius: 5px;
     display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap:20px ;
+   
 }
 
 #ccModal3 {
@@ -445,16 +479,26 @@ h1{
     display: flex; /* 3 блока выстраиваются в линию  */
     flex-direction: column; /* потом в вертикаль */
     gap: 7px; /* вертикальный отступ */
-    width: 500px;
-    height: 200px;
+    width: 550px;
+    height: 250px;
     border-radius: 5px;
+    justify-content: center;
+}
+
+#cccModal3{
+  width: 500px;
+  height: 200px;
+  background-color: var(--hfirst-color);
 }
 
 #CWC {
    display: flex;
-   gap: 10px;
-   flex-direction: column;
-   margin: 40px;
+   gap: 20px;
+}
+
+#cwl {
+   display: flex;
+
 }
 
 .cwc {
@@ -468,6 +512,24 @@ h1{
     align-items: center;
 }
 
+#nextGame{
+    height: 150px;
+    width: 40px;
+    background-color: var(--hfirst-color);
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+    justify-content: center;
+    gap: 15px;
+    border: none;
+    cursor: pointer;
+}
+
+#nextGame:hover{
+    background-color: var(--navod-color);
+}
+
+
 #RebootLanguage {
   background-color:  rgb(56, 55, 53);
   border-radius: 5px;
@@ -480,7 +542,7 @@ h1{
 
 #BACKGROUND{
    display: none;
-   z-index: 5;
+   z-index: 6;
    position: fixed;
    left: 0;
    top: 0;   
@@ -492,7 +554,7 @@ h1{
 #background {
     position: absolute;
     width: 400px;
-    height: 300px;
+    height: 370px;
     background-color: var(--first-color);
     border-radius: 5px; 
     top: 50%;
@@ -505,12 +567,66 @@ h1{
     gap: 8px;
 }
 
-.page {
-  display: none;
+ @media(min-width:940px){ /* если будет больше 780 > применяются слудующие условия */
+ #MENU{
+   visibility: hidden;
+}
+ 
+ #pole{
+    width: 50%;
  }
-/* Показываем только активную */
-.page.active {
-  display: block;
+.progress-bar {
+    left: 25%;
+}
+#ManyButtons {
+    left: 25%;
+}
+
+#MENU2{
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 85px;
+    background-color: rgb(58, 58, 62);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 50px;
+    z-index: 6;
+}
+
+#MenuButtom {
+    display: none;
+}
+
+#H1 {
+    visibility: hidden;
+}
+
+#provale{
+    width: 60vw;
+}
+
+ }
+
+ @media(max-width:630px){ /* если будет больше 780 > применяются слудующие условия */
+   #cotainterModal3{
+    width: 95%;
+   }
+   #ccModal3{
+    width: 86vw;
+    padding: 5px;
+   }
+   .cwc{
+    width: 23vw;
+   }
+
+   #provale {
+    width: 85vw;
+    
+   }
 }
         
 

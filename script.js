@@ -26,6 +26,11 @@ document.getElementById('AboutSite').addEventListener('click', () =>{
    Menu.style.display = 'none'
 })
 
+document.getElementById('AboutSite2').addEventListener('click', () =>{
+   ABOUTSITE.style.display = 'block';
+   Menu.style.display = 'none'
+})
+
 window.addEventListener('click', (ev) => {
  if (ev.target === ABOUTSITE){
   ABOUTSITE.style.display= 'none'
@@ -358,7 +363,8 @@ document.querySelector('.progress-fill2').style.width = '100%';
   T = 120
   whatLevel (200)
   })
-  
+
+// Перемешивание слов 
  document.getElementById('Reboot').addEventListener('click', () =>{
   if ( O === "quote" && Dq === 'EN' ){
     QUOTE(MurkaQuotesEN)
@@ -370,7 +376,7 @@ document.querySelector('.progress-fill2').style.width = '100%';
     whatLevel(200)
     TTIMER(T)
   }
-  
+  Observe();  
   document.querySelector('.progress-fill').style.width = '100%';
   document.querySelector('.progress-fill2').style.width = '100%';
   console.log(`количество слов ${F} tttttttt`)
@@ -401,8 +407,6 @@ document.querySelector('.progress-fill2').style.width = '100%';
   const quote = document.getElementById('quote')
   quote.addEventListener('click', () =>{
   removeaddClass (Quote, quote)
-  STOP()
-  SSTOP ()
   Level.style.visibility = 'hidden'
   cotaiterModal1.style.height ='260px'
   language.textContent = 'english';
@@ -410,13 +414,16 @@ document.querySelector('.progress-fill2').style.width = '100%';
   WordCountQuantity.style.display = 'none'
   Punctuation.style.display = 'none'
   progressBar.style.display = 'none'
-  O = "quote"
+  O = 'quote'
   Dq = 'EN'
   W = 'quotes'
+  P = 'ENGLISH';
   QUOTE (MurkaQuotesEN)
   ENGLISH('keyboard')
   addClass(ENbutton3, 'navod')
   removeClass( RUbutton2, 'navod')
+  STOP()
+  TTIMERWORDS ()
   Observe();
   })
 
@@ -580,7 +587,6 @@ function formatWord(word) {
 
 // НАЧАЛО 
 function newGame(words, num) {
-  probel = 0;
   correctcheck = 0;
   incorrectcheck = 0;
 
@@ -623,7 +629,6 @@ const shuffledWords = shuffleArray(words).slice(0, num);
 
 function newGamePunctu(words, num) {
   const punctuation = [',', '', '.', '?', '!', '', '"', ';', ':'];
-  probel = 0;
   correctcheck = 0;
   incorrectcheck = 0;
 
@@ -761,7 +766,6 @@ document.addEventListener('keydown', updateCursorPosition);
 
 // Обновление курсора при изменении размера окна
 window.addEventListener('resize', updateCursorPosition);
-    let probel = 0;
     let incorrectcheck = 0;
     let correctcheck = 0;
     
@@ -792,7 +796,7 @@ window.addEventListener('resize', updateCursorPosition);
   (или узлу)данного элемента в документе html) 
  -Может вернуть любой узел: Это может быть элемент, 
   текстовый узел(пробелы или перенос строк) или комментарий. */
-
+ 
   // Запрет пробела на первой букве
   if (isSpace && isFirstLetter) {
     ev.preventDefault();
@@ -821,7 +825,6 @@ window.addEventListener('resize', updateCursorPosition);
   // НАЖАЛИ ПРОБЕЛ И ПЕРЕШЛИ К НОВОМУ СЛОВУ
   
   if (isSpace) {
-    probel ++;
     if ( O === 'words' && FF >= 0){
     const F1 = 100 / F
     FF-=F1 ; // Уменьшаем на 1 при каждом нажатии пробела
@@ -940,7 +943,6 @@ window.addEventListener('resize', updateCursorPosition);
     } 
 
   }
-  console.log(probel + 'это пробел ')
  
     updateCursorPosition(); // Обновляем позицию курсора после изменений
 
@@ -965,6 +967,7 @@ const CPM = document.getElementById('CPM')
 
 function Result () {
    G = 'result'
+
    modal3.style.display = "block";
    const cModal3 = document.getElementById('cModal3');
    const result = Math.round(correctcheck / (correctcheck + incorrectcheck) *100 );
@@ -992,16 +995,19 @@ function Result () {
    } 
 
    CPM.innerHTML = CPMT + ' CPM'
-   WPM.innerHTML = WPMT + '     WPM'
-  console.log(CPMT +  '   ПОЛУЧИЛОСЬ CPMT')
-  console.log(WPMT +  '   ПОЛУЧИЛОСЬ WPMT')
+   WPM.innerHTML = WPMT + ' WPM'
+   console.log(CPMT +  '   ПОЛУЧИЛОСЬ CPMT')
+   console.log(WPMT +  '   ПОЛУЧИЛОСЬ WPMT')
    
 
   }
-   if ( O === 'words'){
+   if ( O === 'words' || O === 'quote' ){
     let CPMW = 0;
     if (timeLef >= 5 ){
     CPMW = Math.round((correctcheck / timeLef) * 60)
+    } else {
+   CPM.innerHTML = 0 + ' CPM'
+   WPM.innerHTML = 0 + ' WPM'
     }
     
     let WPMW = 0;
@@ -1030,7 +1036,7 @@ else if (D === "RU") RUSSIAN ('ccModal3')
 const keyboardContainer = document.getElementById('ccModal3');
 
     wrongLetters.forEach(id => {
-      if (id && id.trim() !==""){
+      if (id && id.trim() !== "" && /^[a-zA-Zа-яА-ЯёЁ]+$/.test(id)){
 const keyEl = keyboardContainer.querySelector(`#${id}`);
     if (keyEl) {
       addClass(keyEl, 'nomigaet');
@@ -1042,7 +1048,7 @@ const keyEl = keyboardContainer.querySelector(`#${id}`);
   });  
   
 }
-  
+
 /* 
 const play = document.getElementById('play')
   play.addEventListener('click',() => {
@@ -1183,8 +1189,9 @@ if (timerCheckInterval) {
   SSTOP()
   WordTimerID = setInterval(() => {// создает номер айди
   const firstLetter = document.querySelector('.word.current')?.firstElementChild;
-  if (firstLetter &&  O === 'words' && (firstLetter.classList.contains('correct') || firstLetter.classList.contains('incorrect'))) {
+  if (firstLetter && ( O === 'words' || O === "quote" ) && (firstLetter.classList.contains('correct') || firstLetter.classList.contains('incorrect'))) {
     TIMERWORDS();
+    console.log(' МАССИВ С ЦИТАТАМИ - ДА')
     clearInterval(WordTimerID);// останавливает его работу
   }
 }, 100);
@@ -1301,6 +1308,12 @@ function RUSSIAN (keyboardLayout) {
  Menu.style.display = 'none'
  BACKGROUND.style.display = 'block'
  })
+
+ const Background2 = document.getElementById('Background2');
+ Background2.addEventListener('click', () =>{
+ Menu.style.display = 'none'
+ BACKGROUND.style.display = 'block'
+ })
    
   window.addEventListener('click', (ev) =>{
     if (ev.target === BACKGROUND) {
@@ -1315,10 +1328,50 @@ function RUSSIAN (keyboardLayout) {
   Menu.style.display = 'none'
   })
 
-/*  document.getElementById('').addEventListener('click', () =>{
+  const Profile2 = document.getElementById('Profile2')
+  Profile2.addEventListener('click', () =>{
+  PROVALE.style.display = 'block'
+  Menu.style.display = 'none'
+  })
+
+
+    document.getElementById('Studies').addEventListener('click', () =>{
     window.open('trenazher.html', '_blank');
  })
- */
+
+ const nextGame = document.getElementById('nextGame')
+  nextGame.addEventListener('click', () =>{
+  modal3.style.display = 'none'
+  Level.style.visibility = 'visible'
+  document.querySelector('.progress-fill2').style.display = 'block'
+  document.querySelector('.progress-fill2').style.width = '100%';
+  document.querySelector('.progress-fill').style.display = 'none'
+  cotaiterModal1.style.height ='300px'
+  STOP()
+  TTIMERWORDS ()
+  newGame(normalWordsEN, 10);  
+  Observe();
+  WordCountTime.style.display = 'none' 
+  WordCountQuantity.style.display = 'block'
+  Punctuation.style.display = 'block'
+  progressBar.style.display = 'block'
+  removeaddClass(ChoiceOfWordS, choiceOfWords)
+  removeClass(RUbutton2, 'navod')
+  addClass(ENbutton3, 'navod')
+  removeaddClass (id10, Ten);
+  removeaddClass (nnormal, normal);
+  addClass(choiceOfWords, 'navod')
+  ENGLISH ('keyboard');
+  language.textContent = 'english';
+  Y === 'nopunctuation'
+  D = 'EN';
+  P = 'ENGLISH';
+  X = 'normal'; 
+  O = "words"
+  FF = 100
+  W = 'noquotes'
+
+ })
 
 const WordCount2 = document.getElementById('WordCount2')
 const root = document.documentElement;
@@ -1330,6 +1383,7 @@ const root = document.documentElement;
     root.style.setProperty('--text-color', 'rgb(150, 150, 150)');
     root.style.setProperty('--navod-color', 'rgb(230, 230, 141)');
     
+   
 
     WordCount2.style.color = '#18181a';
 

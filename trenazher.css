@@ -1,0 +1,13 @@
+:root{ 
+    --first-color: rgb(42, 42, 46);
+    --secondary-color: #e9e9e980; /* Вторичный цвет */
+    --text-color: rgb(123, 119, 119);
+    --navod-color: #7e7e85;
+    --three-color: rgb(76, 76, 80);
+    --hfirst-color:rgb(58, 58, 62);
+}  
+body {
+   background-color: var(--first-color);
+   color: aliceblue;
+    font-family: Arial, Helvetica, sans-serif;
+}
