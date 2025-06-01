@@ -37,6 +37,11 @@ window.addEventListener('click', (ev) => {
  }
 })
 
+ document.getElementById('back').addEventListener('click', () => {
+  PROVALE.style.display ='none'
+  H1.style.width = '100vw';
+ })
+
 const easyWordsRU = [
   "в", "на", "с", "по", "за", "из", "от", "к", "у", "о", "до", "без", "про", "при", "под", "над", "перед", "после", "между", "через", "дом", "кот", "сад", "рот", "нос", "год", "сон", "зуб", "дым", "шар", "суп", "мяч", "лес", "мост", "лист", "стол", "пол", "код", "час", "мех", "ест", "пил", "спит", "шел", "брал", "дал", "жил", "бил", "мыл", "пел", "сел", "рвал", "лил", "пил", "жил", "был", "брал", "дал", "ждал", "спал", "тихий", "злой", "громкий", "новый", "старый", "белый", "черный", "добрый", "здоровый", "горячий", "холодный", "мокрый", "сухой", "глухой", "слепой", "вода", "земля", "огонь", "воздух", "камень", "песок", "глина", "железо", "золото", "серебро", "медь", "уголь", "соль", "сахар", "молоко", "птица", "рыба", "зверь", "конь", "волк", "лось", "заяц", "лось", "лось", "лось", "лось", "лось", "лось", "лось", "лось", "лось", "лось", "день", "ночь", "утро", "вечер", "зима", "весна", "лето", "осень", "месяц", "год", "час", "минута", "секунда", "неделя", "понедельник", "рука", "нога", "голова", "спина", "грудь", "шея", "палец", "волос", "глаз", "ухо", "нос", "рот", "зуб", "язык", "сердце", "печень", "стол", "стул", "кровать", "шкаф", "полка", "лампа", "окно", "дверь", "стена", "потолок", "пол", "крыша", "лестница", "забор", "ворота",  
   "книга", "лист", "бумага", "перо", "карандаш", "ручка", "тетрадь", "дневник", "журнал", "газета", "письмо", "конверт", "адрес", "почта", "дождь", "снег", "ветер", "град", "туман", "роса", "иней", "гроза", "молния", "гром", "радуга", "солнце", "луна", "звезда", "облако", "город", "село", "деревня", "улица", "дорога", "площадь", "парк", "сад", "река", "мост", "берег", "остров", "гора", "лес", "поле", "работа", "завод", "фабрика", "магазин", "рынок", "школа", "больница", "театр", "кино", "музей", "библиотека", "церковь", "храм", "суд", "друг", "враг", "брат", "сестра", "мать", "отец", "дед", "баба", "дядя", "тетя", "сын", "дочь", "муж", "жена", "сват", "цвет", "форма", "размер", "вес", "объем", "цена", "стоимость", "количество", "расстояние", "скорость", "сила", "давление", "температура", "время", "я", "ты", "он", "она", "оно", "мы", "вы", "они", "себя", "мой", "твой", "его", "ее", "наш", "ваш", "их", "свой", "кто", "что", "какой", "чей", "где", "куда", "откуда", "когда", "как", "почему", "зачем", "сколько", "который", "тот", "этот", "такой", "или", "и", "а", "но", "да", "нет", "не", "ни", "же", "бы", "ли", "раз", "ведь", "вот", "еще", "уже", "тоже", "очень", "почти", "совсем", "еле", "чуть", "едва", "вдруг", "сразу", "потом", "теперь", "здесь", "там", "тут", "везде", "нигде", "никогда", "можно", "нельзя", "нужно", "должен", "возможно", "надо", "хочу", "могу", "знаю", "вижу", "слышу", "чувствую", "думаю", "верю", "боюсь", "люблю", "иди", "стой", "беги", "прыгай", "лети", "плыви", "лежи", "сиди", "стой", "гляди", "слушай", "молчи", "кричи", "шепчи", "говори", "читай", "правый", "левый", "верхний", "нижний", "передний", "задний", "боковой", "центральный", "крайний", "средний", "внутренний", "наружный", "дальний", "ближний", "первый", "второй", "третий", "четвертый", "пятый", "шестой", "седьмой", "восьмой", "девятый", "десятый", "последний", "следующий", "предыдущий", "каждый", "любой", "свет", "тьма", "деньги", "богатство", "бедность", "счастье", "горе", "радость", "грусть", "страх", "гнев", "любовь", "ненависть", "добро", "зло", "правда", "ложь"
@@ -96,7 +101,8 @@ const RUbutton2 = document.getElementById('button2');
 const ENbutton3 = document.getElementById('button3');
 
 document.addEventListener('DOMContentLoaded', ()=>{
-document.querySelector('.progress-fill2').style.display = 'block'
+document.querySelector('.progress-fill2').style.display = 'block'  
+  InactivityTimer()
   TTIMERWORDS ()
   newGame(normalWordsEN, 10);  
   Observe();
@@ -111,7 +117,6 @@ document.querySelector('.progress-fill2').style.display = 'block'
   X = 'normal'; 
   O = "words"
   FF = 100
-
 });
 
 document.getElementById('button2').addEventListener('click',() =>{
@@ -289,9 +294,12 @@ document.querySelector('.progress-fill2').style.width = '100%';
   O = "time"
   D = 'EN';
   SSTOP ()
+  Observe();
   })
 
-  choiceOfWords.addEventListener('click', () =>{
+  choiceOfWords.addEventListener('click', () =>{  
+  InactivityTimer()
+  TTIMERWORDS ()
   document.querySelector('.progress-fill2').style.display = 'block'
   document.querySelector('.progress-fill2').style.width = '100%';
   document.querySelector('.progress-fill').style.display = 'none'
@@ -321,7 +329,7 @@ document.querySelector('.progress-fill2').style.width = '100%';
   O = "words"
   FF = 100
   STOP()
-  TTIMERWORDS ()
+  
  })
 
   const T15s = document.getElementById('T15s')
@@ -385,19 +393,35 @@ document.querySelector('.progress-fill2').style.width = '100%';
  // пунктуация 
   const Punctuation = document.getElementById('Punctuation')
   Punctuation.addEventListener('click', ()=> {
-    
+      
   if(Punctuation.classList.contains('navod')){
     Y = 'nopunctuation'
       removeClass(Punctuation, 'navod')
-       
+      if (O === 'words'){       
        whatLevel (F)
+      } else if (O === 'time'){
+      SSTOP () 
+      TTIMER(T)
+      whatLevel (200)
+      
+      }
   } else {
       Y = 'punctuation'
       addClass(Punctuation, 'navod')
-      
+      if (O === 'words'){       
        whatLevel (F)
+      } else if (O === 'time'){
+      SSTOP () 
+      STOP()
+      TTIMER(T)
+      whatLevel (200)
+      
+     
+      }
+      
+       
   }
-
+  
 })
   
   const Level = document.getElementById('Level')
@@ -427,7 +451,7 @@ document.querySelector('.progress-fill2').style.width = '100%';
   Observe();
   })
 
-// определяет уровень сложности и язык массива, но нужно вставить количество слов
+// определяет уровень сложности, С ПУНКТУАЦИЕЙ ИЛИ БЕЗ НЕЕ и язык массива, но нужно вставить количество слов
   function whatLevel (F){
    if (D === 'RU') {
 
@@ -1113,21 +1137,36 @@ let observer = null;
 }
 setTimeout(Observe, 500)
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // timer
 let timeL; //  хранит индефикатор таймера 
-let timerCheckInterval; // хранит идентификатор основного таймера
  function TIMER (number) {
  clearInterval(timeL);
  let timeLeft = number; 
 
   timeLeft = number; // сбрасывает в секундах
-  document.getElementById('time').textContent = timeLeft;// находит id и записывает в него новое значение 
 
   document.querySelector('.progress-fill').style.width = '100%';
 
   timeL = setInterval(() => { // создает повторяющийся интервал, каждую секунду 
     timeLeft--;
-    document.getElementById('time').textContent = timeLeft;
+   
     const predictable = (timeLeft / number )* 100;
     document.querySelector('.progress-fill').style.width = `${predictable}%`;
     console.log(timeLeft)
@@ -1139,6 +1178,7 @@ let timerCheckInterval; // хранит идентификатор основн�
   
  }
 
+let timerCheckInterval; // хранит идентификатор основного таймера
   function TTIMER(number) {
   STOP()
   T = number;
@@ -1163,29 +1203,78 @@ if (timerCheckInterval) {
     document.querySelector('.progress-fill').style.width = '100%';
  }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // таймер слов 
  let timeLef = 0;
- let wordTimerID; //  хранит индефикатор таймера 
- let WordTimerID;
+ let wordTimerID = null; //  хранит индефикатор таймера 
+ let savedTimeLef = 0; // Для сохранения времени при паузе
+ let isTimerPaused = false; // Флаг  НЕ паузы
+
  function TIMERWORDS (){
-  timeLef = 0;
- 
+if(isTimerPaused) { // первый раз не срабатывает
+  timeLef = savedTimeLef;// сохранется обновленное время 
+  isTimerPaused = false;
+} else {
+  timeLef = 0;// если это первый запуск 
+}
+
    if (wordTimerID !== null) {
-  // если wordTimerID не нул, значит он уже был запущен 
+  // если wordTimerID не нул, значит он уже был запущен, то есть индефикатор есть 
     clearInterval(wordTimerID);// останавливает предыдущий таймер 
   }
 
  wordTimerID = setInterval(() => { // создает повторяющийся интервал, каждую секунду 
     timeLef++;
-   
-    if ( G === 'result') {
+    console.log(timeLef + "ТАЙМЕР СЛОВ")
+    if (G === 'result') {
       clearInterval(wordTimerID);
     }
   }, 1000);
     console.log('Таймер слов запущен');
  }
 
+let WordTimerID;
  function TTIMERWORDS (){
+  isTimerPaused = false;
+  timeLef = 0;
+  savedTimeLef = 0;
   SSTOP()
   WordTimerID = setInterval(() => {// создает номер айди
   const firstLetter = document.querySelector('.word.current')?.firstElementChild;
@@ -1197,15 +1286,65 @@ if (timerCheckInterval) {
 }, 100);
  }
 
+
+// полностью сбразывается 
  function SSTOP (){
-   if (wordTimerID) {
-   clearInterval(wordTimerID);
-   } 
-   if (WordTimerID) {
+    if (wordTimerID) {
+    clearInterval(wordTimerID);
+    wordTimerID = null; // Важно обнулять ID
+  }
+  if (WordTimerID) {
     clearInterval(WordTimerID);
-   }
+    WordTimerID = null;
+  }
    console.log('таймер слов выключен')
  }
+
+
+
+// слушает клавиши, ФУНКЦИЯ ВЫЗЫВАЕТСЯ ПРИ КАЖДОМ НАЖАТИИ - запускается сама
+document.addEventListener('keydown', handleKeyPress);
+
+
+function handleKeyPress(e) {
+  setTimeout (() => {
+  if (e.key.length === 1) {
+    InactivityTimer(); // Сбрасываем таймер при любом нажатии
+
+  // запускаем, потому что он существует 
+    if (isTimerPaused) {
+      if (O === 'words'){
+      TIMERWORDS()
+      }
+    }
+  }
+ }, 1000) 
+}
+
+// Таймер бездействия
+let typingTimer;
+
+function InactivityTimer() {
+  clearTimeout(typingTimer); 
+  typingTimer = setTimeout(() => { // запускается новый таймер 
+    console.log("Пользователь не печатал 5 секунд!");
+
+// если таймер был запущен    
+  if(wordTimerID) {
+    savedTimeLef = timeLef;
+    clearInterval(wordTimerID);
+    wordTimerID = null;// не останавливаем предыдущий таймер
+    isTimerPaused = true; // 
+    }
+  }, 5000);
+}  
+
+
+
+
+
+
+
 
 
 function ENGLISH (keyboardLayout) {
@@ -1321,19 +1460,36 @@ function RUSSIAN (keyboardLayout) {
   }
   })
   
+  const H1 = document.getElementById('H1');
+  const english = document.getElementById('english')
+  const russian = document.getElementById('russian')
+
   const PROVALE = document.getElementById('PROVALE')
   const Profile = document.getElementById('Profile')
   Profile.addEventListener('click', () =>{
   PROVALE.style.display = 'block'
   Menu.style.display = 'none'
+  H1.style.width = '98vw';
+  addClass(english, 'OOO')
   })
-
+   
   const Profile2 = document.getElementById('Profile2')
   Profile2.addEventListener('click', () =>{
   PROVALE.style.display = 'block'
   Menu.style.display = 'none'
+  H1.style.width = '98vw';
+  addClass(english, 'OOO')
   })
 
+  russian.addEventListener('click', () => {
+  addClass(russian, 'OOO')
+  removeClass(english, 'OOO')
+  })
+
+  english.addEventListener('click', () => {
+  addClass(english, 'OOO')
+  removeClass (russian, 'OOO')
+  })
 
     document.getElementById('Studies').addEventListener('click', () =>{
     window.open('trenazher.html', '_blank');
@@ -1347,7 +1503,9 @@ function RUSSIAN (keyboardLayout) {
   document.querySelector('.progress-fill2').style.width = '100%';
   document.querySelector('.progress-fill').style.display = 'none'
   cotaiterModal1.style.height ='300px'
+  removeClass(Punctuation, 'navod')
   STOP()
+  InactivityTimer()
   TTIMERWORDS ()
   newGame(normalWordsEN, 10);  
   Observe();
@@ -1370,7 +1528,6 @@ function RUSSIAN (keyboardLayout) {
   O = "words"
   FF = 100
   W = 'noquotes'
-
  })
 
 const WordCount2 = document.getElementById('WordCount2')
@@ -1379,12 +1536,25 @@ const root = document.documentElement;
  document.getElementById('Lima').addEventListener('click', () =>{
     
     // Меняем CSS-переменные
-    root.style.setProperty('--secondary-color', 'rgb(221, 227, 187)');
-    root.style.setProperty('--text-color', 'rgb(150, 150, 150)');
-    root.style.setProperty('--navod-color', 'rgb(230, 230, 141)');
-    
-   
-
+    root.style.setProperty('--secondary-color', 'rgb(143, 168, 1)');
+    root.style.setProperty('--text-color', 'rgb(123, 78, 133)');
+    root.style.setProperty('--navod-color', 'rgb(84, 65, 92)');
     WordCount2.style.color = '#18181a';
+/* 
+        --secondary-color: rgb(137 148 161);
+    --text-color: rgb(105 109 129);
+    --navod-color: rgb(78 91 115); */
 
+ })
+
+ document.getElementById('Zhaniya').addEventListener('click', () =>{
+
+ })
+
+ document.getElementById('lera').addEventListener('click', () => {
+
+ })
+
+ document.getElementById('murka').addEventListener('click', () => {
+  
  })

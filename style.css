@@ -2,12 +2,15 @@
     к CSS-селекторам, которые позволяют изменять стиль 
     элементов на веб-странице в зависимости от их состояния 
     или положения.*/
-    --first-color: rgb(42, 42, 46);
-    --secondary-color: #e9e9e980; /* Вторичный цвет */
+    --first-color: rgb(42, 42, 46); 
     --text-color: rgb(123, 119, 119);
+    --three-color: rgb(76, 76, 80);/*  кнопки в модальных окнах */
+    --hfirst-color:rgb(58, 58, 62);/* контейнеры с результатами + главная линия  */
+    --secondary-color: #e9e9e980; /* клавиатура */
     --navod-color: #7e7e85;
-    --three-color: rgb(76, 76, 80);
-    --hfirst-color:rgb(58, 58, 62);
+    --progressfill-color: #9b9c9f;
+    --progressbar-color: #3c3c3e ;
+    
 }  
 
 .WORDCOUNT{
@@ -15,8 +18,7 @@
     border-radius: 5px;
 }
 
-.WordCount{
-    
+.WordCount{   
     background-color:  rgb(56, 55, 53);
     padding: 5px 5px;
     border: none;
@@ -120,7 +122,7 @@
 .progress-bar {
     width: 210px;
     height: 7px;
-    background-color: #9b9c9f;
+    background-color: var(--progressbar-color);
     border-radius: 5px;
     overflow: hidden;/*содержимое элемента выходит за границы, оно будет скрыто  */
     position: relative;
@@ -132,7 +134,7 @@
 .progress-fill {
   display: none;
   height: 100%;
-  background-color:#3c3c3e;
+  background-color:var(--progressfill-color);
   width: 100%;
   transition: width 1s linear;
 }
@@ -140,7 +142,7 @@
 .progress-fill2 {
   display: none;
   height: 100%;
-  background-color:#3c3c3e;
+  background-color:var(--progressfill-color);
   width: 100%;
   transition: width 1s linear;
   position: absolute;
@@ -164,13 +166,24 @@ body{
 #H1{
     background-color: var(--hfirst-color);
     position: relative;
-     z-index: 6;
+    z-index: 6;
     visibility: visible;
+    color: #b0b0b1;
+    width: 100vw;
+
  } 
 
 h1{ 
     margin: 0;
     padding: 15px ; 
+}
+
+#H2 {
+    position: absolute;
+    left: 10%;
+    top: 10px;
+    display: none;
+    color: var(--text-color);
 }
 
 #MenuButtom{ 
@@ -280,7 +293,7 @@ h1{
 
 #modal1{
     display: none;
-    z-index: 3;
+    z-index: 10;
     position: fixed;
     left: 0;
     top: 0;
@@ -309,12 +322,13 @@ h1{
 #PROVALE {
  left: 0;
  top: 0;
- background-color: var(--secondary-color);
+ background-color: var(--first-color);
  display: none;
  position: fixed;
  height: 100% ;
  width: 100% ;
  z-index: 5;
+ overflow-y: auto;
 }
 
 #provale {
@@ -322,18 +336,23 @@ h1{
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%); 
-    height: 550px;
-    width: 600px;
+    height: 100%;
+    width: 650px;
     background-color: var(--first-color);
+    padding: 100px 5% 0px 5%; /* Добавляем внутренний отступ */
+    box-sizing: border-box;
+   
+
 }
 
-#pr{
-    left: 25%;
+#enru{
+    display: flex;
+    gap: 10px;
 }
 
 #av {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     gap: 40px;
 }
 
@@ -379,6 +398,7 @@ h1{
     padding: 10px;
     border-radius: 5px;
     text-decoration: none;
+    border: none;
 }
 .O:hover {
     background-color: var(--navod-color);
@@ -390,7 +410,40 @@ h1{
 }
 
 .OO {
-    
+    background-color: var(--three-color);
+    color: #dedede;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    border: none;
+}
+
+.OO:hover {
+   background-color: var(--navod-color);
+}
+
+.OOO {
+   background-color: var(--navod-color);
+}
+
+#back{
+    background: transparent;
+    border: none;
+    position: absolute;
+    right: 40px;
+    top: 120px;
+}
+
+#back:hover {
+    background-color: var(--navod-color);
+    border-radius: 5px;
+}
+
+#grafik {
+    width: 50px;
+    height: 1000px;
+    background-color: #dedede;
 }
 
 #keyboard {
@@ -502,7 +555,7 @@ h1{
 }
 
 .cwc {
- height: 150px;
+    height: 150px;
     width: 150px;
     background-color: var(--hfirst-color);
     border-radius: 5px;
@@ -606,9 +659,12 @@ h1{
 }
 
 #provale{
-    width: 60vw;
+    width: 70vw;
 }
 
+#H2 {
+    display: block;
+}
  }
 
  @media(max-width:630px){ /* если будет больше 780 > применяются слудующие условия */
@@ -624,7 +680,7 @@ h1{
    }
 
    #provale {
-    width: 85vw;
+    width: 95vw;
     
    }
 }
