@@ -10,6 +10,10 @@
     --navod-color: #7e7e85;
     --progressfill-color: #9b9c9f;
     --progressbar-color: #3c3c3e ;
+    --poletext-color:  rgb(123, 119, 119);
+    --incorrect-color: #c06060;
+    --klava-color:  #9b9c9f;
+    --nomigaet-color: #a96969;
     
 }  
 
@@ -77,7 +81,7 @@
     flex-wrap: wrap;
     justify-content: start;
     font-size: 27px;
-    color: var(--text-color);
+    color: var(--poletext-color);
     /*  filter: blur(10px);  */
     overflow: hidden; /* скрывает переполнение контейнера */
     scroll-behavior: smooth; /* Плавная прокрутка всегда */
@@ -111,7 +115,7 @@
 }
 
 .incorrect{
- color: rgb(180, 53, 53);
+ color: var(--incorrect-color);
 }
 
 .word {
@@ -183,7 +187,7 @@ h1{
     left: 10%;
     top: 10px;
     display: none;
-    color: var(--text-color);
+    color: #7e7e85;
 }
 
 #MenuButtom{ 
@@ -391,6 +395,35 @@ h1{
     color: #dedede;
 }
 
+.M {
+ padding: 20px;
+ color: #ffffff;
+ background-color:var(--three-color);
+ border: none;
+ font-size:17px ;
+ font-family: Arial, Helvetica, sans-serif;
+ border-radius: 5px;
+ width: 350px;
+ height: 60px;
+}
+
+.Lim:hover {
+background-color: #85857e;
+}
+
+.Z:hover {
+background-color: #667580;
+}
+
+.Ler:hover {
+background-color: #65525d;
+}
+
+.murk:hover {
+background-color: #7e7e85 ;
+}
+
+
 .O{
     background-color: var(--three-color);
     color: #dedede;
@@ -466,9 +499,9 @@ h1{
 } 
 
 .key {
-    width: 36px;
-    height: 36px;
-    border: var(--secondary-color);
+    width: 40px;
+    height: 40px;
+    border: var(--klava-color);
     border-style: solid; /* сплошная граница */
     border-width: 2px;
     border-radius: 5px;
@@ -489,14 +522,15 @@ h1{
      }
 
 .migaet {
-    background-color: rgb(157, 157, 164);
+    background-color: var(--klava-color);
     color: var(--first-color);
     transform: translate(5px, -5px);
     transition: 0.3s;
 }
 
 .nomigaet {
-    background-color: #5c2828;
+    background-color: var(--nomigaet-color);
+    border: var(--nomigaet-color);
 }
 
 #modal3{
@@ -532,7 +566,7 @@ h1{
     display: flex; /* 3 блока выстраиваются в линию  */
     flex-direction: column; /* потом в вертикаль */
     gap: 7px; /* вертикальный отступ */
-    width: 550px;
+    width: 581px;
     height: 250px;
     border-radius: 5px;
     justify-content: center;
@@ -555,8 +589,8 @@ h1{
 }
 
 .cwc {
-    height: 150px;
-    width: 150px;
+    height: 160px;
+    width: 160px;
     background-color: var(--hfirst-color);
     border-radius: 5px;
     font-size: 25px;
@@ -566,7 +600,7 @@ h1{
 }
 
 #nextGame{
-    height: 150px;
+    height: 160px;
     width: 40px;
     background-color: var(--hfirst-color);
     display: flex;

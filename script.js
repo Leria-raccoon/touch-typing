@@ -94,7 +94,7 @@ let T = 15 // время
 let O = 'words'// показывае втоит у тебя время или слова или цитаты
 let FF = 100 // счетчик линии каждый раз начинается со 100%
 let Y = 'nopunctuation' // пунктуация 
-let W = 'noquotes'
+let W = 'noquotes' // не цитаты
 let G = 'noresult'
 
 const RUbutton2 = document.getElementById('button2');
@@ -117,10 +117,17 @@ document.querySelector('.progress-fill2').style.display = 'block'
   X = 'normal'; 
   O = "words"
   FF = 100
+  F = 10
+  
+   const savedTheme = localStorage.getItem('selectedTheme');
+  if (savedTheme) applyTheme(savedTheme);
 });
 
 document.getElementById('button2').addEventListener('click',() =>{
 document.querySelector('.progress-fill2').style.width = '100%';
+  InactivityTimer()
+  TTIMERWORDS ()
+  G = 'noresult'
   removeaddClass (nnormal, normal);
   addClass(RUbutton2, 'navod')
   removeClass( ENbutton3, 'navod')
@@ -130,16 +137,19 @@ document.querySelector('.progress-fill2').style.width = '100%';
   Dq = 'RU'
   P = 'RUSSIAN';
   X = 'normal';
+  G = 'noresult'
   FF = 100
   if( W === 'quotes'){
     QUOTE (MurkaQuotesRU)
   } else if (O === "words" && Y === 'punctuation') {
   newGamePunctu(normalWordsRU, 10);
   removeaddClass (id10, Ten);
+  F = 10
   } else if (O === "words" && Y === 'nopunctuation') {
    newGame(normalWordsRU, 10)
    removeaddClass(id10, Ten)
-  } else {
+   F = 10
+  } else if (O === 'time'){
    TTIMER(T)
    whatLevel(200)
   }
@@ -153,20 +163,24 @@ document.querySelector('.progress-fill2').style.width = '100%';
   removeClass( RUbutton2, 'navod')
   language.textContent = 'english';
   ENGLISH ('keyboard');
+  G = 'noresult'
   D = 'EN';
   Dq = 'EN'
   P = 'ENGLISH';
   X = 'normal';
   FF = 100
-  if (W = 'quotes'){
+  if (W === 'quotes'){
   QUOTE(MurkaQuotesEN)
   } else if (O === "words" &&  Y === 'punctuation') {
   newGamePunctu(normalWordsEN, 10);
   removeaddClass (id10, Ten);  
+  F = 10
   } else if (O === "words" &&  Y === 'nopunctuation') {
   newGame(normalWordsEN, 10)
   removeaddClass(id10, Ten)
-  } else {
+  F = 10
+  } else if (O === 'time') {
+    TTIMER(T)
     whatLevel(200)
   }
   Observe ();
@@ -416,12 +430,8 @@ document.querySelector('.progress-fill2').style.width = '100%';
       TTIMER(T)
       whatLevel (200)
       
-     
       }
-      
-       
-  }
-  
+    }
 })
   
   const Level = document.getElementById('Level')
@@ -600,7 +610,6 @@ function formatWord(word) {
 удаляет отступы в начале и в конце 
 .split('') - разбивает строку на массив БУКВ! - !без пробела 
 .join объединяет все элементы обртно в строку и вставляет между ними 
-
   <div class="word">
   <span class="letter"> Р </span>
   <span class="letter"> р </span>
@@ -679,7 +688,6 @@ function shuffleArray(words) {
       } else if (punctuation[k] === '"') {
        newArr[i] = '"' + newArr[i];
       }
-
   }
   return newArr;
 }
@@ -726,9 +734,6 @@ function QUOTE (MurkaQuotes) {
   pole.focus();
   updateCursorPosition();
   }
-
-  
-
 
 const modal3 = document.getElementById('modal3');
 
@@ -1023,7 +1028,6 @@ function Result () {
    console.log(CPMT +  '   ПОЛУЧИЛОСЬ CPMT')
    console.log(WPMT +  '   ПОЛУЧИЛОСЬ WPMT')
    
-
   }
    if ( O === 'words' || O === 'quote' ){
     let CPMW = 0;
@@ -1032,7 +1036,7 @@ function Result () {
     } else {
    CPM.innerHTML = 0 + ' CPM'
    WPM.innerHTML = 0 + ' WPM'
-    }
+  }
     
     let WPMW = 0;
     if (X === 'easy'){
@@ -1048,11 +1052,7 @@ function Result () {
 
    }
 
-
-
 console.log(timeLef  +' Секунды таймера слов')
-
-
 
 if (D === 'EN') ENGLISH ('ccModal3')
 else if (D === "RU") RUSSIAN ('ccModal3')
@@ -1065,13 +1065,80 @@ const keyEl = keyboardContainer.querySelector(`#${id}`);
     if (keyEl) {
       addClass(keyEl, 'nomigaet');
       } 
-      }
+     }
     })
      document.querySelectorAll('#keyboard .key.migaet').forEach(key => {
     removeClass(key, 'migaet');
   });  
   
+
+
+
+
+
+
+
+
+
+const resultData = {
+  wpm: WPM,
+  cpm: CPM,
+  accuracy: result,
+  date: new Date().toDateString()
 }
+
+// Получаем текущие данные из localStorage
+  const savedResults = JSON.parse(localStorage.getItem('typingResults')) || {
+    english: { history: [], bestWpm: 0 },
+    russian: { history: [], bestWpm: 0 }
+  };
+
+  // Определяем язык (D === 'EN' или 'RU')
+  const langKey = D === 'EN' ? 'english' : 'russian';
+  
+  // Добавляем текущий результат
+  savedResults[langKey].history.push(resultData);
+  
+  // Обновляем рекорд WPM
+  if (WPM > savedResults[langKey].bestWpm) {
+    savedResults[langKey].bestWpm = WPM;
+  }
+
+  // Сохраняем обратно
+  localStorage.setItem('typingResults', JSON.stringify(savedResults));
+
+
+}
+
+
+
+
+
+
+
+
+
+
+// Получить лучший WPM для языка
+function getBestWpm(lang) { // 'english' или 'russian'
+  const data = JSON.parse(localStorage.getItem('typingResults')) || {};
+  return data[lang]?.bestWpm || 0;
+}
+
+// Получить последние 10 результатов
+function getRecentResults(lang) {
+  const data = JSON.parse(localStorage.getItem('typingResults')) || {};
+  return data[lang]?.history.slice(-10) || [];
+}
+
+
+
+
+
+
+
+
+
 
 /* 
 const play = document.getElementById('play')
@@ -1137,23 +1204,6 @@ let observer = null;
 }
 setTimeout(Observe, 500)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // timer
 let timeL; //  хранит индефикатор таймера 
  function TIMER (number) {
@@ -1202,44 +1252,6 @@ if (timerCheckInterval) {
     }
     document.querySelector('.progress-fill').style.width = '100%';
  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // таймер слов 
  let timeLef = 0;
@@ -1300,11 +1312,8 @@ let WordTimerID;
    console.log('таймер слов выключен')
  }
 
-
-
 // слушает клавиши, ФУНКЦИЯ ВЫЗЫВАЕТСЯ ПРИ КАЖДОМ НАЖАТИИ - запускается сама
 document.addEventListener('keydown', handleKeyPress);
-
 
 function handleKeyPress(e) {
   setTimeout (() => {
@@ -1331,21 +1340,13 @@ function InactivityTimer() {
 
 // если таймер был запущен    
   if(wordTimerID) {
-    savedTimeLef = timeLef;
+    savedTimeLef = timeLef; 
     clearInterval(wordTimerID);
     wordTimerID = null;// не останавливаем предыдущий таймер
     isTimerPaused = true; // 
     }
   }, 5000);
 }  
-
-
-
-
-
-
-
-
 
 function ENGLISH (keyboardLayout) {
 const keyboardContainer = document.getElementById(keyboardLayout);
@@ -1471,6 +1472,7 @@ function RUSSIAN (keyboardLayout) {
   Menu.style.display = 'none'
   H1.style.width = '98vw';
   addClass(english, 'OOO')
+  removeClass (russian, 'OOO')
   })
    
   const Profile2 = document.getElementById('Profile2')
@@ -1479,6 +1481,7 @@ function RUSSIAN (keyboardLayout) {
   Menu.style.display = 'none'
   H1.style.width = '98vw';
   addClass(english, 'OOO')
+  removeClass (russian, 'OOO')
   })
 
   russian.addEventListener('click', () => {
@@ -1495,8 +1498,11 @@ function RUSSIAN (keyboardLayout) {
     window.open('trenazher.html', '_blank');
  })
 
- const nextGame = document.getElementById('nextGame')
+  const nextGame = document.getElementById('nextGame')
   nextGame.addEventListener('click', () =>{
+
+
+    
   modal3.style.display = 'none'
   Level.style.visibility = 'visible'
   document.querySelector('.progress-fill2').style.display = 'block'
@@ -1505,10 +1511,10 @@ function RUSSIAN (keyboardLayout) {
   cotaiterModal1.style.height ='300px'
   removeClass(Punctuation, 'navod')
   STOP()
-  InactivityTimer()
-  TTIMERWORDS ()
   newGame(normalWordsEN, 10);  
   Observe();
+  InactivityTimer()
+  TTIMERWORDS ()
   WordCountTime.style.display = 'none' 
   WordCountQuantity.style.display = 'block'
   Punctuation.style.display = 'block'
@@ -1521,40 +1527,109 @@ function RUSSIAN (keyboardLayout) {
   addClass(choiceOfWords, 'navod')
   ENGLISH ('keyboard');
   language.textContent = 'english';
-  Y === 'nopunctuation'
   D = 'EN';
   P = 'ENGLISH';
   X = 'normal'; 
   O = "words"
-  FF = 100
+  FF = 100 
   W = 'noquotes'
+   G = 'noresult'
+  F = 10
  })
 
 const WordCount2 = document.getElementById('WordCount2')
 const root = document.documentElement;
 
  document.getElementById('Lima').addEventListener('click', () =>{
-    
-    // Меняем CSS-переменные
-    root.style.setProperty('--secondary-color', 'rgb(143, 168, 1)');
-    root.style.setProperty('--text-color', 'rgb(123, 78, 133)');
-    root.style.setProperty('--navod-color', 'rgb(84, 65, 92)');
-    WordCount2.style.color = '#18181a';
-/* 
-        --secondary-color: rgb(137 148 161);
-    --text-color: rgb(105 109 129);
-    --navod-color: rgb(78 91 115); */
+root.style.setProperty('--text-color', 'rgb(175 176 134)');
+root.style.setProperty('--navod-color', '#85857e');
+root.style.setProperty('--progressfill-color', '#969578');
+root.style.setProperty('--incorrect-color', '#a2a082');
+root.style.setProperty('--klava-color', '#929282');
+root.style.setProperty('--nomigaet-color', 'rgb(163 160 120)' )
 
  })
 
  document.getElementById('Zhaniya').addEventListener('click', () =>{
+root.style.setProperty('--text-color', 'rgb(134, 154, 176)');
+root.style.setProperty('--navod-color', '#667580');
+root.style.setProperty('--progressfill-color', '#788896');
+root.style.setProperty('--incorrect-color', '#2e5c74');
+root.style.setProperty('--klava-color', '#5e7076');
+root.style.setProperty('--nomigaet-color', 'rgb(57, 81, 98)');
 
  })
 
  document.getElementById('lera').addEventListener('click', () => {
+root.style.setProperty('--text-color', 'rgb(120, 63, 92)');
+root.style.setProperty('--navod-color', '#65525d');
+root.style.setProperty('--progressfill-color', '#977283');
+root.style.setProperty('--incorrect-color', '#8f3458');
+root.style.setProperty('--klava-color', '#6b4757');
+root.style.setProperty('--nomigaet-color', '#6b4757');
 
  })
 
  document.getElementById('murka').addEventListener('click', () => {
-  
+root.style.setProperty('--text-color', 'rgb(123, 119, 119)');
+root.style.setProperty('--navod-color', '#7e7e85');
+root.style.setProperty('--progressfill-color', '#9b9c9f');
+root.style.setProperty('--incorrect-color', '#c06060');
+root.style.setProperty('--klava-color', '#9b9c9f');
+root.style.setProperty('--nomigaet-color', '#a96969');
+
  })
+
+const themes = {
+  Lima: {
+    '--text-color': 'rgb(175 176 134)',
+    '--navod-color': '#85857e',
+    '--progressfill-color': '#969578',
+    '--incorrect-color': '#a2a082',
+    '--klava-color': '#929282',
+    '--nomigaet-color': 'rgb(163 160 120)'
+  },
+  Zhaniya: {
+    '--text-color': 'rgb(134, 154, 176)',
+    '--navod-color': '#667580',
+    '--progressfill-color': '#788896',
+    '--incorrect-color': '#2e5c74',
+    '--klava-color': '#5e7076',
+    '--nomigaet-color': 'rgb(57, 81, 98)'
+  },
+  lera: {
+    '--text-color': 'rgb(120, 63, 92)',
+    '--navod-color': '#65525d',
+    '--progressfill-color': '#977283',
+    '--incorrect-color': '#8f3458',
+    '--klava-color': '#6b4757',
+    '--nomigaet-color': '#6b4757'
+  },
+  murka: {
+    '--text-color': 'rgb(123, 119, 119)',
+    '--navod-color': '#7e7e85',
+    '--progressfill-color': '#9b9c9f',
+    '--incorrect-color': '#c06060',
+    '--klava-color': '#9b9c9f',
+    '--nomigaet-color': '#a96969'
+  }
+};
+
+function applyTheme(themeName) {
+  const theme = themes[themeName];
+  for (const [varName, value] of Object.entries(theme)) {
+    document.documentElement.style.setProperty(varName, value);
+  }
+  localStorage.setItem('selectedTheme', themeName); // Автосохранение
+}
+
+// 3. Вешаем обработчики на все кнопки (одна универсальная функция)
+['Lima', 'Zhaniya', 'lera', 'murka'].forEach(btnId => {
+  document.getElementById(btnId).addEventListener('click', () => applyTheme(btnId));
+});
+
+// 4. Восстанавливаем тему при загрузке страницы
+window.addEventListener('DOMContentLoaded', () => {
+  const savedTheme = localStorage.getItem('selectedTheme');
+  if (savedTheme) applyTheme(savedTheme);
+});
