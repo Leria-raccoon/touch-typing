@@ -332,7 +332,6 @@ h1{
  height: 100% ;
  width: 100% ;
  z-index: 5;
- overflow-y: auto;
 }
 
 #provale {
@@ -345,8 +344,6 @@ h1{
     background-color: var(--first-color);
     padding: 100px 5% 0px 5%; /* Добавляем внутренний отступ */
     box-sizing: border-box;
-   
-
 }
 
 #enru{
@@ -471,12 +468,6 @@ background-color: #7e7e85 ;
 #back:hover {
     background-color: var(--navod-color);
     border-radius: 5px;
-}
-
-#grafik {
-    width: 50px;
-    height: 1000px;
-    background-color: #dedede;
 }
 
 #keyboard {

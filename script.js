@@ -39,7 +39,6 @@ window.addEventListener('click', (ev) => {
 
  document.getElementById('back').addEventListener('click', () => {
   PROVALE.style.display ='none'
-  H1.style.width = '100vw';
  })
 
 const easyWordsRU = [
@@ -102,7 +101,6 @@ const ENbutton3 = document.getElementById('button3');
 
 document.addEventListener('DOMContentLoaded', ()=>{
 document.querySelector('.progress-fill2').style.display = 'block'  
-  InactivityTimer()
   TTIMERWORDS ()
   newGame(normalWordsEN, 10);  
   Observe();
@@ -125,7 +123,6 @@ document.querySelector('.progress-fill2').style.display = 'block'
 
 document.getElementById('button2').addEventListener('click',() =>{
 document.querySelector('.progress-fill2').style.width = '100%';
-  InactivityTimer()
   TTIMERWORDS ()
   G = 'noresult'
   removeaddClass (nnormal, normal);
@@ -312,7 +309,6 @@ document.querySelector('.progress-fill2').style.width = '100%';
   })
 
   choiceOfWords.addEventListener('click', () =>{  
-  InactivityTimer()
   TTIMERWORDS ()
   document.querySelector('.progress-fill2').style.display = 'block'
   document.querySelector('.progress-fill2').style.width = '100%';
@@ -1050,6 +1046,9 @@ function Result () {
     CPM.innerHTML = CPMW + '   CPM'
     WPM.innerHTML = WPMW + '   WPM'
 
+
+    console.log(CPMW +  '   ПОЛУЧИЛОСЬ CPMW')
+    console.log(WPMW +  '   ПОЛУЧИЛОСЬ WPMW')
    }
 
 console.log(timeLef  +' Секунды таймера слов')
@@ -1071,72 +1070,62 @@ const keyEl = keyboardContainer.querySelector(`#${id}`);
     removeClass(key, 'migaet');
   });  
   
+    const resultData = {
+        wpm: parseInt(WPM.textContent),
+        cpm: parseInt(CPM.textContent),
+        accuracy: result,
+        date: new Date().toLocaleDateString()
+    };
 
+    // Получаем или создаем хранилище результатов
+    const savedResults = JSON.parse(localStorage.getItem('typingResults')) || {
+        english: { bestWpm: 0, bestCpm: 0, bestAccuracy: 0 },
+        russian: { bestWpm: 0, bestCpm: 0, bestAccuracy: 0 }
+    };
 
+    const langKey = D === 'EN' ? 'english' : 'russian';
 
+    // Обновляем рекорды если текущие показатели лучше сохраненных
+    if (resultData.wpm > savedResults[langKey].bestWpm) {
+        savedResults[langKey].bestWpm = resultData.wpm;
+    }
+    if (resultData.cpm > savedResults[langKey].bestCpm) {
+        savedResults[langKey].bestCpm = resultData.cpm;
+    }
+    if (resultData.accuracy > savedResults[langKey].bestAccuracy) {
+        savedResults[langKey].bestAccuracy = resultData.accuracy;
+    }
 
+    // Сохраняем обновленные данные
+    localStorage.setItem('typingResults', JSON.stringify(savedResults));
 
-
-
-
-
-const resultData = {
-  wpm: WPM,
-  cpm: CPM,
-  accuracy: result,
-  date: new Date().toDateString()
+    // Обновляем отображение профиля
+    updateProfileStats();
 }
 
-// Получаем текущие данные из localStorage
-  const savedResults = JSON.parse(localStorage.getItem('typingResults')) || {
-    english: { history: [], bestWpm: 0 },
-    russian: { history: [], bestWpm: 0 }
-  };
+function updateProfileStats() {
+    const savedResults = JSON.parse(localStorage.getItem('typingResults')) || {
+        english: { bestWpm: 0, bestCpm: 0, bestAccuracy: 0 },
+        russian: { bestWpm: 0, bestCpm: 0, bestAccuracy: 0 }
+    };
 
-  // Определяем язык (D === 'EN' или 'RU')
-  const langKey = D === 'EN' ? 'english' : 'russian';
-  
-  // Добавляем текущий результат
-  savedResults[langKey].history.push(resultData);
-  
-  // Обновляем рекорд WPM
-  if (WPM > savedResults[langKey].bestWpm) {
-    savedResults[langKey].bestWpm = WPM;
-  }
+   
+    // Переключение между языками
+    document.getElementById('english').addEventListener('click', function() {
+        document.getElementById('avWPM').textContent = `WPM: ${savedResults.english.bestWpm}`;
+        document.getElementById('avCPM').textContent = `CPM: ${savedResults.english.bestCpm}`;
+        document.getElementById('avPercent').textContent = `Accuracy: ${savedResults.english.bestAccuracy}%`;
+    });
 
-  // Сохраняем обратно
-  localStorage.setItem('typingResults', JSON.stringify(savedResults));
-
-
+    document.getElementById('russian').addEventListener('click', function() {
+        document.getElementById('avWPM').textContent = `WPM: ${savedResults.russian.bestWpm}`;
+        document.getElementById('avCPM').textContent = `CPM: ${savedResults.russian.bestCpm}`;
+        document.getElementById('avPercent').textContent = `Accuracy: ${savedResults.russian.bestAccuracy}%`;
+    });
 }
 
-
-
-
-
-
-
-
-
-
-// Получить лучший WPM для языка
-function getBestWpm(lang) { // 'english' или 'russian'
-  const data = JSON.parse(localStorage.getItem('typingResults')) || {};
-  return data[lang]?.bestWpm || 0;
-}
-
-// Получить последние 10 результатов
-function getRecentResults(lang) {
-  const data = JSON.parse(localStorage.getItem('typingResults')) || {};
-  return data[lang]?.history.slice(-10) || [];
-}
-
-
-
-
-
-
-
+// Вызываем при загрузке страницы профиля
+updateProfileStats();
 
 
 
@@ -1312,42 +1301,6 @@ let WordTimerID;
    console.log('таймер слов выключен')
  }
 
-// слушает клавиши, ФУНКЦИЯ ВЫЗЫВАЕТСЯ ПРИ КАЖДОМ НАЖАТИИ - запускается сама
-document.addEventListener('keydown', handleKeyPress);
-
-function handleKeyPress(e) {
-  setTimeout (() => {
-  if (e.key.length === 1) {
-    InactivityTimer(); // Сбрасываем таймер при любом нажатии
-
-  // запускаем, потому что он существует 
-    if (isTimerPaused) {
-      if (O === 'words'){
-      TIMERWORDS()
-      }
-    }
-  }
- }, 1000) 
-}
-
-// Таймер бездействия
-let typingTimer;
-
-function InactivityTimer() {
-  clearTimeout(typingTimer); 
-  typingTimer = setTimeout(() => { // запускается новый таймер 
-    console.log("Пользователь не печатал 5 секунд!");
-
-// если таймер был запущен    
-  if(wordTimerID) {
-    savedTimeLef = timeLef; 
-    clearInterval(wordTimerID);
-    wordTimerID = null;// не останавливаем предыдущий таймер
-    isTimerPaused = true; // 
-    }
-  }, 5000);
-}  
-
 function ENGLISH (keyboardLayout) {
 const keyboardContainer = document.getElementById(keyboardLayout);
 keyboardContainer.innerHTML = `
@@ -1461,7 +1414,6 @@ function RUSSIAN (keyboardLayout) {
   }
   })
   
-  const H1 = document.getElementById('H1');
   const english = document.getElementById('english')
   const russian = document.getElementById('russian')
 
@@ -1470,7 +1422,6 @@ function RUSSIAN (keyboardLayout) {
   Profile.addEventListener('click', () =>{
   PROVALE.style.display = 'block'
   Menu.style.display = 'none'
-  H1.style.width = '98vw';
   addClass(english, 'OOO')
   removeClass (russian, 'OOO')
   })
@@ -1479,7 +1430,6 @@ function RUSSIAN (keyboardLayout) {
   Profile2.addEventListener('click', () =>{
   PROVALE.style.display = 'block'
   Menu.style.display = 'none'
-  H1.style.width = '98vw';
   addClass(english, 'OOO')
   removeClass (russian, 'OOO')
   })
@@ -1513,7 +1463,6 @@ function RUSSIAN (keyboardLayout) {
   STOP()
   newGame(normalWordsEN, 10);  
   Observe();
-  InactivityTimer()
   TTIMERWORDS ()
   WordCountTime.style.display = 'none' 
   WordCountQuantity.style.display = 'block'
