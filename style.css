@@ -96,7 +96,7 @@
     flex-wrap: wrap;
     gap: 10px;
     position: absolute;
-    top: 400px;
+    top: 25rem;
     left: 10%;
 }
 
@@ -130,7 +130,7 @@
     border-radius: 5px;
     overflow: hidden;/*содержимое элемента выходит за границы, оно будет скрыто  */
     position: relative;
-    top: 190px;
+    top: 12rem;
     left: 10%;
     display: block;
 }

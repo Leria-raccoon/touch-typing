@@ -1083,7 +1083,6 @@ const keyEl = keyboardContainer.querySelector(`#${id}`);
         wpm: parseInt(WPM.textContent),
         cpm: parseInt(CPM.textContent),
         accuracy: result,
-        date: new Date().toLocaleDateString()
     };
 
     // Получаем или создаем хранилище результатов
@@ -1124,7 +1123,7 @@ function updateProfileStats() {
     removeClass (russian, 'OOO')
         avWPM.textContent = `WPM: ${savedResults.english.bestWpm}`;
         avCPM.textContent = `CPM: ${savedResults.english.bestCpm}`;
-        avPercent.textContent = `Accuracy: ${savedResults.english.bestAccuracy}%`;
+        avPercent.textContent = ` ${savedResults.english.bestAccuracy}%`;
     });
 
     document.getElementById('russian').addEventListener('click', function() {
@@ -1132,24 +1131,9 @@ function updateProfileStats() {
       removeClass(english, 'OOO')
         avWPM.textContent = `WPM: ${savedResults.russian.bestWpm}`;
         avCPM.textContent = `CPM: ${savedResults.russian.bestCpm}`;
-        avPercent.textContent = `Accuracy: ${savedResults.russian.bestAccuracy}%`;
+        avPercent.textContent = ` ${savedResults.russian.bestAccuracy}%`;
     });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-     
+   
     const avWPM = document.getElementById('avWPM')
     const avCPM = document.getElementById('avCPM')
     const avPercent = document.getElementById('avPercent')
@@ -1163,7 +1147,7 @@ function updateProfileStats() {
   removeClass (russian, 'OOO')
    avWPM.textContent = `WPM: ${savedResults.english.bestWpm}`;
    avCPM.textContent = `CPM: ${savedResults.english.bestCpm}`;
-   avPercent.textContent = `Accuracy: ${savedResults.english.bestAccuracy}%`;
+   avPercent.textContent = `${savedResults.english.bestAccuracy}%`;
   })
    
   
@@ -1175,10 +1159,9 @@ function updateProfileStats() {
   removeClass (russian, 'OOO')
    avWPM.textContent = `WPM: ${savedResults.english.bestWpm}`;
    avCPM.textContent = `CPM: ${savedResults.english.bestCpm}`;
-   avPercent.textContent = `Accuracy: ${savedResults.english.bestAccuracy}%`;
+   avPercent.textContent = ` ${savedResults.english.bestAccuracy}%`;
   })
   
-
 }
 
 // Вызываем при загрузке страницы профиля
