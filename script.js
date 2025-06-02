@@ -124,7 +124,6 @@ document.querySelector('.progress-fill2').style.display = 'block'
 document.getElementById('button2').addEventListener('click',() =>{
 document.querySelector('.progress-fill2').style.width = '100%';
   TTIMERWORDS ()
-  G = 'noresult'
   removeaddClass (nnormal, normal);
   addClass(RUbutton2, 'navod')
   removeClass( ENbutton3, 'navod')
@@ -384,6 +383,7 @@ document.querySelector('.progress-fill2').style.width = '100%';
 
 // Перемешивание слов 
  document.getElementById('Reboot').addEventListener('click', () =>{
+  G = 'noresult'
   if ( O === "quote" && Dq === 'EN' ){
     QUOTE(MurkaQuotesEN)
   } else if ( O === "quote" && Dq === 'RU'){
@@ -405,6 +405,7 @@ document.querySelector('.progress-fill2').style.width = '100%';
   Punctuation.addEventListener('click', ()=> {
       
   if(Punctuation.classList.contains('navod')){
+    G = 'noresult'
     Y = 'nopunctuation'
       removeClass(Punctuation, 'navod')
       if (O === 'words'){       
@@ -436,6 +437,7 @@ document.querySelector('.progress-fill2').style.width = '100%';
 // цитаты
   const quote = document.getElementById('quote')
   quote.addEventListener('click', () =>{
+  G = 'noresult'
   removeaddClass (Quote, quote)
   Level.style.visibility = 'hidden'
   cotaiterModal1.style.height ='260px'
@@ -459,6 +461,7 @@ document.querySelector('.progress-fill2').style.width = '100%';
 
 // определяет уровень сложности, С ПУНКТУАЦИЕЙ ИЛИ БЕЗ НЕЕ и язык массива, но нужно вставить количество слов
   function whatLevel (F){
+    G = 'noresult'
    if (D === 'RU') {
 
     if (X === 'easy') {
@@ -512,6 +515,7 @@ document.querySelector('.progress-fill2').style.width = '100%';
 
 // определяет количество слов, но нужно вставить уровень сложности массива
  function howManyWords (words) {
+  G = 'noresult'
   if (F === 10){
     const F = 10;
     if (Y === 'punctuation'){
@@ -1069,8 +1073,13 @@ const keyEl = keyboardContainer.querySelector(`#${id}`);
      document.querySelectorAll('#keyboard .key.migaet').forEach(key => {
     removeClass(key, 'migaet');
   });  
+
+
+
+
+
   
-    const resultData = {
+    const resultData = { 
         wpm: parseInt(WPM.textContent),
         cpm: parseInt(CPM.textContent),
         accuracy: result,
@@ -1109,23 +1118,98 @@ function updateProfileStats() {
         russian: { bestWpm: 0, bestCpm: 0, bestAccuracy: 0 }
     };
 
-   
     // Переключение между языками
     document.getElementById('english').addEventListener('click', function() {
-        document.getElementById('avWPM').textContent = `WPM: ${savedResults.english.bestWpm}`;
-        document.getElementById('avCPM').textContent = `CPM: ${savedResults.english.bestCpm}`;
-        document.getElementById('avPercent').textContent = `Accuracy: ${savedResults.english.bestAccuracy}%`;
+    addClass(english, 'OOO')
+    removeClass (russian, 'OOO')
+        avWPM.textContent = `WPM: ${savedResults.english.bestWpm}`;
+        avCPM.textContent = `CPM: ${savedResults.english.bestCpm}`;
+        avPercent.textContent = `Accuracy: ${savedResults.english.bestAccuracy}%`;
     });
 
     document.getElementById('russian').addEventListener('click', function() {
-        document.getElementById('avWPM').textContent = `WPM: ${savedResults.russian.bestWpm}`;
-        document.getElementById('avCPM').textContent = `CPM: ${savedResults.russian.bestCpm}`;
-        document.getElementById('avPercent').textContent = `Accuracy: ${savedResults.russian.bestAccuracy}%`;
+      addClass(russian, 'OOO')
+      removeClass(english, 'OOO')
+        avWPM.textContent = `WPM: ${savedResults.russian.bestWpm}`;
+        avCPM.textContent = `CPM: ${savedResults.russian.bestCpm}`;
+        avPercent.textContent = `Accuracy: ${savedResults.russian.bestAccuracy}%`;
     });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+     
+    const avWPM = document.getElementById('avWPM')
+    const avCPM = document.getElementById('avCPM')
+    const avPercent = document.getElementById('avPercent')
+
+  const PROVALE = document.getElementById('PROVALE')
+  const Profile = document.getElementById('Profile')
+  Profile.addEventListener('click', () =>{
+  PROVALE.style.display = 'block'
+  Menu.style.display = 'none'
+  addClass(english, 'OOO')
+  removeClass (russian, 'OOO')
+   avWPM.textContent = `WPM: ${savedResults.english.bestWpm}`;
+   avCPM.textContent = `CPM: ${savedResults.english.bestCpm}`;
+   avPercent.textContent = `Accuracy: ${savedResults.english.bestAccuracy}%`;
+  })
+   
+  
+  const Profile2 = document.getElementById('Profile2')
+  Profile2.addEventListener('click', () =>{
+  PROVALE.style.display = 'block'
+  Menu.style.display = 'none'
+  addClass(english, 'OOO')
+  removeClass (russian, 'OOO')
+   avWPM.textContent = `WPM: ${savedResults.english.bestWpm}`;
+   avCPM.textContent = `CPM: ${savedResults.english.bestCpm}`;
+   avPercent.textContent = `Accuracy: ${savedResults.english.bestAccuracy}%`;
+  })
+  
+
 }
 
 // Вызываем при загрузке страницы профиля
 updateProfileStats();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1416,33 +1500,6 @@ function RUSSIAN (keyboardLayout) {
   
   const english = document.getElementById('english')
   const russian = document.getElementById('russian')
-
-  const PROVALE = document.getElementById('PROVALE')
-  const Profile = document.getElementById('Profile')
-  Profile.addEventListener('click', () =>{
-  PROVALE.style.display = 'block'
-  Menu.style.display = 'none'
-  addClass(english, 'OOO')
-  removeClass (russian, 'OOO')
-  })
-   
-  const Profile2 = document.getElementById('Profile2')
-  Profile2.addEventListener('click', () =>{
-  PROVALE.style.display = 'block'
-  Menu.style.display = 'none'
-  addClass(english, 'OOO')
-  removeClass (russian, 'OOO')
-  })
-
-  russian.addEventListener('click', () => {
-  addClass(russian, 'OOO')
-  removeClass(english, 'OOO')
-  })
-
-  english.addEventListener('click', () => {
-  addClass(english, 'OOO')
-  removeClass (russian, 'OOO')
-  })
 
     document.getElementById('Studies').addEventListener('click', () =>{
     window.open('trenazher.html', '_blank');
