@@ -337,6 +337,7 @@ document.querySelector('.progress-fill2').style.width = '100%';
   X = 'normal'; 
   O = "words"
   FF = 100
+  F = 10
   STOP()
   
  })
@@ -1073,11 +1074,6 @@ const keyEl = keyboardContainer.querySelector(`#${id}`);
      document.querySelectorAll('#keyboard .key.migaet').forEach(key => {
     removeClass(key, 'migaet');
   });  
-
-
-
-
-
   
     const resultData = { 
         wpm: parseInt(WPM.textContent),
@@ -1166,35 +1162,6 @@ function updateProfileStats() {
 
 // Вызываем при загрузке страницы профиля
 updateProfileStats();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /* 
 const play = document.getElementById('play')
