@@ -14,7 +14,7 @@
     --incorrect-color: #c06060;
     --klava-color:  #9b9c9f;
     --nomigaet-color: #a96969;
-    
+    --Text-color:  rgb(188, 189, 190);
 }  
 
 .WORDCOUNT{
@@ -130,7 +130,7 @@
     border-radius: 5px;
     overflow: hidden;/*содержимое элемента выходит за границы, оно будет скрыто  */
     position: relative;
-    top: 12rem;
+    top: 11rem;
     left: 10%;
     display: block;
 }
@@ -267,7 +267,7 @@ h1{
     transform: translate(-50%, -54%);
     background-color: var(--first-color);
     width: 700PX;
-    height: 450px;
+
     border-radius: 5px;
     display: flex;
     flex-direction: column;
