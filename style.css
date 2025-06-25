@@ -70,16 +70,10 @@
 #pole {
     position: absolute;
     z-index:0;
-    top: 46%;
-    left: 50%;
-    transform: translate(-50%, -50%); /* Центрирование */ 
-    width: 80%;
+    width: 550px;
     height: 80px; 
    /*  background-color:  rgb(75, 72, 69) ;  */  
     padding: 3px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: start;
     font-size: 27px;
     color: var(--poletext-color);
     /*  filter: blur(10px);  */
@@ -95,9 +89,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
-    position: absolute;
-    top: 25rem;
-    left: 10%;
+    
 }
 
 #Punctuation{
@@ -130,8 +122,6 @@
     border-radius: 5px;
     overflow: hidden;/*содержимое элемента выходит за границы, оно будет скрыто  */
     position: relative;
-    top: 11rem;
-    left: 10%;
     display: block;
 }
 
@@ -163,8 +153,10 @@ body{
     margin: 0;
     
     user-select: none;  /* Блокирует выделение текста */
-  -webkit-user-select: none; /* Для Safari */
-  -moz-user-select: none;    /* Для Firefox */
+    -webkit-user-select: none; /* Для Safari */
+    -moz-user-select: none;    /* Для Firefox */
+    height: 100%;
+
 }
 
 #H1{
@@ -475,10 +467,6 @@ background-color: #7e7e85 ;
     flex-direction: column; /* потом в вертикаль */
     gap: 8px; /* вертикальный отступ */
     color: var(--secondary-color);
-    position: absolute;
-    top: 82%;
-    left: 50%;
-    transform: translate(-50%, -50%); 
 }
   
 .line {
@@ -490,8 +478,8 @@ background-color: #7e7e85 ;
 } 
 
 .key {
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
     border: var(--klava-color);
     border-style: solid; /* сплошная граница */
     border-width: 2px;
@@ -649,16 +637,6 @@ background-color: #7e7e85 ;
  #MENU{
    visibility: hidden;
 }
- 
- #pole{
-    width: 50%;
- }
-.progress-bar {
-    left: 25%;
-}
-#ManyButtons {
-    left: 25%;
-}
 
 #MENU2{
     display: block;
@@ -706,10 +684,23 @@ background-color: #7e7e85 ;
 
    #provale {
     width: 95vw;
-    
    }
 }
+
+#cotainterGrid {
+    display: grid;
+    grid-template-columns: 100%;
+    align-items: flex-end;
+
+}
         
+#grid {
+   display: grid;
+   grid-template-rows: 1vh 1vh 20vh 40vh;
+   align-items: end;
+   justify-content: center;
+   
+}
 
 
 

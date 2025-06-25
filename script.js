@@ -99,8 +99,11 @@ let G = 'noresult'
 const RUbutton2 = document.getElementById('button2');
 const ENbutton3 = document.getElementById('button3');
 
+const progressfill = document.querySelector('.progress-fill')
+const progressfill2 = document.querySelector('.progress-fill2')
+
 document.addEventListener('DOMContentLoaded', ()=>{
-document.querySelector('.progress-fill2').style.display = 'block'  
+  progressfill2.style.display = 'block'  
   TTIMERWORDS ()
   newGame(normalWordsEN, 10);  
   Observe();
@@ -122,7 +125,7 @@ document.querySelector('.progress-fill2').style.display = 'block'
 });
 
 document.getElementById('button2').addEventListener('click',() =>{
-document.querySelector('.progress-fill2').style.width = '100%';
+  progressfill2.style.width = '100%';
   TTIMERWORDS ()
   removeaddClass (nnormal, normal);
   addClass(RUbutton2, 'navod')
@@ -153,7 +156,7 @@ document.querySelector('.progress-fill2').style.width = '100%';
 });
 
 document.getElementById('button3').addEventListener('click',() =>{
-document.querySelector('.progress-fill2').style.width = '100%';
+  progressfill2.style.width = '100%';
   removeaddClass (nnormal, normal);
   addClass(ENbutton3, 'navod')
   removeClass( RUbutton2, 'navod')
@@ -184,7 +187,7 @@ document.querySelector('.progress-fill2').style.width = '100%';
   
   const easy = document.getElementById('easy');
   easy.addEventListener('click', () => {
-  document.querySelector('.progress-fill2').style.width = '100%';
+  progressfill2.style.width = '100%';
   const words = D === 'RU' ? easyWordsRU : easyWordsEN;
   X = 'easy';
   removeaddClass (eeasy, easy);
@@ -199,7 +202,7 @@ document.querySelector('.progress-fill2').style.width = '100%';
 
   const normal = document.getElementById('normal');
   normal.addEventListener('click', () => {
-  document.querySelector('.progress-fill2').style.width = '100%';
+  progressfill2.style.width = '100%';
   const words = D === 'RU' ? normalWordsRU : normalWordsEN;
   X = 'normal';
   removeaddClass (nnormal, normal);
@@ -214,7 +217,7 @@ document.querySelector('.progress-fill2').style.width = '100%';
 
   const hard = document.getElementById('hard');
   hard.addEventListener('click', () => {
-  document.querySelector('.progress-fill2').style.width = '100%';
+  progressfill2.style.width = '100%';
   const words = D === 'RU' ? hardWordsRU : hardWordsEN;
   X = 'hard';
   removeaddClass (hhard, hard);
@@ -229,7 +232,7 @@ document.querySelector('.progress-fill2').style.width = '100%';
 
   const Ten = document.getElementById('Ten')
   Ten.addEventListener('click',() =>{
-  document.querySelector('.progress-fill2').style.width = '100%';
+  progressfill2.style.width = '100%';
   F = 10;
   whatLevel (F);
   removeaddClass (id10, Ten);
@@ -238,7 +241,7 @@ document.querySelector('.progress-fill2').style.width = '100%';
 
   const TwentyFive = document.getElementById('TwentyFive');
   TwentyFive.addEventListener('click',() =>{
-  document.querySelector('.progress-fill2').style.width = '100%';
+  progressfill2.style.width = '100%';
   F = 25;
   whatLevel (F);
   removeaddClass(id25, TwentyFive);
@@ -247,7 +250,7 @@ document.querySelector('.progress-fill2').style.width = '100%';
 
   const Fifty = document.getElementById('Fifty');
   Fifty.addEventListener('click',() =>{
-  document.querySelector('.progress-fill2').style.width = '100%';
+  progressfill2.style.width = '100%';
   F = 50;
   whatLevel (F);
   removeaddClass (id50, Fifty);
@@ -256,7 +259,7 @@ document.querySelector('.progress-fill2').style.width = '100%';
 
   const SeventyFive = document.getElementById('SeventyFive');
   SeventyFive.addEventListener('click',() =>{
-  document.querySelector('.progress-fill2').style.width = '100%';
+  progressfill2.style.width = '100%';
   F = 75;
   whatLevel (F);
   removeaddClass (id75, SeventyFive);
@@ -265,7 +268,7 @@ document.querySelector('.progress-fill2').style.width = '100%';
 
   const OneHundred = document.getElementById('OneHundred');
   OneHundred.addEventListener('click',() =>{
-  document.querySelector('.progress-fill2').style.width = '100%';
+  progressfill2.style.width = '100%';
   F = 100;
   whatLevel (F);
   removeaddClass (id100, OneHundred);
@@ -278,9 +281,9 @@ document.querySelector('.progress-fill2').style.width = '100%';
   const TiMe = document.getElementById('timer')
   
   TiMe.addEventListener('click', () =>{
-  document.querySelector('.progress-fill2').style.display = 'none'
-  document.querySelector('.progress-fill').style.display = 'block'
-  document.querySelector('.progress-fill').style.width = '100%';
+  progressfill2.style.display = 'none'
+  progressfill.style.display = 'block'
+  progressfill.style.width = '100%';
   WordCountTime.style.display = 'block'
   WordCountQuantity.style.display = 'none'
   Level.style.visibility = 'visible'
@@ -309,9 +312,9 @@ document.querySelector('.progress-fill2').style.width = '100%';
 
   choiceOfWords.addEventListener('click', () =>{  
   TTIMERWORDS ()
-  document.querySelector('.progress-fill2').style.display = 'block'
-  document.querySelector('.progress-fill2').style.width = '100%';
-  document.querySelector('.progress-fill').style.display = 'none'
+  progressfill2.style.display = 'block'
+  progressfill2.style.width = '100%';
+  progressfill.style.display = 'none'
   WordCountTime.style.display = 'none' 
   WordCountQuantity.style.display = 'block'
   Level.style.visibility = 'visible'
@@ -396,21 +399,24 @@ document.querySelector('.progress-fill2').style.width = '100%';
     TTIMER(T)
   }
   Observe();  
-  document.querySelector('.progress-fill').style.width = '100%';
-  document.querySelector('.progress-fill2').style.width = '100%';
+  progressfill.style.width = '100%';
+  progressfill2.style.width = '100%';
   console.log(`количество слов ${F} tttttttt`)
  });
 
  // пунктуация 
   const Punctuation = document.getElementById('Punctuation')
   Punctuation.addEventListener('click', ()=> {
+   progressfill.style.width = '100%';
+       SSTOP ()
       
   if(Punctuation.classList.contains('navod')){
     G = 'noresult'
     Y = 'nopunctuation'
+   
       removeClass(Punctuation, 'navod')
       if (O === 'words'){       
-       whatLevel (F)
+      whatLevel (F)
       } else if (O === 'time'){
       SSTOP () 
       TTIMER(T)
@@ -858,7 +864,7 @@ window.addEventListener('resize', updateCursorPosition);
     if ( O === 'words' && FF >= 0){
     const F1 = 100 / F
     FF-=F1 ; // Уменьшаем на 1 при каждом нажатии пробела
-    document.querySelector('.progress-fill2').style.width = FF + '%';
+    progressfill2.style.width = FF + '%';
     console.log(FF); 
     }
     if (expected !== ' ' && currentWord) {
@@ -925,7 +931,7 @@ window.addEventListener('resize', updateCursorPosition);
         if ( O === 'words'){
     const F1 = 100 / F
     FF+=F1 ; // Уменьшаем на 1 при каждом нажатии пробела
-    document.querySelector('.progress-fill2').style.width = FF + '%';
+    progressfill2.style.width = FF + '%';
     console.log(FF); 
     }
       // remove both classes
@@ -1235,13 +1241,13 @@ let timeL; //  хранит индефикатор таймера
 
   timeLeft = number; // сбрасывает в секундах
 
-  document.querySelector('.progress-fill').style.width = '100%';
+  progressfill.style.width = '100%';
 
   timeL = setInterval(() => { // создает повторяющийся интервал, каждую секунду 
     timeLeft--;
    
     const predictable = (timeLeft / number )* 100;
-    document.querySelector('.progress-fill').style.width = `${predictable}%`;
+    progressfill.style.width = `${predictable}%`;
     console.log(timeLeft)
     if (timeLeft <= 0) {
       clearInterval(timeL);
@@ -1273,7 +1279,7 @@ if (timerCheckInterval) {
     if (timeL) {
         clearInterval(timeL);
     }
-    document.querySelector('.progress-fill').style.width = '100%';
+    progressfill.style.width = '100%';
  }
 
 // таймер слов 
@@ -1457,14 +1463,11 @@ function RUSSIAN (keyboardLayout) {
 
   const nextGame = document.getElementById('nextGame')
   nextGame.addEventListener('click', () =>{
-
-
-    
   modal3.style.display = 'none'
   Level.style.visibility = 'visible'
-  document.querySelector('.progress-fill2').style.display = 'block'
-  document.querySelector('.progress-fill2').style.width = '100%';
-  document.querySelector('.progress-fill').style.display = 'none'
+  progressfill2.style.display = 'block'
+  progressfill2.style.width = '100%';
+  progressfill.style.display = 'none'
   cotaiterModal1.style.height ='300px'
   removeClass(Punctuation, 'navod')
   STOP()
@@ -1489,14 +1492,14 @@ function RUSSIAN (keyboardLayout) {
   O = "words"
   FF = 100 
   W = 'noquotes'
-   G = 'noresult'
+  G = 'noresult'
   F = 10
  })
 
 const WordCount2 = document.getElementById('WordCount2')
 const root = document.documentElement;
 
- document.getElementById('Lima').addEventListener('click', () =>{
+document.getElementById('Lima').addEventListener('click', () =>{
 root.style.setProperty('--text-color', 'rgb(175 176 134)');
 root.style.setProperty('--navod-color', '#85857e');
 root.style.setProperty('--progressfill-color', '#969578');
@@ -1589,3 +1592,165 @@ window.addEventListener('DOMContentLoaded', () => {
   const savedTheme = localStorage.getItem('selectedTheme');
   if (savedTheme) applyTheme(savedTheme);
 });
+
+function ENGLISHTRAINER(keyboardLayout) {
+  const keyboardContainer = document.getElementById(keyboardLayout);
+  keyboardContainer.innerHTML = 
+  `
+    <div class="line">
+      <div class="key" id=""></div>
+      <div class="key" id="1">1</div>
+      <div class="key" id="2">2</div>
+      <div class="key" id="3">3</div>
+      <div class="key" id="4">4</div>
+      <div class="key" id="5">5</div>
+      <div class="key" id="6">6</div>
+      <div class="key" id="7">7</div>
+      <div class="key" id="8">8</div>
+      <div class="key" id="9">9</div>
+      <div class="key" id="0">0</div>
+      <div class="key" id="-">-</div> 
+      <div class="key" id="=">=</div>
+      <div class="key" id="Backspace" style="width: 100px;">Backspace</div>
+    </div>
+
+    <div class="line">
+      <div class="key" id="Tab" style="width: 70px;">Tab</div>
+      <div class="key" id="q">q</div>
+      <div class="key" id="w">w</div>
+      <div class="key" id="e">e</div>
+      <div class="key" id="r">r</div>
+      <div class="key" id="t">t</div>
+      <div class="key" id="y">y</div>
+      <div class="key" id="u">u</div>
+      <div class="key" id="i">i</div>
+      <div class="key" id="o">o</div>
+      <div class="key" id="p">p</div>
+      <div class="key" id="[">[</div>
+      <div class="key" id="]">]</div>
+      <div class="key" id="\\" style="width: 66px;">\\</div>
+    </div>
+
+    <div class="line">
+      <div class="key" id="Caps" style="width: 90px;">Caps</div>
+      <div class="key" id="a">a</div>
+      <div class="key" id="s">s</div>
+      <div class="key" id="d">d</div>
+      <div class="key" id="f">f</div>
+      <div class="key" id="g">g</div>
+      <div class="key" id="h">h</div>
+      <div class="key" id="j">j</div>
+      <div class="key" id="k">k</div>
+      <div class="key" id="l">l</div>
+      <div class="key" id=";">;</div>
+      <div class="key" id="'">'</div>
+      <div class="key" id="Enter" style="width: 91px;">Enter</div>
+    </div>
+
+    <div class="line">
+      <div class="key" id="ShiftLeft" style="width: 113px;">Shift</div>
+      <div class="key" id="z">z</div>
+      <div class="key" id="x">x</div>
+      <div class="key" id="c">c</div>
+      <div class="key" id="v">v</div>
+      <div class="key" id="b">b</div>
+      <div class="key" id="n">n</div>
+      <div class="key" id="m">m</div>
+      <div class="key" id=",">,</div>
+      <div class="key" id=".">.</div>
+      <div class="key" id="/">/</div>
+      <div class="key" id="ShiftRight" style="width: 112px;">Shift</div>
+    </div>
+
+    <div class="line">
+      <div class="key" id="Ctrl" style="width: 80px;">Ctrl</div>
+      <div class="key" id="Win" style="width: 50px;">Win</div>
+      <div class="key" id="Alt" style="width: 40px;">Alt</div>
+      <div class="key" id="Space" style="width: 245px;"></div>
+      <div class="key" id="Alt" style="width: 40px;">Alt</div>
+      <div class="key" id="Fn" style="width: 93px;">Fn</div>
+      <div class="key" id="Ctrl" style="width: 80px;">Ctrl</div>
+    </div>
+  `
+}
+
+function RUSSIANTRAINER (keyboardLayout) {
+  const keyboardContainer = document.getElementById(keyboardLayout);
+  keyboardContainer.innerHTML = `
+    <div class="line">
+    <div class="key" id="ё">ё</div>
+    <div class="key" id="1">1</div>
+    <div class="key" id="2">2</div>
+    <div class="key" id="3">3</div>
+    <div class="key" id="4">4</div>
+    <div class="key" id="5">5</div>
+    <div class="key" id="6">6</div>
+    <div class="key" id="7">7</div>
+    <div class="key" id="8">8</div>
+    <div class="key" id="9">9</div>
+    <div class="key" id="0">0</div>
+    <div class="key" id="-">-</div>
+    <div class="key" id="=">=</div>
+    <div class="key" id="Backspace" style="width: 100px;">Backspace</div>
+  </div>
+
+  <div class="line">
+    <div class="key" id="Tab" style="width: 70px;">Tab</div>
+    <div class="key" id="й">й</div>
+    <div class="key" id="ц">ц</div>
+    <div class="key" id="у">у</div>
+    <div class="key" id="к">к</div>
+    <div class="key" id="е">е</div>
+    <div class="key" id="н">н</div>
+    <div class="key" id="г">г</div>
+    <div class="key" id="ш">ш</div>
+    <div class="key" id="щ">щ</div>
+    <div class="key" id="з">з</div>
+    <div class="key" id="х">х</div>
+    <div class="key" id="ъ">ъ</div>
+    <div class="key" id="\""  style="width: 66px;">\</div>
+  </div>
+
+  <div class="line">
+    <div class="key" id="Caps" style="width: 90px;">Caps</div>
+    <div class="key" id="ф">ф</div>
+    <div class="key" id="ы">ы</div>
+    <div class="key" id="в">в</div>
+    <div class="key" id="а">а</div>
+    <div class="key" id="п">п</div>
+    <div class="key" id="р">р</div>
+    <div class="key" id="о">о</div>
+    <div class="key" id="л">л</div>
+    <div class="key" id="д">д</div>
+    <div class="key" id="ж">ж</div>
+    <div class="key" id="э">э</div>
+    <div class="key" id="Enter" style="width: 91px;">Enter</div>
+  </div>
+
+  <div class="line">
+    <div class="key" id="ShiftLeft" style="width: 113px;">Shift</div>
+    <div class="key" id="я">я</div>
+    <div class="key" id="ч">ч</div>
+    <div class="key" id="с">с</div>
+    <div class="key" id="м">м</div>
+    <div class="key" id="и">и</div>
+    <div class="key" id="т">т</div>
+    <div class="key" id="ь">ь</div>
+    <div class="key" id="б">б</div>
+    <div class="key" id="ю">ю</div>
+    <div class="key" id=".">.</div>
+    <div class="key" id="ShiftRight" style="width: 112px;">Shift</div>
+  </div>
+
+  <div class="line">
+    <div class="key" id="Ctrl"  style="width: 80px;" >Ctrl</div>
+    <div class="key" id="Win"  style="width: 50px;">Win</div>
+    <div class="key" id="Alt"  style="width: 40px;" >Alt</div>
+    <div class="key" id="Space"  style="width: 245px;"></div>
+    <div class="key" id="Alt"  style="width: 40px;">Alt</div>
+    <div class="key" id="Fn"  style="width: 93px;">Fn</div>
+    <div class="key" id="Ctrl"  style="width: 80px;">Ctrl</div>
+  </div>
+</div>
+`
+}
