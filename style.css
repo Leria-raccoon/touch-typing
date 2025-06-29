@@ -70,11 +70,11 @@
 #pole {
     position: absolute;
     z-index:0;
-    width: 550px;
-    height: 80px; 
-   /*  background-color:  rgb(75, 72, 69) ;  */  
+    width: 600px;
+    height: 90px; 
+  /*   background-color:  rgb(75, 72, 69) ;  */
     padding: 3px;
-    font-size: 27px;
+    font-size: 30px;
     color: var(--poletext-color);
     /*  filter: blur(10px);  */
     overflow: hidden; /* скрывает переполнение контейнера */
@@ -89,7 +89,6 @@
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
-    
 }
 
 #Punctuation{
@@ -687,22 +686,34 @@ background-color: #7e7e85 ;
    }
 }
 
-#cotainterGrid {
-    display: grid;
-    grid-template-columns: 100%;
-    align-items: flex-end;
+ #cotainterGrid {
+  display: grid;
+  grid-template-rows: 88vh;
+  align-items: end; 
 
-}
+} 
         
 #grid {
-   display: grid;
-   grid-template-rows: 1vh 1vh 20vh 40vh;
-   align-items: end;
-   justify-content: center;
-   
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    align-items: end;
+    justify-content: center;
+    gap: 10vh;
 }
 
+#grid2 {
+    display: grid;
+    grid-template-rows: 25px 120px 20px;
+}
 
+@media (min-resolution: 125dpi) {
+    #cotainterGrid {
+  grid-template-rows: 85vh;
+} 
 
+#H2 {
+    display: none;
+}
+}
 
 
